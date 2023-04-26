@@ -1,1 +1,0 @@
-/usr/bin/c++ -ldl -Wall -Werror -Wextra -Wshadow -Wuninitialized --coverage -lcriterion CMakeFiles/tests_run.dir/tests/test_sample.cpp.o -o tests_run 

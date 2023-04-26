@@ -1,5 +1,0 @@
-/home/miouzora/home/epi/Raytracer/CMakeFiles/raytracer.dir
-/home/miouzora/home/epi/Raytracer/CMakeFiles/tests_run.dir
-/home/miouzora/home/epi/Raytracer/CMakeFiles/test.dir
-/home/miouzora/home/epi/Raytracer/CMakeFiles/edit_cache.dir
-/home/miouzora/home/epi/Raytracer/CMakeFiles/rebuild_cache.dir
