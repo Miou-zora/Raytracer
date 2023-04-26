@@ -1,0 +1,1 @@
+/usr/bin/c++ -ldl -Wall -Werror -Wextra -Wshadow -Wuninitialized --coverage -lcriterion CMakeFiles/raytracer.dir/main.cpp.o -o raytracer 
