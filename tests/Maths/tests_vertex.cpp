@@ -170,3 +170,75 @@ Test(Vertex, iostream)
     stream << vertex;
     cr_assert_eq(stream.str(), "Vertex(1, 2, 3)");
 }
+
+Test(Vertex, add_scalar)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    Maths::Vertex vertex2 = vertex + 1;
+    cr_assert_eq(vertex2._x, 2);
+    cr_assert_eq(vertex2._y, 3);
+    cr_assert_eq(vertex2._z, 4);
+}
+
+Test(Vertex, add_scalar_assign)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    vertex += 1;
+    cr_assert_eq(vertex._x, 2);
+    cr_assert_eq(vertex._y, 3);
+    cr_assert_eq(vertex._z, 4);
+}
+
+Test(Vertex, sub_scalar)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    Maths::Vertex vertex2 = vertex - 1;
+    cr_assert_eq(vertex2._x, 0);
+    cr_assert_eq(vertex2._y, 1);
+    cr_assert_eq(vertex2._z, 2);
+}
+
+Test(Vertex, sub_scalar_assign)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    vertex -= 1;
+    cr_assert_eq(vertex._x, 0);
+    cr_assert_eq(vertex._y, 1);
+    cr_assert_eq(vertex._z, 2);
+}
+
+Test(Vertex, mult_scalar)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    Maths::Vertex vertex2 = vertex * 2;
+    cr_assert_eq(vertex2._x, 2);
+    cr_assert_eq(vertex2._y, 4);
+    cr_assert_eq(vertex2._z, 6);
+}
+
+Test(Vertex, mult_scalar_assign)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    vertex *= 2;
+    cr_assert_eq(vertex._x, 2);
+    cr_assert_eq(vertex._y, 4);
+    cr_assert_eq(vertex._z, 6);
+}
+
+Test(Vertex, div_scalar)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    Maths::Vertex vertex2 = vertex / 2;
+    cr_assert_eq(vertex2._x, 0.5);
+    cr_assert_eq(vertex2._y, 1);
+    cr_assert_eq(vertex2._z, 1.5);
+}
+
+Test(Vertex, div_scalar_assign)
+{
+    Maths::Vertex vertex(1, 2, 3);
+    vertex /= 2;
+    cr_assert_eq(vertex._x, 0.5);
+    cr_assert_eq(vertex._y, 1);
+    cr_assert_eq(vertex._z, 1.5);
+}

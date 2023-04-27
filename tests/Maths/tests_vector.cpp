@@ -253,3 +253,11 @@ Test(Vector, normalized)
     cr_assert_eq(vector._y, 2);
     cr_assert_eq(vector._z, 3);
 }
+
+Test(Vector, iostream)
+{
+    Maths::Vector vector(1, 2, 3);
+    std::stringstream stream;
+    stream << vector;
+    cr_assert_str_eq(stream.str().c_str(), "Vector(1, 2, 3)");
+}

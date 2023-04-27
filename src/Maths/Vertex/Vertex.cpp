@@ -106,6 +106,59 @@ bool Maths::Vertex::operator!=(const Maths::Vertex &other)
     return (_x != other._x || _y != other._y || _z != other._z);
 }
 
+Maths::Vertex Maths::Vertex::operator+(const double &value)
+{
+    return (Maths::Vertex(_x + value, _y + value, _z + value));
+}
+
+Maths::Vertex &Maths::Vertex::operator+=(const double &value)
+{
+    _x += value;
+    _y += value;
+    _z += value;
+    return (*this);
+}
+
+Maths::Vertex Maths::Vertex::operator-(const double &value)
+{
+    return (Maths::Vertex(_x - value, _y - value, _z - value));
+}
+
+Maths::Vertex &Maths::Vertex::operator-=(const double &value)
+{
+    _x -= value;
+    _y -= value;
+    _z -= value;
+    return (*this);
+}
+
+Maths::Vertex Maths::Vertex::operator*(const double &value)
+{
+    return (Maths::Vertex(_x * value, _y * value, _z * value));
+}
+
+Maths::Vertex &Maths::Vertex::operator*=(const double &value)
+{
+    _x *= value;
+    _y *= value;
+    _z *= value;
+    return (*this);
+}
+
+Maths::Vertex Maths::Vertex::operator/(const double &value)
+{
+    return (Maths::Vertex(_x / value, _y / value, _z / value));
+}
+
+Maths::Vertex &Maths::Vertex::operator/=(const double &value)
+{
+    _x /= value;
+    _y /= value;
+    _z /= value;
+    return (*this);
+}
+
+
 std::ostream &operator<< (std::ostream &out, const Maths::Vertex &vertex)
 {
     out << "Vertex(" << vertex._x << ", " << vertex._y << ", " << vertex._z << ")";

@@ -146,6 +146,70 @@ namespace Maths {
              */
             bool operator!= (const Vertex &other);
 
+            /**
+             * @brief Add a value to a Vertex
+             *
+             * @param value Value to add
+             * @return Vertex Result of the addition
+             */
+            Vertex operator+(const double &value);
+
+            /**
+             * @brief Add a value to a Vertex
+             *
+             * @param value Value to add
+             * @return Vertex Result of the addition
+             */
+            Vertex &operator+=(const double &value);
+
+            /**
+             * @brief Substract a value to a Vertex
+             *
+             * @param value Value to substract
+             * @return Vertex Result of the substraction
+             */
+            Vertex operator-(const double &value);
+
+            /**
+             * @brief Substract a value to a Vertex
+             *
+             * @param value Value to substract
+             * @return Vertex Result of the substraction
+             */
+            Vertex &operator-=(const double &value);
+
+            /**
+             * @brief Multiply a value to a Vertex
+             *
+             * @param value Value to multiply
+             * @return Vertex Result of the multiplication
+             */
+            Vertex operator*(const double &value);
+
+            /**
+             * @brief Multiply a value to a Vertex
+             *
+             * @param value Value to multiply
+             * @return Vertex Result of the multiplication
+             */
+            Vertex &operator*=(const double &value);
+
+            /**
+             * @brief Divide a value to a Vertex
+             *
+             * @param value Value to divide
+             * @return Vertex Result of the division
+             */
+            Vertex operator/(const double &value);
+
+            /**
+             * @brief Divide a value to a Vertex
+             *
+             * @param value Value to divide
+             * @return Vertex Result of the division
+             */
+            Vertex &operator/=(const double &value);
+
             /// @brief X coordinate
             double _x;
             /// @brief Y coordinate

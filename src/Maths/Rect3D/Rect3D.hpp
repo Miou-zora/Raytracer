@@ -5,18 +5,26 @@
 ** Rect3D
 */
 
-#ifndef RECT3D_HPP_
-#define RECT3D_HPP_
+#pragma once
+
+#include "Vertex.hpp"
 
 namespace Maths {
     class Rect3D {
         public:
-            Rect3D();
-            ~Rect3D();
+            Rect3D(void);
+            Rect3D(const Maths::Vertex &origin, const Maths::Vertex &bottom_side, const Maths::Vertex &left_side);
+            ~Rect3D() = default;
+
+            Maths::Vertex pointAt(double u, double v);
+
+            Maths::Vertex _origin;
+            Maths::Vertex _bottom_side;
+            Maths::Vertex _left_side;
 
         protected:
         private:
     };
 }
 
-#endif /* !RECT3D_HPP_ */
+std::iostream &operator<<(std::iostream &stream, const Maths::Rect3D &rect3D);
