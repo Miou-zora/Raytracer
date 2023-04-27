@@ -5,12 +5,6 @@
 ** main
 */
 
-#include "Ray.hpp"
-#include "Vector.hpp"
-#include "Vertex.hpp"
-#include "Rect3D.hpp"
-#include <iostream>
-
 int main(int ac, char **av)
 {
     (void)ac;

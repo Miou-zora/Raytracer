@@ -70,7 +70,7 @@ namespace Maths {
              * @param other
              * @return Vector
              */
-            Vector operator+ (const Vector &other);
+            Vector operator+ (const Vector &other) const;
 
             /**
              * @brief Add two vectors
@@ -86,7 +86,7 @@ namespace Maths {
              * @param other
              * @return Vector
              */
-            Vector operator- (const Vector &other);
+            Vector operator- (const Vector &other) const;
 
             /**
              * @brief Subtract two vectors
@@ -102,7 +102,7 @@ namespace Maths {
              * @param other
              * @return Vector
              */
-            Vector operator* (const Vector &other);
+            Vector operator* (const Vector &other) const;
 
             /**
              * @brief Multiply two vectors
@@ -118,7 +118,7 @@ namespace Maths {
              * @param other
              * @return Vector
              */
-            Vector operator/ (const Vector &other);
+            Vector operator/ (const Vector &other) const;
 
             /**
              * @brief Divide two vectors
@@ -252,3 +252,6 @@ namespace Maths {
 }
 
 std::ostream &operator<<(std::ostream &stream, const Maths::Vector &vector);
+
+Maths::Vector operator-(const Maths::Vector &vector);
+

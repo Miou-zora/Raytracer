@@ -10,7 +10,8 @@ project(raytracer)
 set(INCLUDE_SRC "src/Maths/Ray"
                 "src/Maths/Rect3D"
                 "src/Maths/Vector"
-                "src/Maths/Vertex")
+                "src/Maths/Vertex"
+                "src/Maths")
 set(SRC "src/Maths/Ray/Ray.cpp"
         "src/Maths/Rect3D/Rect3D.cpp"
         "src/Maths/Vector/Vector.cpp"

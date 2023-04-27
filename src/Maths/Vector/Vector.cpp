@@ -46,7 +46,7 @@ Maths::Vector &Maths::Vector::operator=(const Maths::Vector &&other)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator+(const Maths::Vector &other)
+Maths::Vector Maths::Vector::operator+(const Maths::Vector &other) const
 {
     return (Maths::Vector(_x + other._x, _y + other._y, _z + other._z));
 }
@@ -59,7 +59,7 @@ Maths::Vector &Maths::Vector::operator+=(const Maths::Vector &other)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator-(const Maths::Vector &other)
+Maths::Vector Maths::Vector::operator-(const Maths::Vector &other) const
 {
     return (Maths::Vector(_x - other._x, _y - other._y, _z - other._z));
 }
@@ -72,7 +72,7 @@ Maths::Vector &Maths::Vector::operator-=(const Maths::Vector &other)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator*(const Maths::Vector &other)
+Maths::Vector Maths::Vector::operator*(const Maths::Vector &other) const
 {
     return (Maths::Vector(_x * other._x, _y * other._y, _z * other._z));
 }
@@ -85,7 +85,7 @@ Maths::Vector &Maths::Vector::operator*=(const Maths::Vector &other)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator/(const Maths::Vector &other)
+Maths::Vector Maths::Vector::operator/(const Maths::Vector &other) const
 {
     return (Maths::Vector(_x / other._x, _y / other._y, _z / other._z));
 }
@@ -203,4 +203,9 @@ std::ostream &operator<<(std::ostream &stream, const Maths::Vector &vector)
     stream << "Vector(" << vector._x << ", " << vector._y << ", " << vector._z
         << ")";
     return (stream);
+}
+
+Maths::Vector operator-(const Maths::Vector &vector)
+{
+    return (Maths::Vector(-vector._x, -vector._y, -vector._z));
 }
