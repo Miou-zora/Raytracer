@@ -26,8 +26,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 
 enable_testing()
-set(TEST_SRC tests/test_sample.cpp)
+set(TEST_SRC "tests/Maths/tests_vertex.cpp"
+"tests/Maths/tests_vector.cpp")
 
-add_executable(tests_run ${TEST_SRC} ${CORE_SRC})
-add_test(NAME tests_run COMMAND ./tests_run)
+add_executable(tests_run ${TEST_SRC} ${SRC})
 
