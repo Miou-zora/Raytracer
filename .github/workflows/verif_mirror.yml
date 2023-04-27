@@ -54,10 +54,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: make
+      - run: cmake .
         timeout-minutes: 2
 
-      - run: make clean
+      - run: make
+        timeout-minutes: 2
 
       - name: Verifies that files are present and executable
         run: |

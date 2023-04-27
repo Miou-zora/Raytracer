@@ -1,0 +1,14 @@
+.vscode
+.build
+*.cmake
+CMakeCache.txt
+Makefile
+CMakeFiles
+Testing
+tests_run
+*.so
+CMakeDoxyfile.in
+build
+doc/html
+doc/latex
+raytracer
