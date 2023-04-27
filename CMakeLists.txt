@@ -4,13 +4,19 @@ set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wshadow -Wuninitialized")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
-
-set(INCLUDE_SRC )
-include_directories(${INCLUDE_SRC})
-set(SRC )
-
-set(MAIN main.cpp)
 project(raytracer)
+
+
+set(INCLUDE_SRC "src/Maths/Ray"
+                "src/Maths/Rect3D"
+                "src/Maths/Vector"
+                "src/Maths/Vertex")
+set(SRC "src/Maths/Ray/Ray.cpp"
+        "src/Maths/Rect3D/Rect3D.cpp"
+        "src/Maths/Vector/Vector.cpp"
+        "src/Maths/Vertex/Vertex.cpp")
+include_directories(${INCLUDE_SRC})
+set(MAIN "main.cpp")
 add_executable(raytracer ${MAIN} ${SRC})
 
 ### TESTS ###
