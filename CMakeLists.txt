@@ -28,7 +28,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 enable_testing()
 set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/Maths/tests_vector.cpp"
-"tests/Maths/tests_rect3D.cpp")
+"tests/Maths/tests_rect3D.cpp"
+"tests/Maths/tests_ray.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
 

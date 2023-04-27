@@ -188,7 +188,17 @@ Maths::Vector Maths::Vector::normalized(void) const
     return (Maths::Vector(_x / length, _y / length, _z / length));
 }
 
-std::iostream &operator<<(std::iostream &stream, const Maths::Vector &vector)
+bool Maths::Vector::operator==(const Maths::Vector &other) const
+{
+    return (_x == other._x && _y == other._y && _z == other._z);
+}
+
+bool Maths::Vector::operator!=(const Maths::Vector &other) const
+{
+    return (_x != other._x || _y != other._y || _z != other._z);
+}
+
+std::ostream &operator<<(std::ostream &stream, const Maths::Vector &vector)
 {
     stream << "Vector(" << vector._x << ", " << vector._y << ", " << vector._z
         << ")";

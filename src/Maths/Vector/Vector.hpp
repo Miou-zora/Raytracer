@@ -229,10 +229,26 @@ namespace Maths {
              */
             Vector normalized(void) const;
 
+            /**
+             * @brief Compare two vectors
+             *
+             * @param other The other vector
+             * @return true If the vectors are the same, false otherwise
+             */
+            bool operator==(const Vector &other) const;
+
+            /**
+             * @brief Compare two vectors
+             *
+             * @param other The other vector
+             * @return false If the vectors are the same, true otherwise
+             */
+            bool operator!=(const Vector &other) const;
+
             double _x;
             double _y;
             double _z;
     };
 }
 
-std::iostream &operator<<(std::iostream &stream, const Maths::Vector &vector);
+std::ostream &operator<<(std::ostream &stream, const Maths::Vector &vector);

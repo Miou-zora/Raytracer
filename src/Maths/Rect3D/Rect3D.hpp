@@ -27,4 +27,4 @@ namespace Maths {
     };
 }
 
-std::iostream &operator<<(std::iostream &stream, const Maths::Rect3D &rect3D);
+std::ostream &operator<<(std::ostream &stream, const Maths::Rect3D &rect3D);
