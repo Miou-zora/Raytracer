@@ -24,13 +24,13 @@ namespace RayTracer {
             void addLight(const ILight &light);
             void setCamera(const std::shared_ptr<ICamera> &camera);
 
-            std::vector<IShape> getShapes() const { return _shapes; };
-            std::vector<ILight> getLights() const { return _lights; };
+            std::vector<std::shared_ptr<IShape>> getShapes() const { return _shapes; };
+            std::vector<std::shared_ptr<ILight>> getLights() const { return _lights; };
             std::shared_ptr<ICamera> getCamera() const { return _camera; };
 
         private:
-            std::vector<IShape> _shapes;
-            std::vector<ILight> _lights;
+            std::vector<std::shared_ptr<IShape>> _shapes;
+            std::vector<std::shared_ptr<ILight>> _lights;
             std::shared_ptr<ICamera> _camera;
     };
 }

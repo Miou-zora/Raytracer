@@ -20,10 +20,10 @@ namespace RayTracer {
             void buildScene(void);
             void run(void);
             void setScene(std::string scenePath);
-            std::shared_ptr<AScene> getScene(void) const;
+            std::shared_ptr<RayTracer::AScene> getScene(void) const;
         private:
             std::string _scenePath;
-            std::shared_ptr<AScene> _scene;
+            std::shared_ptr<RayTracer::AScene> _scene;
             std::shared_ptr<IRenderer> _renderer;
     };
 }
