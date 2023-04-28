@@ -25,6 +25,11 @@ namespace RayTracer {
             void translateX(double x);
             void translateY(double y);
             void translateZ(double z);
+
+            void rotate(double x, double y, double z);
+            void rotateX(double x);
+            void rotateY(double y);
+            void rotateZ(double z);
         private:
             Maths::Vertex _position;
             Maths::Vertex _rotation;
