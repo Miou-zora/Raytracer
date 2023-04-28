@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace Transformation {
+namespace RayTracer {
     class ITranslation {
         public:
             virtual void translate(double x, double y, double z) = 0;

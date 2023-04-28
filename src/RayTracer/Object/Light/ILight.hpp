@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer [WSL : Ubuntu]
 ** File description:
-** ILights
+** ILight
 */
 
 #pragma once
@@ -10,7 +10,7 @@
 #include "Vertex.hpp"
 
 namespace RayTracer {
-    class ILights {
+    class ILight {
         public:
             bool hits(const Maths::Vertex &vertex) const;
     };

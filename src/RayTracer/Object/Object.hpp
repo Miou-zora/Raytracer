@@ -14,7 +14,7 @@
 #include <cstddef>
 
 namespace RayTracer {
-    class Object: public Transformation::ITranslation, public Transformation::IRotation {
+    class Object: public RayTracer::ITranslation, public RayTracer::IRotation {
         public:
             Maths::Vertex &getPosition(void) { return _position; };
             Maths::Vertex &getRotation(void) { return _rotation; };

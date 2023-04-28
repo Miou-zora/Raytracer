@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer
 ** File description:
-** Lights
+** Light
 */
 
 #pragma once
 
 #include "Object.hpp"
-#include "ILights.hpp"
+#include "ILight.hpp"
 
 namespace RayTracer {
-    class Lights: public ILights, public Object {
+    class Light: public ILight, public Object {
         public:
-            Lights();
-            ~Lights();
+            Light();
+            ~Light();
     };
 };

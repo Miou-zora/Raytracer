@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace Transformation {
+namespace RayTracer {
     class IRotation {
         public:
             virtual void rotate(double x, double y, double z) = 0;

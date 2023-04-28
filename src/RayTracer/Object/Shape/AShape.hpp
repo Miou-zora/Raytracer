@@ -23,7 +23,7 @@ namespace RayTracer {
             bool isShadow() const { return _isShadow; };
             void setShadow(bool isShadow) { _isShadow = isShadow; };
         private:
-            Material _material;
+            RayTracer::Material _material;
             bool _isShadow;
     };
 };
