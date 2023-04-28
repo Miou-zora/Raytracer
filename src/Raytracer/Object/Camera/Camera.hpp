@@ -8,11 +8,19 @@
 #pragma once
 
 #include "AObject.hpp"
+#include "Rect3D.hpp"
+#include "ICamera.hpp"
 
 namespace RayTracer {
-    class Camera: public AObject {
+    class Camera: public AObject, public ICamera {
         public:
             Camera();
             ~Camera();
+            Maths::Rect3D getScreen() const { return _screen; };
+            void setScreen(Maths::Rect3D screen) { _screen = screen; };
+
+            Maths::Ray ray(double u, double v) const override;
+        private:
+            Maths::Rect3D _screen;
     };
 };
