@@ -7,11 +7,11 @@
 
 #pragma once
 
-#include "AObject.hpp"
+#include "Object.hpp"
 #include "ILights.hpp"
 
 namespace RayTracer {
-    class Lights: public ILights, public AObject {
+    class Lights: public ILights, public Object {
         public:
             Lights();
             ~Lights();

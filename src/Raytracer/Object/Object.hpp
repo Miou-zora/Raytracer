@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer
 ** File description:
-** AObject
+** Object
 */
 
 #pragma once
@@ -14,7 +14,7 @@
 #include <cstddef>
 
 namespace RayTracer {
-    class AObject: public Transformation::ITranslation, public Transformation::IRotation {
+    class Object: public Transformation::ITranslation, public Transformation::IRotation {
         public:
             Maths::Vertex &getPosition(void) { return _position; };
             Maths::Vertex &getRotation(void) { return _rotation; };

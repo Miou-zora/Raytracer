@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "AObject.hpp"
+#include "Object.hpp"
 #include "Rect3D.hpp"
 #include "ICamera.hpp"
 
 namespace RayTracer {
-    class Camera: public AObject, public ICamera {
+    class Camera: public Object, public ICamera {
         public:
             Camera();
             ~Camera();

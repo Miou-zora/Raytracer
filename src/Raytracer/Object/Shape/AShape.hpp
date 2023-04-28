@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "AObject.hpp"
+#include "Object.hpp"
 #include "IShape.hpp"
 #include "Material.hpp"
 
 namespace RayTracer {
-    class AShape: public AObject, public IShape {
+    class AShape: public Object, public IShape {
         public:
             AShape();
             ~AShape();
