@@ -10,6 +10,7 @@
 #include <memory>
 #include "AScene.hpp"
 #include "IRenderer.hpp"
+#include "IDisplayer.hpp"
 
 namespace RayTracer {
     class Core {
@@ -24,6 +25,7 @@ namespace RayTracer {
         private:
             std::string _scenePath;
             std::shared_ptr<RayTracer::AScene> _scene;
-            std::shared_ptr<IRenderer> _renderer;
+            std::shared_ptr<RayTracer::IRenderer> _renderer;
+            std::shared_ptr<RayTracer::IDisplayer> _displayer;
     };
 }

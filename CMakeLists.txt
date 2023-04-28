@@ -22,11 +22,18 @@ set(INCLUDE_SRC "src"
                 "src/RayTracer/Object/Shape"
                 "src/RayTracer/Renderer"
                 "src/RayTracer/Scene"
-                "src/RayTracer/Transformation")
+                "src/RayTracer/Transformation"
+                "src/RayTracer/Color"
+                "src/RayTracer/Color/RGBColor"
+                "src/RayTracer/Frame"
+                "src/RayTracer/Displayer"
+                "src/RayTracer/Displayer/PPMDisplayer")
 set(SRC "src/Maths/Ray/Ray.cpp"
         "src/Maths/Rect3D/Rect3D.cpp"
         "src/Maths/Vector/Vector.cpp"
         "src/Maths/Vertex/Vertex.cpp"
+        "src/RayTracer/Color/RGBColor/RGBColor.cpp"
+        "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/Core.cpp")
 include_directories(${INCLUDE_SRC})
 set(MAIN "main.cpp")
