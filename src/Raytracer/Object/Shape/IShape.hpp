@@ -14,7 +14,7 @@
 namespace RayTracer {
     class IShape {
         public:
-            Maths::Vector getNormal(const Maths::Vertex &vertex);
-            bool hits(const Maths::Ray &ray) const;
+            virtual Maths::Vector getNormal(const Maths::Vertex &vertex) = 0;
+            virtual bool hits(const Maths::Ray &ray) const = 0;
     };
 }
