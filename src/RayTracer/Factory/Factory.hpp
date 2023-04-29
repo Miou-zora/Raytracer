@@ -9,7 +9,7 @@
 
 #include <string>
 #include "ILight.hpp"
-#include "IObject.hpp"
+#include "Object.hpp"
 #include "IDisplayer.hpp"
 #include <memory>
 
@@ -20,7 +20,7 @@ namespace RayTracer {
             ~Factory();
 
             std::shared_ptr<RayTracer::ILight> createLight(std::string name);
-            std::shared_ptr<RayTracer::IObject> createObject(std::string name);
+            std::shared_ptr<RayTracer::Object> createObject(std::string name);
             std::shared_ptr<RayTracer::IDisplayer> createDisplayer(std::string name);
 
         protected:

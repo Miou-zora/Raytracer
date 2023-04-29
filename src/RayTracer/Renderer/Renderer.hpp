@@ -7,12 +7,15 @@
 
 #pragma once
 
+#include "IRenderer.hpp"
+
 namespace RayTracer {
-    /// @brief Renderer class that will render the scene in PPM format and print it in the console
-    class Renderer {
+    class Renderer : virtual public IRenderer{
         public:
             Renderer(void);
             ~Renderer();
+
+            void render(const RayTracer::AScene &scene, RayTracer::Frame &frame);
 
         protected:
         private:

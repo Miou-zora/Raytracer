@@ -19,6 +19,8 @@ namespace RayTracer {
 
             void setPixel(const Maths::Vertex &vertex, const RayTracer::IColor &color);
 
+            const std::vector<std::vector<Maths::Vertex>> &getFrame(void) const;
+
         private:
             std::vector<std::vector<Maths::Vertex>> _frame; // 3D array of vertices (pixels)
     };
