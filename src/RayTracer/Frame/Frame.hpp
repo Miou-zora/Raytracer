@@ -14,7 +14,7 @@
 namespace RayTracer {
     class Frame {
         public:
-            Frame() = default;
+            Frame(void) = default;
             ~Frame() = default;
 
             void setPixel(const Maths::Vertex &vertex, const RayTracer::IColor &color);

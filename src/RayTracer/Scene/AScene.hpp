@@ -17,7 +17,7 @@ namespace RayTracer {
     /// @brief AScene class that will contain all the objects of the scene
     class AScene {
         public:
-            AScene();
+            AScene(void);
             ~AScene();
 
             void addShape(const IShape &shape);

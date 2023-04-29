@@ -16,7 +16,7 @@
 namespace RayTracer {
     class Factory {
         public:
-            Factory();
+            Factory(void);
             ~Factory();
 
             std::shared_ptr<RayTracer::ILight> createLight(std::string name);

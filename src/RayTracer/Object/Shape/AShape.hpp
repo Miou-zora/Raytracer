@@ -14,7 +14,7 @@
 namespace RayTracer {
     class AShape: public Object, public IShape {
         public:
-            AShape();
+            AShape(void);
             ~AShape();
 
             Material getMaterial() const { return _material; };

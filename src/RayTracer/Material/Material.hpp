@@ -12,7 +12,7 @@
 namespace RayTracer {
     class Material {
         public:
-            Material();
+            Material(void);
             ~Material();
 
             double getAmbient() const { return _ambient; };
