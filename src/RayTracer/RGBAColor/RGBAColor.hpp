@@ -2,40 +2,43 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer [WSL : Ubuntu]
 ** File description:
-** RGBColor
+** RGBAColor
 */
 
 #pragma once
 
-#include "IColor.hpp"
+#include "Vertex.hpp"
 
 namespace RayTracer {
-    class RGBColor : virtual public RayTracer::IColor {
+    class RGBAColor {
         public:
-            RGBColor(void) = default;
-            RGBColor(const RGBColor &color) = default;
-            RGBColor(const RGBColor &&color);
-            RGBColor(double r, double g, double b);
-            virtual ~RGBColor() = default;
+            RGBAColor(void) = default;
+            RGBAColor(const RGBAColor &color) = default;
+            RGBAColor(const RGBAColor &&color);
+            RGBAColor(double r, double g, double b);
+            virtual ~RGBAColor() = default;
 
-            RGBColor &operator=(const RGBColor &color) = default;
-            RGBColor &operator=(const RGBColor &&color);
+            RGBAColor &operator=(const RGBAColor &color) = default;
+            RGBAColor &operator=(const RGBAColor &&color);
 
             void setColor(double r, double g, double b);
-            void setColor(const RGBColor &color);
+            void setColor(const RGBAColor &color);
             void setColor(const Maths::Vertex &color);
             void setRed(double r);
             void setGreen(double g);
             void setBlue(double b);
+            void setAlpha(double a);
 
             double getRed(void) const;
             double getGreen(void) const;
             double getBlue(void) const;
+            double getAlpha(void) const;
             Maths::Vertex getColor(void) const;
 
         private:
             double _r;
             double _g;
             double _b;
+            double _a;
     };
 }

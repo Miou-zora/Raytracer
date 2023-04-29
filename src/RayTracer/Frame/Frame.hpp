@@ -8,20 +8,22 @@
 #pragma once
 
 #include "Vertex.hpp"
-#include "IColor.hpp"
+#include "RGBAColor.hpp"
 #include <vector>
 
 namespace RayTracer {
     class Frame {
         public:
-            Frame(void) = default;
+            Frame(std::size_t width, std::size_t height): _width(width), _height(height) {};
             ~Frame() = default;
 
-            void setPixel(const Maths::Vertex &vertex, const RayTracer::IColor &color);
+            void setPixel(const Maths::Vertex &vertex, const RayTracer::RGBAColor &color);
 
-            const std::vector<std::vector<Maths::Vertex>> &getFrame(void) const;
+            const std::vector<std::vector<Maths::RGBAColor>> &getFrame(void) const;
 
         private:
-            std::vector<std::vector<Maths::Vertex>> _frame; // 3D array of vertices (pixels)
+            std::size_t _width;
+            std::size_t _height;
+            std::vector<std::vector<RayTracer::RGBAColor>> _frame; // 3D array of vertices (pixels)
     };
 }

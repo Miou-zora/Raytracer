@@ -9,8 +9,7 @@
 
 #include <string>
 #include "ILight.hpp"
-#include "Object.hpp"
-#include "IDisplayer.hpp"
+#include "IShape.hpp"
 #include <memory>
 
 namespace RayTracer {
@@ -20,8 +19,7 @@ namespace RayTracer {
             ~Factory();
 
             std::shared_ptr<RayTracer::ILight> createLight(std::string name);
-            std::shared_ptr<RayTracer::Object> createObject(std::string name);
-            std::shared_ptr<RayTracer::IDisplayer> createDisplayer(std::string name);
+            std::shared_ptr<RayTracer::IShape> createShape(std::string name);
 
         protected:
         private:
