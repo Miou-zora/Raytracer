@@ -12,16 +12,20 @@
 
 Test(Camera, casualRay)
 {
-    RayTracer::Camera camera;
+    RayTracer::Camera camera(1, 1, 28.955);
 
     Maths::Ray ray = camera.ray(0.5, 0.5);
     cr_assert(ray._origin == Maths::Vertex(0, 0, 0));
-    cr_assert(ray._direction == Maths::Vector(0, 1, 0));
+    Maths::Vector directionRounded = ray._direction;
+    directionRounded._x = round(directionRounded._x * 1000) / 1000;
+    directionRounded._y = round(directionRounded._y * 1000) / 1000;
+    directionRounded._z = round(directionRounded._z * 1000) / 1000;
+    cr_assert(directionRounded == Maths::Vector(0, 1, 0));
 }
 
 Test(Camera, rotateRayZ)
 {
-    RayTracer::Camera camera;
+    RayTracer::Camera camera(1, 1, 28.955);
 
     camera.setRotation(Maths::Vertex(0, 0, -M_PI / 2));
     Maths::Ray ray = camera.ray(0.5, 0.5);
@@ -35,7 +39,7 @@ Test(Camera, rotateRayZ)
 
 Test(Camera, rotateRayX)
 {
-    RayTracer::Camera camera;
+    RayTracer::Camera camera(1, 1, 28.955);
 
     camera.setRotation(Maths::Vertex(M_PI / 2, 0, 0));
     Maths::Ray ray = camera.ray(0.5, 0.5);
@@ -49,7 +53,7 @@ Test(Camera, rotateRayX)
 
 Test(Camera, rotateRayY)
 {
-    RayTracer::Camera camera;
+    RayTracer::Camera camera(1, 1, 28.955);
 
     camera.setRotation(Maths::Vertex(0, M_PI / 2, 0));
     Maths::Ray ray = camera.ray(0.5, 0.5);
@@ -63,7 +67,7 @@ Test(Camera, rotateRayY)
 
 Test(Camera, rotateRayXZ)
 {
-    RayTracer::Camera camera;
+    RayTracer::Camera camera(1, 1, 28.955);
 
     camera.setRotation(Maths::Vertex(M_PI / 2, 0, M_PI / 2));
     Maths::Ray ray = camera.ray(0.5, 0.5);
