@@ -35,6 +35,9 @@ namespace RayTracer {
             double getAlpha(void) const;
             Maths::Vertex getColor(void) const;
 
+            bool operator==(const RGBAColor &other) const;
+            bool operator!=(const RGBAColor &other) const;
+
         private:
             double _r;
             double _g;

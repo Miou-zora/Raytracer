@@ -47,7 +47,7 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
         hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
                                            hit_record.getIntersectionPoint()._y - this->getPosition()._y,
                                            hit_record.getIntersectionPoint()._z - this->getPosition()._z));
-        hit_record.setFrontFace(true);
+        hit_record.setFrontFace(ray._direction.dot(hit_record.getNormal()) < 0);
         hit_record.setMaterial(this->getMaterial());
         return hit_record;
     }
@@ -57,13 +57,13 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
         hit_record.setHit(false);
         return hit_record;
     }
-    double t = (t1 < t2) ? t1 : t2;
+    double t = (abs(t1) < abs(t2)) ? t1 : t2;
     hit_record.setHit(true);
     hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
     hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
                                        hit_record.getIntersectionPoint()._y - this->getPosition()._y,
                                        hit_record.getIntersectionPoint()._z - this->getPosition()._z));
-    hit_record.setFrontFace(true);
+    hit_record.setFrontFace(((t1 < 0 && t2 >= 0) || (t1 >= 0 && t2 < 0)) ? false : ray._direction.dot(hit_record.getNormal()) < 0);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;
 }
