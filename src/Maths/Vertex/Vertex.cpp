@@ -162,9 +162,9 @@ Maths::Vertex &Maths::Vertex::operator/=(const double &value)
 
 Maths::Vertex &Maths::Vertex::rotate(const Maths::Vertex &rotation)
 {
-    this->rotateX(rotation._x);
-    this->rotateY(rotation._y);
-    this->rotateZ(rotation._z);
+    rotateX(rotation._x);
+    rotateY(rotation._y);
+    rotateZ(rotation._z);
     return (*this);
 }
 

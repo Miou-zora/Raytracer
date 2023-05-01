@@ -13,6 +13,8 @@ RayTracer::Camera::Camera(void)
     _screen._origin = Maths::Vertex(-0.5, 1, -0.5);
     _screen._bottom_side = Maths::Vertex(0, 0, 1);
     _screen._left_side = Maths::Vertex(1, 0, 0);
+    setPosition(Maths::Vertex(0, 0, 0));
+    setRotation(Maths::Vertex(0, 0, 0));
 }
 
 Maths::Ray RayTracer::Camera::ray(double u, double v) const
