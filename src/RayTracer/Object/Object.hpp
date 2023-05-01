@@ -16,8 +16,8 @@
 namespace RayTracer {
     class Object: public RayTracer::ITranslation, public RayTracer::IRotation {
         public:
-            Maths::Vertex &getPosition(void) { return _position; };
-            Maths::Vertex &getRotation(void) { return _rotation; };
+            Maths::Vertex getPosition(void) const { return _position; };
+            Maths::Vertex getRotation(void) const { return _rotation; };
             void setPosition(const Maths::Vertex &position) { _position = position; };
             void setRotation(const Maths::Vertex &rotation) { _rotation = rotation; };
 

@@ -1,0 +1,69 @@
+/*
+** EPITECH PROJECT, 2023
+** Raytracer [WSL : Ubuntu]
+** File description:
+** Sphere
+*/
+
+#include "Sphere.hpp"
+#include <cmath>
+#include "MathsUtils.hpp"
+
+RayTracer::Sphere::Sphere(const Maths::Vertex &center, double radius)
+{
+    setPosition(center);
+    _radius = radius;
+}
+
+RayTracer::Sphere::Sphere(const Maths::Vertex &center, double radius, const RayTracer::Material &material)
+{
+    setPosition(center);
+    _radius = radius;
+    setMaterial(material);
+}
+
+RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
+{
+    RayTracer::HitRecord hit_record;
+
+    double a = ray._direction.dot(ray._direction);
+    double b = 2 * (ray._direction._x * (ray._origin._x - this->getPosition()._x) +
+                    ray._direction._y * (ray._origin._y - this->getPosition()._y) +
+                    ray._direction._z * (ray._origin._z - this->getPosition()._z));
+    double c = pow((ray._origin._x - this->getPosition()._x), 2) +
+               pow((ray._origin._y - this->getPosition()._y), 2) +
+               pow((ray._origin._z - this->getPosition()._z), 2) -
+               pow(_radius, 2);
+    double discriminant = b * b - 4 * a * c;
+
+    if (discriminant < 0) {
+        hit_record.setHit(false);
+        return hit_record;
+    }
+    if (discriminant == 0) {
+        double t = -b / (2 * a);
+        hit_record.setHit(true);
+        hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
+        hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
+                                           hit_record.getIntersectionPoint()._y - this->getPosition()._y,
+                                           hit_record.getIntersectionPoint()._z - this->getPosition()._z));
+        hit_record.setFrontFace(true);
+        hit_record.setMaterial(this->getMaterial());
+        return hit_record;
+    }
+    double t1 = (-b + sqrt(discriminant)) / (2 * a);
+    double t2 = (-b - sqrt(discriminant)) / (2 * a);
+    if (t1 < 0 && t2 < 0) {
+        hit_record.setHit(false);
+        return hit_record;
+    }
+    double t = (t1 < t2) ? t1 : t2;
+    hit_record.setHit(true);
+    hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
+    hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
+                                       hit_record.getIntersectionPoint()._y - this->getPosition()._y,
+                                       hit_record.getIntersectionPoint()._z - this->getPosition()._z));
+    hit_record.setFrontFace(true);
+    hit_record.setMaterial(this->getMaterial());
+    return hit_record;
+}

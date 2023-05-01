@@ -12,8 +12,8 @@
 namespace RayTracer {
     class Material {
         public:
-            Material(void);
-            ~Material();
+            Material(void) = default;
+            ~Material() = default;
 
             double getAmbient() const { return _ambient; };
             double getDiffuse() const { return _diffuse; };
@@ -26,6 +26,18 @@ namespace RayTracer {
             void setSpecular(double specular) { _specular = specular; };
             void setReflective(double reflective) { _reflective = reflective; };
             void setColor(const Maths::Vector &color) { _color = color; };
+
+            bool operator==(const Material &other) const {
+                return _ambient == other.getAmbient() &&
+                    _diffuse == other.getDiffuse() &&
+                    _specular == other.getSpecular() &&
+                    _reflective == other.getReflective() &&
+                    _color == other.getColor();
+            }
+
+            bool operator!=(const Material &other) const {
+                return !(*this == other);
+            }
         protected:
         private:
             double _ambient;

@@ -10,11 +10,11 @@
 #include "Vector.hpp"
 #include "Vertex.hpp"
 #include "Ray.hpp"
+#include "HitRecord.hpp"
 
 namespace RayTracer {
     class IShape {
         public:
-            virtual Maths::Vector getNormal(const Maths::Vertex &vertex) = 0;
-            virtual bool hits(const Maths::Ray &ray) const = 0;
+            virtual RayTracer::HitRecord hit(const Maths::Ray &ray) const = 0;
     };
 }
