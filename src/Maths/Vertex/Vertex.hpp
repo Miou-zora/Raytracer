@@ -70,7 +70,7 @@ namespace Maths {
              * @param other Vertex to add
              * @return Vertex Result of the addition
              */
-            Vertex operator+ (const Vertex &other);
+            Vertex operator+ (const Vertex &other) const;
 
             /**
              * @brief Add two Vertex
@@ -86,7 +86,7 @@ namespace Maths {
              * @param other Vertex to substract
              * @return Vertex Result of the substraction
              */
-            Vertex operator- (const Vertex &other);
+            Vertex operator- (const Vertex &other) const;
 
             /**
              * @brief Substract two Vertex
@@ -102,7 +102,7 @@ namespace Maths {
              * @param other Vertex to multiply
              * @return Vertex Result of the multiplication
              */
-            Vertex operator* (const Vertex &other);
+            Vertex operator* (const Vertex &other) const;
 
             /**
              * @brief Multiply two Vertex
@@ -118,7 +118,7 @@ namespace Maths {
              * @param other Vertex to divide
              * @return Vertex Result of the division
              */
-            Vertex operator/ (const Vertex &other);
+            Vertex operator/ (const Vertex &other) const;
 
             /**
              * @brief Divide two Vertex
@@ -135,7 +135,7 @@ namespace Maths {
              * @return true Vertex are the same
              * @return false Vertex are different
              */
-            bool operator== (const Vertex &other);
+            bool operator== (const Vertex &other) const;
 
             /**
              * @brief Compare two Vertex
@@ -144,7 +144,7 @@ namespace Maths {
              * @return true Vertex are different
              * @return false Vertex are the same
              */
-            bool operator!= (const Vertex &other);
+            bool operator!= (const Vertex &other) const;
 
             /**
              * @brief Add a value to a Vertex
@@ -152,7 +152,7 @@ namespace Maths {
              * @param value Value to add
              * @return Vertex Result of the addition
              */
-            Vertex operator+(const double &value);
+            Vertex operator+(const double &value) const;
 
             /**
              * @brief Add a value to a Vertex
@@ -168,7 +168,7 @@ namespace Maths {
              * @param value Value to substract
              * @return Vertex Result of the substraction
              */
-            Vertex operator-(const double &value);
+            Vertex operator-(const double &value) const;
 
             /**
              * @brief Substract a value to a Vertex
@@ -184,7 +184,7 @@ namespace Maths {
              * @param value Value to multiply
              * @return Vertex Result of the multiplication
              */
-            Vertex operator*(const double &value);
+            Vertex operator*(const double &value) const;
 
             /**
              * @brief Multiply a value to a Vertex
@@ -200,7 +200,7 @@ namespace Maths {
              * @param value Value to divide
              * @return Vertex Result of the division
              */
-            Vertex operator/(const double &value);
+            Vertex operator/(const double &value) const;
 
             /**
              * @brief Divide a value to a Vertex
@@ -209,6 +209,38 @@ namespace Maths {
              * @return Vertex Result of the division
              */
             Vertex &operator/=(const double &value);
+
+            /**
+             * @brief Rotate a Vertex
+             *
+             * @param rotation Vertex to rotate
+             * @return Vertex Result of the rotation
+             */
+            Vertex &rotate(const Vertex &rotation);
+
+            /**
+             * @brief Rotate a Vertex on X axis
+             *
+             * @param rotation Vertex to rotate
+             * @return Vertex Result of the rotation
+             */
+            Vertex &rotateX(const double &angle);
+
+            /**
+             * @brief Rotate a Vertex on Y axis
+             *
+             * @param rotation Vertex to rotate
+             * @return Vertex Result of the rotation
+             */
+            Vertex &rotateY(const double &angle);
+
+            /**
+             * @brief Rotate a Vertex on Z axis
+             *
+             * @param rotation Vertex to rotate
+             * @return Vertex Result of the rotation
+             */
+            Vertex &rotateZ(const double &angle);
 
             /// @brief X coordinate
             double _x;
@@ -220,5 +252,3 @@ namespace Maths {
 }
 
 std::ostream &operator<< (std::ostream &out, const Maths::Vertex &vertex);
-
-Maths::Vertex operator- (const Maths::Vertex &vertex1, const Maths::Vertex &vertex2);
