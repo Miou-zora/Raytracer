@@ -19,13 +19,13 @@ namespace RayTracer {
 
             void setPixel(const std::pair<std::size_t, std::size_t> &pos, const RayTracer::RGBAColor &color);
 
-            const std::vector<std::vector<RayTracer::RGBAColor>> &getFrame(void) const;
+            const std::vector<std::vector<RayTracer::RGBAColor>> &getRect(void) const;
 
             std::size_t getWidth(void) const { return _width; };
             std::size_t getHeight(void) const { return _height; };
         private:
             std::size_t _width;
             std::size_t _height;
-            std::vector<std::vector<RayTracer::RGBAColor>> _frame; // 3D array of vertices (pixels)
+            std::vector<std::vector<RayTracer::RGBAColor>> _rect; // 2D array of vertices (pixels)
     };
 }
