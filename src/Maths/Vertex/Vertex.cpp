@@ -204,7 +204,3 @@ std::ostream &operator<<(std::ostream &out, const Maths::Vertex &vertex)
     return (out);
 }
 
-Maths::Vertex operator-(const Maths::Vertex &vertex1, const Maths::Vertex &vertex2)
-{
-    return (Maths::Vertex(vertex1._x - vertex2._x, vertex1._y - vertex2._y, vertex1._z - vertex2._z));
-}
