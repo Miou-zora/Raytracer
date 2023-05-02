@@ -254,4 +254,3 @@ namespace Maths {
 std::ostream &operator<<(std::ostream &stream, const Maths::Vector &vector);
 
 Maths::Vector operator-(const Maths::Vector &vector);
-

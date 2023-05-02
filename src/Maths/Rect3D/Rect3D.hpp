@@ -16,7 +16,7 @@ namespace Maths {
             Rect3D(const Maths::Vertex &origin, const Maths::Vertex &bottom_side, const Maths::Vertex &left_side);
             ~Rect3D() = default;
 
-            Maths::Vertex pointAt(double u, double v);
+            Maths::Vertex pointAt(double u, double v) const;
 
             Maths::Vertex _origin;
             Maths::Vertex _bottom_side;
