@@ -16,18 +16,6 @@ RayTracer::Renderer::~Renderer()
 {
 }
 
-double RayTracer::Renderer::getDistance(const std::vector<RayTracer::HitRecord> &records) const
-{
-    double distance = 0;
-
-    for (auto &record : records) {
-        if (record.getDistance() < distance) {
-            distance = record.getDistance();
-        }
-    }
-    return distance;
-}
-
 RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
 {
     double distance = records[0].getDistance();
