@@ -38,6 +38,10 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
     hitRecord.setHit(false);
     if (denominator == 0)
         return hitRecord;
+    double distance = Maths::MathsUtils::distance(ray._origin, hitRecord.getIntersectionPoint());
+    if (distance < 0)
+        return hitRecord;
+    hitRecord.setDistance(distance);
     hitRecord.setHit(true);
     double t = -(ray._origin.dot(VectorToVertex(getNormal())) + getNormal().dot(VertexToVector(getPosition()))) / denominator;
     hitRecord.setIntersectionPoint(ray._origin + ray._direction * t);

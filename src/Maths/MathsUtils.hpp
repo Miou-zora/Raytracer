@@ -43,6 +43,13 @@ namespace Maths {
                 return (Maths::Ray(incident._origin,
                     GetReflectedRay(normal, incident._direction)));
             }
+
+            static double distance(const Maths::Vertex &lhs, const Maths::Vertex &rhs)
+            {
+                return (std::sqrt(std::pow(rhs._x - lhs._x, 2) +
+                    std::pow(rhs._y - lhs._y, 2) +
+                    std::pow(rhs._z - lhs._z, 2)));
+            }
     };
 }
 
