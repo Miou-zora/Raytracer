@@ -8,6 +8,7 @@
 #pragma once
 
 #include "IDisplayer.hpp"
+#include <iostream>
 
 namespace RayTracer {
     class PPMDisplayer : virtual public RayTracer::IDisplayer {

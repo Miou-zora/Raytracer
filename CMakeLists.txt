@@ -39,6 +39,7 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Object/Object.cpp"
         "src/RayTracer/RGBAColor/RGBAColor.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
+        "src/RayTracer/Frame/Frame.cpp"
         "src/Core.cpp")
 include_directories(${INCLUDE_SRC})
 set(MAIN "main.cpp")
@@ -57,6 +58,8 @@ set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/Maths/tests_ray.cpp"
 "tests/RayTracer/Object/Shape/tests_sphere.cpp"
 "tests/RayTracer/Object/Shape/tests_plane.cpp"
+"tests/RayTracer/Frame/tests_frame.cpp"
+"tests/RayTracer/Displayer/PPMDisplayer/tests_ppmdisplayer.cpp"
 "tests/RayTracer/Object/Camera/tests_camera.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
