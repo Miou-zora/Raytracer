@@ -8,26 +8,14 @@
 #include "Renderer.hpp"
 #include "ICamera.hpp"
 
-RayTracer::Renderer::Renderer(void)
-{
-}
-
-RayTracer::Renderer::~Renderer()
-{
-}
-
 RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
 {
     double distance = records[0].getDistance();
-    RayTracer::HitRecord closestHit;
+    RayTracer::HitRecord closestHit = records[0];
 
     for (auto &record : records) {
         if (record.getDistance() < distance) {
             distance = record.getDistance();
-        }
-    }
-    for (auto &record : records) {
-        if (record.getDistance() == distance) {
             closestHit = record;
         }
     }
@@ -37,8 +25,6 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
 RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene, const Maths::Ray &ray) const
 {
     std::vector<RayTracer::HitRecord> records;
-    double distance = 0;
-    RayTracer::HitRecord closestHit;
 
     for (auto &shape : scene.getShapes()) {
         RayTracer::HitRecord record = shape.get()->hit(ray);
@@ -47,8 +33,7 @@ RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene
     }
     if (records.empty())
         return RayTracer::RGBAColor(0, 0, 0, 255);
-    closestHit = this->getClosestHit(records);
-    return closestHit.getShape()->getColor();
+    return this->getClosestHit(records).getShape()->getColor();
 }
 
 void RayTracer::Renderer::render(const RayTracer::AScene &scene, RayTracer::Frame &frame)

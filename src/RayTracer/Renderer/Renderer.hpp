@@ -12,8 +12,8 @@
 namespace RayTracer {
     class Renderer : virtual public IRenderer{
         public:
-            Renderer(void);
-            ~Renderer();
+            Renderer(void) = default;
+            ~Renderer() = default;
 
             void render(const RayTracer::AScene &scene, RayTracer::Frame &frame);
 
