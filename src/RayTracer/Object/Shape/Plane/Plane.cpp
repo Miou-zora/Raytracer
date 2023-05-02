@@ -7,6 +7,8 @@
 
 #include "Plane.hpp"
 
+#include "MathsUtils.hpp"
+
 RayTracer::Plane::Plane(const Maths::Vertex &position)
 {
     setPosition(position);
@@ -25,11 +27,23 @@ RayTracer::Plane::Plane(const Maths::Vertex &position, const Maths::Vertex &rota
     setPosition(position);
     setRotation(rotation);
     setMaterial(material);
-    // _normal.rotate(rotation);
+    _normal.rotate(rotation);
 }
 
 RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
 {
     RayTracer::HitRecord hitRecord;
+    double denominator = ray._direction.dot(getNormal());
+
+    hitRecord.setHit(false);
+    if (denominator == 0)
+        return hitRecord;
+    hitRecord.setHit(true);
+    double t = -(ray._origin.dot(VectorToVertex(getNormal())) + getNormal().dot(VertexToVector(getPosition()))) / denominator;
+    hitRecord.setIntersectionPoint(ray._origin + ray._direction * t);
+    hitRecord.setNormal(getNormal());
+    hitRecord.setFrontFace(ray._direction.dot(hitRecord.getNormal()) < 0);
+    hitRecord.setMaterial(getMaterial());
+    return hitRecord;
 }
 
