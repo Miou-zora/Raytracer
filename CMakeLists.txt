@@ -56,6 +56,7 @@ set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/Maths/tests_rect3D.cpp"
 "tests/Maths/tests_ray.cpp"
 "tests/RayTracer/Object/Shape/tests_sphere.cpp"
+"tests/RayTracer/Object/Shape/tests_plane.cpp"
 "tests/RayTracer/Object/Camera/tests_camera.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
