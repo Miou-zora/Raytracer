@@ -8,8 +8,10 @@
 #pragma once
 
 #include <iostream>
+#include "Vertex.hpp"
 
 namespace Maths {
+    class Vertex;
     /**
      * @brief A vector in 3D space
      */
@@ -244,6 +246,46 @@ namespace Maths {
              * @return false If the vectors are the same, true otherwise
              */
             bool operator!=(const Vector &other) const;
+
+            /**
+             * @brief Rotate a Vector
+             *
+             * @param rotation The rotation vector
+             * @return Vector& The rotated vector
+             */
+            Vector &rotate(const Vector &rotation);
+
+            /**
+             * @brief Rotate a Vector
+             *
+             * @param rotation The rotation vector
+             * @return Vector The rotated vector
+             */
+            Vector &rotate(const Vertex &rotation);
+
+            /**
+             * @brief Rotate a Vector on X axis
+             *
+             * @param angle The angle
+             * @return Vector& The rotated vector
+             */
+            Vector &rotateX(double angle);
+
+            /**
+             * @brief Rotate a Vector on Y axis
+             *
+             * @param angle The angle
+             * @return Vector& The rotated vector
+             */
+            Vector &rotateY(double angle);
+
+            /**
+             * @brief Rotate a Vector on Z axis
+             *
+             * @param angle The angle
+             * @return Vector& The rotated vector
+             */
+            Vector &rotateZ(double angle);
 
             double _x;
             double _y;

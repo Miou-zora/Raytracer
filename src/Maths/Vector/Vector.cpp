@@ -205,6 +205,53 @@ std::ostream &operator<<(std::ostream &stream, const Maths::Vector &vector)
     return (stream);
 }
 
+Maths::Vector &Maths::Vector::rotate(const Maths::Vector &rotation)
+{
+    rotateX(rotation._x);
+    rotateY(rotation._y);
+    rotateZ(rotation._z);
+    return (*this);
+}
+
+
+Maths::Vector &Maths::Vector::rotate(const Maths::Vertex &rotation)
+{
+    rotateX(rotation._x);
+    rotateY(rotation._y);
+    rotateZ(rotation._z);
+    return (*this);
+}
+
+Maths::Vector &Maths::Vector::rotateX(double angle)
+{
+    double y = _y;
+    double z = _z;
+
+    _y = y * cos(angle) - z * sin(angle);
+    _z = y * sin(angle) + z * cos(angle);
+    return (*this);
+}
+
+Maths::Vector &Maths::Vector::rotateY(double angle)
+{
+    double x = _x;
+    double z = _z;
+
+    _x = x * cos(angle) + z * sin(angle);
+    _z = -x * sin(angle) + z * cos(angle);
+    return (*this);
+}
+
+Maths::Vector &Maths::Vector::rotateZ(double angle)
+{
+    double x = _x;
+    double y = _y;
+
+    _x = x * cos(angle) - y * sin(angle);
+    _y = x * sin(angle) + y * cos(angle);
+    return (*this);
+}
+
 Maths::Vector operator-(const Maths::Vector &vector)
 {
     return (Maths::Vector(-vector._x, -vector._y, -vector._z));

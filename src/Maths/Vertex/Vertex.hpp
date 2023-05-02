@@ -242,6 +242,14 @@ namespace Maths {
              */
             Vertex &rotateZ(const double &angle);
 
+            /**
+             * @brief Make the dot product of two Vertex
+             *
+             * @param other Vertex to make the dot product
+             * @return double Result of the dot product
+             */
+            double dot(const Vertex &other) const;
+
             /// @brief X coordinate
             double _x;
             /// @brief Y coordinate
