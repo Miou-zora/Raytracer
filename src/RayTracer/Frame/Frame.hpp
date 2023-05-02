@@ -21,6 +21,8 @@ namespace RayTracer {
 
             const std::vector<std::vector<RayTracer::RGBAColor>> &getFrame(void) const;
 
+            std::size_t getWidth(void) const { return _width; };
+            std::size_t getHeight(void) const { return _height; };
         private:
             std::size_t _width;
             std::size_t _height;
