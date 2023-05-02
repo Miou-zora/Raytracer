@@ -198,6 +198,12 @@ Maths::Vertex &Maths::Vertex::rotateZ(const double &angle)
     return (*this);
 }
 
+
+double Maths::Vertex::dot(const Maths::Vertex &other) const
+{
+    return (_x * other._x + _y * other._y + _z * other._z);
+}
+
 std::ostream &operator<<(std::ostream &out, const Maths::Vertex &vertex)
 {
     out << "Vertex(" << vertex._x << ", " << vertex._y << ", " << vertex._z << ")";
