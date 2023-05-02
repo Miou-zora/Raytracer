@@ -16,15 +16,51 @@ RayTracer::Renderer::~Renderer()
 {
 }
 
-RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene, const Maths::Ray &ray) const
+double RayTracer::Renderer::getDistance(const std::vector<RayTracer::HitRecord> &records) const
 {
-    for (auto &shape : scene.getShapes()) {
-        RayTracer::HitRecord record = shape.get()->hit(ray);
-        if (record.isHit() && record.isFrontFace()) {
-            return record.getColor();
+    double distance = 0;
+
+    for (auto &record : records) {
+        if (record.getDistance() < distance) {
+            distance = record.getDistance();
         }
     }
-    return RayTracer::RGBAColor(0, 0, 0, 255);
+    return distance;
+}
+
+RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
+{
+    double distance = records[0].getDistance();
+    RayTracer::HitRecord closestHit;
+
+    for (auto &record : records) {
+        if (record.getDistance() < distance) {
+            distance = record.getDistance();
+        }
+    }
+    for (auto &record : records) {
+        if (record.getDistance() == distance) {
+            closestHit = record;
+        }
+    }
+    return closestHit;
+}
+
+RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene, const Maths::Ray &ray) const
+{
+    std::vector<RayTracer::HitRecord> records;
+    double distance = 0;
+    RayTracer::HitRecord closestHit;
+
+    for (auto &shape : scene.getShapes()) {
+        RayTracer::HitRecord record = shape.get()->hit(ray);
+        if (record.isHit() && record.isFrontFace())
+            records.push_back(record);
+    }
+    if (records.empty())
+        return RayTracer::RGBAColor(0, 0, 0, 255);
+    closestHit = this->getClosestHit(records);
+    return closestHit.getShape()->getColor();
 }
 
 void RayTracer::Renderer::render(const RayTracer::AScene &scene, RayTracer::Frame &frame)

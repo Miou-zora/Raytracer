@@ -20,5 +20,6 @@ namespace RayTracer {
         protected:
         private:
             RGBAColor castRay(const AScene &scene, const Maths::Ray &ray) const;
+            RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
     };
 }
