@@ -219,6 +219,6 @@ namespace Maths {
     };
 }
 
-std::ostream &operator<< (std::ostream &out, const Maths::Vertex &vertex);
+std::ostream &operator<<(std::ostream &out, const Maths::Vertex &vertex);
 
-Maths::Vertex operator- (const Maths::Vertex &vertex1, const Maths::Vertex &vertex2);
+Maths::Vertex operator-(const Maths::Vertex &vertex1, const Maths::Vertex &vertex2);
