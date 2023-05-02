@@ -98,7 +98,7 @@ Maths::Vector &Maths::Vector::operator/=(const Maths::Vector &other)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator+(double value)
+Maths::Vector Maths::Vector::operator+(double value) const
 {
     return (Maths::Vector(_x + value, _y + value, _z + value));
 }
@@ -111,7 +111,7 @@ Maths::Vector &Maths::Vector::operator+=(double value)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator-(double value)
+Maths::Vector Maths::Vector::operator-(double value) const
 {
     return (Maths::Vector(_x - value, _y - value, _z - value));
 }
@@ -124,7 +124,7 @@ Maths::Vector &Maths::Vector::operator-=(double value)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator*(double value)
+Maths::Vector Maths::Vector::operator*(double value) const
 {
     return (Maths::Vector(_x * value, _y * value, _z * value));
 }
@@ -137,7 +137,7 @@ Maths::Vector &Maths::Vector::operator*=(double value)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator/(double value)
+Maths::Vector Maths::Vector::operator/(double value) const
 {
     return (Maths::Vector(_x / value, _y / value, _z / value));
 }

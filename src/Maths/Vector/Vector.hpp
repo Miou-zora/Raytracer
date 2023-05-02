@@ -134,7 +134,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator+ (double value);
+            Vector operator+ (double value) const;
 
             /**
              * @brief Add a value to a vector
@@ -150,7 +150,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator- (double value);
+            Vector operator- (double value) const;
 
             /**
              * @brief Subtract a value to a vector
@@ -166,7 +166,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator* (double value);
+            Vector operator* (double value) const;
 
             /**
              * @brief Multiply a vector by a value
@@ -182,7 +182,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator/ (double value);
+            Vector operator/ (double value) const;
 
             /**
              * @brief Divide a vector by a value

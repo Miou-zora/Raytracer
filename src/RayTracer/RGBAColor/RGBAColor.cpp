@@ -99,3 +99,13 @@ Maths::Vertex RayTracer::RGBAColor::getColor(void) const
     return (Maths::Vertex(_r, _g, _b));
 }
 
+bool RayTracer::RGBAColor::operator==(const RayTracer::RGBAColor &other) const
+{
+    return (_r == other.getRed() && _g == other.getGreen() && _b == other.getBlue());
+}
+
+bool RayTracer::RGBAColor::operator!=(const RayTracer::RGBAColor &other) const
+{
+    return (_r != other.getRed() || _g != other.getGreen() || _b != other.getBlue());
+}
+

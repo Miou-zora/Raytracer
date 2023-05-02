@@ -45,3 +45,8 @@ namespace Maths {
             }
     };
 }
+
+inline Maths::Vertex operator+(const Maths::Vertex &lhs, const Maths::Vector &rhs)
+{
+    return (Maths::Vertex(lhs._x + rhs._x, lhs._y + rhs._y, lhs._z + rhs._z));
+}

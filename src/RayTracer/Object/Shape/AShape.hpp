@@ -12,12 +12,12 @@
 #include "Material.hpp"
 
 namespace RayTracer {
-    class AShape: public Object, public IShape {
+    class AShape: public RayTracer::Object, public RayTracer::IShape {
         public:
-            AShape(void);
-            ~AShape();
+            AShape(void) = default;
+            virtual ~AShape() = default;
 
-            Material getMaterial() const { return _material; };
+            RayTracer::Material getMaterial() const { return _material; };
             void setMaterial(const Material &material) { _material = material; };
 
             bool isShadow() const { return _isShadow; };

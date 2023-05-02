@@ -20,6 +20,7 @@ set(INCLUDE_SRC "src"
                 "src/RayTracer/Object/Camera"
                 "src/RayTracer/Object/Light"
                 "src/RayTracer/Object/Shape"
+                "src/RayTracer/Object/Shape/Sphere"
                 "src/RayTracer/Renderer"
                 "src/RayTracer/Scene"
                 "src/RayTracer/Transformation"
@@ -31,6 +32,8 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/Maths/Rect3D/Rect3D.cpp"
         "src/Maths/Vector/Vector.cpp"
         "src/Maths/Vertex/Vertex.cpp"
+        "src/RayTracer/Object/Shape/Sphere/Sphere.cpp"
+        "src/RayTracer/Object/Object.cpp"
         "src/RayTracer/RGBAColor/RGBAColor.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/Core.cpp")
@@ -48,7 +51,8 @@ enable_testing()
 set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/Maths/tests_vector.cpp"
 "tests/Maths/tests_rect3D.cpp"
-"tests/Maths/tests_ray.cpp")
+"tests/Maths/tests_ray.cpp"
+"tests/RayTracer/Object/Shape/tests_sphere.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
 
