@@ -6,7 +6,7 @@
 */
 
 #include "Core.hpp"
-#include <fstream>
+#include <libconfig.h++>
 
 void RayTracer::Core::run(void)
 {
@@ -14,11 +14,18 @@ void RayTracer::Core::run(void)
 
 void RayTracer::Core::setScene(std::string scenePath)
 {
+    libconfig::Config cfg;
+
     if (scenePath.empty())
         throw std::invalid_argument("Scene path is empty");
-    std::ifstream file = std::ifstream(scenePath.c_str());
-    if (file.fail())
-        throw std::invalid_argument("Scene path is invalid");
+    try {
+        cfg.readFile(scenePath.c_str());
+    } catch (const libconfig::FileIOException &fioex) {
+        throw std::invalid_argument("I/O error while reading file.");
+    }
+    catch (const libconfig::ParseException &pex) {
+        throw std::invalid_argument("Parse error at " + std::to_string(pex.getLine()) + ": " + pex.getError());
+    }
     _scenePath = scenePath;
 }
 
