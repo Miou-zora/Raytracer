@@ -12,5 +12,6 @@ namespace RayTracer {
         public:
             Factory(void);
             virtual ~Factory() = default;
+        private:
     };
 }
