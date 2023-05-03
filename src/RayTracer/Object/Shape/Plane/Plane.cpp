@@ -27,6 +27,7 @@ RayTracer::Plane::Plane(const Maths::Vertex &position, const Maths::Vertex &rota
     setPosition(position);
     setRotation(rotation);
     setMaterial(material);
+    setNormal(Maths::Vector(0, 0, 1));
     _normal.rotate(rotation);
 }
 
@@ -45,11 +46,8 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
     hitRecord.setHit(true);
     double t = -(ray._origin.dot(VectorToVertex(getNormal())) + getNormal().dot(VertexToVector(getPosition()))) / denominator;
     hitRecord.setIntersectionPoint(ray._origin + ray._direction * t);
-    hitRecord.setFrontFace(ray._direction.dot(hitRecord.getNormal()) < 0);
-    if (hitRecord.isFrontFace())
-        hitRecord.setNormal(getNormal());
-    else
-        hitRecord.setNormal(getNormal() * -1);
+    hitRecord.setNormal(getNormal());
+    hitRecord.setFrontFace(ray._direction.dot(getNormal()) < 0);
     hitRecord.setMaterial(getMaterial());
     return hitRecord;
 }
