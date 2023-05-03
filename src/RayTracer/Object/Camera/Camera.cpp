@@ -25,11 +25,11 @@ RayTracer::Camera::Camera(int width, int height, double fov)
     _screen._bottom_side = Maths::Vertex(0, 0, aspectRatio);
 }
 
-Maths::Ray RayTracer::Camera::ray(double u, double v) const
+Maths::Ray RayTracer::Camera::ray(double x, double y) const
 {
     Maths::Vertex rotation = this->getRotation();
     Maths::Vertex origin = this->getPosition();
-    Maths::Vertex direction = _screen.pointAt(u, v);
+    Maths::Vertex direction = _screen.pointAt(y, x);
     direction = direction.rotate(rotation);
 
     return (Maths::Ray(origin, Maths::Vector(direction._x, direction._y, direction._z)));
