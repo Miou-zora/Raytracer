@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "AScene.hpp"
+#include "Scene.hpp"
 #include "Frame.hpp"
 
 namespace RayTracer {
@@ -15,6 +15,6 @@ namespace RayTracer {
     class IRenderer {
         public:
             /// @brief Render the scene and put it in frame
-            virtual void render(const RayTracer::AScene &scene, RayTracer::Frame &frame) = 0;
+            virtual void render(const RayTracer::Scene &scene, RayTracer::Frame &frame) = 0;
     };
 }

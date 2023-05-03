@@ -40,13 +40,13 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
     if (discriminant < 0)
         return hit_record;
     if (discriminant == 0) {
+        double t = -b / (2 * a);
+        hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
         double distance = Maths::MathsUtils::distance(ray._origin, hit_record.getIntersectionPoint());
         if (distance < 0)
             return hit_record;
-        hit_record.setDistance(distance);
-        double t = -b / (2 * a);
         hit_record.setHit(true);
-        hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
+        hit_record.setDistance(distance);
         hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
                                            hit_record.getIntersectionPoint()._y - this->getPosition()._y,
                                            hit_record.getIntersectionPoint()._z - this->getPosition()._z));
@@ -62,8 +62,12 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
         return hit_record;
     }
     double t = (abs(t1) < abs(t2)) ? t1 : t2;
-    hit_record.setHit(true);
     hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
+    double distance = Maths::MathsUtils::distance(ray._origin, hit_record.getIntersectionPoint());
+    hit_record.setDistance(distance);
+    if (distance < 0)
+        return hit_record;
+    hit_record.setHit(true);
     hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
                                        hit_record.getIntersectionPoint()._y - this->getPosition()._y,
                                        hit_record.getIntersectionPoint()._z - this->getPosition()._z));
