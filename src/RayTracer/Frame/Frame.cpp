@@ -9,5 +9,5 @@
 
 void RayTracer::Frame::setPixel(const std::pair<std::size_t, std::size_t> &pos, const RayTracer::RGBAColor &color)
 {
-    _rect[pos.first][pos.second] = color;
+    _rect[pos.second][pos.first] = color;
 }
