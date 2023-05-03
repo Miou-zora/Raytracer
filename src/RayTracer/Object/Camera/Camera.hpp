@@ -19,7 +19,7 @@ namespace RayTracer {
             Maths::Rect3D getScreen() const { return _screen; };
             void setScreen(Maths::Rect3D screen) { _screen = screen; };
 
-            Maths::Ray ray(double u, double v) const override;
+            Maths::Ray ray(double x, double y) const override;
         private:
             Maths::Rect3D _screen;
     };
