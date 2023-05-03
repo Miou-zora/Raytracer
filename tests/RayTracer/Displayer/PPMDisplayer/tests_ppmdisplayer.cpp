@@ -17,8 +17,8 @@ Test(ppmdisplayer, casual)
     RayTracer::PPMDisplayer displayer;
 
     frame.setPixel(std::make_pair(0, 0), RayTracer::RGBAColor(255, 0, 255));
-    frame.setPixel(std::make_pair(0, 1), RayTracer::RGBAColor(255, 255, 0));
-    frame.setPixel(std::make_pair(1, 0), RayTracer::RGBAColor(0, 255, 255));
+    frame.setPixel(std::make_pair(1, 0), RayTracer::RGBAColor(255, 255, 0));
+    frame.setPixel(std::make_pair(0, 1), RayTracer::RGBAColor(0, 255, 255));
     frame.setPixel(std::make_pair(1, 1), RayTracer::RGBAColor(255, 255, 255));
     cr_redirect_stdout();
     displayer.display(frame);
