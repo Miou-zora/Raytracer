@@ -22,7 +22,7 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
     return closestHit;
 }
 
-RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene, const Maths::Ray &ray) const
+RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
     std::vector<RayTracer::HitRecord> records;
 
@@ -36,7 +36,7 @@ RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene
     return this->getClosestHit(records).getMaterial().getColor();
 }
 
-void RayTracer::Renderer::render(const RayTracer::AScene &scene, RayTracer::Frame &frame)
+void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame &frame)
 {
     RayTracer::ICamera &camera = *scene.getCamera().get();
 

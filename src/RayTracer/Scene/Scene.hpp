@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer [WSL : Ubuntu]
 ** File description:
-** AScene
+** Scene
 */
 
 #pragma once
@@ -14,15 +14,15 @@
 #include <memory>
 
 namespace RayTracer {
-    /// @brief AScene class that will contain all the objects of the scene
-    class AScene {
+    /// @brief Scene class that will contain all the objects of the scene
+    class Scene {
         public:
-            AScene(void);
-            ~AScene();
+            Scene(void) = default;
+            ~Scene() = default;
 
-            void addShape(const IShape &shape);
-            void addLight(const ILight &light);
-            void setCamera(const std::shared_ptr<ICamera> &camera);
+            void addShape(std::shared_ptr<IShape> shape) { _shapes.push_back(shape); };
+            void addLight(std::shared_ptr<ILight> light) { _lights.push_back(light); };
+            void setCamera(const std::shared_ptr<ICamera> &camera) { _camera = camera; };
 
             std::vector<std::shared_ptr<IShape>> getShapes(void) const { return _shapes; };
             std::vector<std::shared_ptr<ILight>> getLights(void) const { return _lights; };
