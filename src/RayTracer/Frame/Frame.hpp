@@ -18,7 +18,7 @@ namespace RayTracer {
             ~Frame() = default;
 
             void setPixel(const std::pair<std::size_t, std::size_t> &pos, const RayTracer::RGBAColor &color);
-            const RayTracer::RGBAColor &getPixel(const std::pair<std::size_t, std::size_t> &pos) const { return _rect[pos.first][pos.second]; };
+            const RayTracer::RGBAColor &getPixel(const std::pair<std::size_t, std::size_t> &pos) const { return _rect[pos.second][pos.first]; };
 
             std::size_t getWidth(void) const { return _width; };
             std::size_t getHeight(void) const { return _height; };
