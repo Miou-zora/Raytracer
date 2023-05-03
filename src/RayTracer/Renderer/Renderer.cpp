@@ -22,7 +22,7 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
     return closestHit;
 }
 
-RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene, const Maths::Ray &ray) const
+RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
     std::vector<RayTracer::HitRecord> records;
 
@@ -32,20 +32,20 @@ RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::AScene &scene
             records.push_back(record);
     }
     if (records.empty())
-        return RayTracer::RGBAColor(0, 0, 0, 255);
-    return this->getClosestHit(records).getShape()->getColor();
+        return RayTracer::RGBAColor(0, 0, 0);
+    return this->getClosestHit(records).getMaterial().getColor();
 }
 
-void RayTracer::Renderer::render(const RayTracer::AScene &scene, RayTracer::Frame &frame)
+void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame &frame)
 {
-    RayTracer::ICamera camera = scene.getCamera().get();
+    RayTracer::ICamera &camera = *scene.getCamera().get();
 
     for (std::size_t i = 0; i < frame.getWidth(); i++) {
         for (std::size_t j = 0; j < frame.getHeight(); j++) {
             double x = i / (double)frame.getWidth();
             double y = j / (double)frame.getHeight();
             Maths::Ray ray = camera.ray(x, y);
-            frame.setPixel(i, j, this->castRay(scene, ray));
+            frame.setPixel(std::pair<int, int>(i, j), this->castRay(scene, ray));
         }
     }
 }
