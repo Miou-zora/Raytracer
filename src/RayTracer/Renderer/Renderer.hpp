@@ -12,12 +12,14 @@
 namespace RayTracer {
     class Renderer : virtual public IRenderer{
         public:
-            Renderer(void);
-            ~Renderer();
+            Renderer(void) = default;
+            ~Renderer() = default;
 
             void render(const RayTracer::AScene &scene, RayTracer::Frame &frame);
 
         protected:
         private:
+            RGBAColor castRay(const AScene &scene, const Maths::Ray &ray) const;
+            RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
     };
 }
