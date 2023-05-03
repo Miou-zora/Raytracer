@@ -38,6 +38,7 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Object/Shape/Plane/Plane.cpp"
         "src/RayTracer/Object/Object.cpp"
         "src/RayTracer/RGBAColor/RGBAColor.cpp"
+        "src/RayTracer/Renderer/Renderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp"
         "src/Core.cpp")
