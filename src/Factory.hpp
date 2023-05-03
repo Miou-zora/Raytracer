@@ -10,7 +10,7 @@
 namespace RayTracer {
     class Factory {
         public:
-            Factory(void) = default;
+            Factory(void);
             virtual ~Factory() = default;
     };
 }

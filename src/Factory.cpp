@@ -6,3 +6,11 @@
 */
 
 #include "Factory.hpp"
+
+RayTracer::Factory::Factory(void)
+{
+}
+
+RayTracer::Factory::~Factory()
+{
+}
