@@ -7,6 +7,7 @@
 
 #include "Renderer.hpp"
 #include "ICamera.hpp"
+#include "MathsUtils.hpp"
 
 RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
 {
@@ -22,7 +23,8 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
     return closestHit;
 }
 
-RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
+
+RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
     std::vector<RayTracer::HitRecord> records;
 
@@ -31,9 +33,48 @@ RayTracer::RGBAColor RayTracer::Renderer::castRay(const RayTracer::Scene &scene,
         if (record.isHit() && record.isFrontFace())
             records.push_back(record);
     }
-    if (records.empty())
-        return RayTracer::RGBAColor(0, 0, 0);
-    return this->getClosestHit(records).getMaterial().getColor();
+    if (records.empty()) {
+        RayTracer::HitRecord record;
+        record.setHit(false);
+        return record;
+    }
+    return this->getClosestHit(records);
+}
+
+Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
+{
+    Maths::Vertex rayColor(1, 1, 1);
+    Maths::Vertex incomingLight(0, 0, 0);
+    Maths::Ray newRay = ray;
+
+    for (std::size_t i = 0; i < MAX_DEPTH; i++) {
+        RayTracer::HitRecord record = this->castRay(scene, newRay);
+        if (!record.isHit())
+            break;
+        newRay._origin = record.getIntersectionPoint();
+        newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
+
+        RayTracer::Material material = record.getMaterial();
+        Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
+        incomingLight += (rayColor * emittedLight);
+        Maths::Vertex materialColor = Maths::Vertex(0, 0, 0);
+        materialColor._x = material.getColor().getRed();
+        materialColor._y = material.getColor().getGreen();
+        materialColor._z = material.getColor().getBlue();
+        rayColor *= materialColor;
+    }
+    return incomingLight;
+}
+
+RayTracer::RGBAColor RayTracer::Renderer::cast(const RayTracer::Scene &scene, const Maths::Ray &ray)
+{
+    Maths::Vertex totalIncomingLight(0, 0, 0);
+
+    for (std::size_t i = 0; i < RAY_PER_PIXEL; i++) {
+        totalIncomingLight += this->trace(scene, ray);
+    }
+    totalIncomingLight /= RAY_PER_PIXEL;
+    return RayTracer::RGBAColor(totalIncomingLight._x * 255, totalIncomingLight._y * 255, totalIncomingLight._z * 255);
 }
 
 void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame &frame)
@@ -45,7 +86,7 @@ void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame
             double x = i / (double)frame.getWidth();
             double y = j / (double)frame.getHeight();
             Maths::Ray ray = camera.ray(x, y);
-            frame.setPixel(std::pair<int, int>(i, j), this->castRay(scene, ray));
+            frame.setPixel(std::pair<int, int>(i, j), cast(scene, ray));
         }
     }
 }

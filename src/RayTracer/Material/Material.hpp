@@ -16,24 +16,18 @@ namespace RayTracer {
             Material(void) = default;
             ~Material() = default;
 
-            double getAmbient() const { return _ambient; };
-            double getDiffuse() const { return _diffuse; };
-            double getSpecular() const { return _specular; };
-            double getReflective() const { return _reflective; };
             RayTracer::RGBAColor getColor() const { return _color; };
+            Maths::Vertex getEmissionColor() const { return emissionColor; };
+            double getEmissionStrength() const { return emissionStrength; };
 
-            void setAmbient(double ambient) { _ambient = ambient; };
-            void setDiffuse(double diffuse) { _diffuse = diffuse; };
-            void setSpecular(double specular) { _specular = specular; };
-            void setReflective(double reflective) { _reflective = reflective; };
             void setColor(const RayTracer::RGBAColor &color) { _color = color; };
+            void setEmissionColor(const Maths::Vertex &color) { emissionColor = color; };
+            void setEmissionStrength(double strength) { emissionStrength = strength; };
 
             bool operator==(const Material &other) const {
-                return _ambient == other.getAmbient() &&
-                    _diffuse == other.getDiffuse() &&
-                    _specular == other.getSpecular() &&
-                    _reflective == other.getReflective() &&
-                    _color == other.getColor();
+                return _color == other.getColor() &&
+                    emissionColor == other.getEmissionColor() &&
+                    emissionStrength == other.getEmissionStrength();
             }
 
             bool operator!=(const Material &other) const {
@@ -41,10 +35,8 @@ namespace RayTracer {
             }
         protected:
         private:
-            double _ambient;
-            double _diffuse;
-            double _specular;
-            double _reflective;
+            Maths::Vertex emissionColor;
+            double emissionStrength;
             RayTracer::RGBAColor _color;
     };
 };
