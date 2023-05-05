@@ -56,10 +56,10 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
         }
         newRay._origin = record.getIntersectionPoint();
         newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
-        RayTracer::Material material = record.getMaterial();
-        Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
+        Maths::Vertex emittedLight = record.getMaterial().getEmissionColor();
+        emittedLight *= record.getMaterial().getEmissionStrength();;
         incomingLight += (emittedLight * rayColor);
-        rayColor *= material.getColor();
+        rayColor *= record.getMaterial().getColor();
     }
     return incomingLight;
 }
