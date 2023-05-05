@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wshadow -Wuninitialized")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wshadow -Wuninitialized -lconfig++")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
@@ -47,6 +47,7 @@ include_directories(${INCLUDE_SRC})
 set(MAIN "main.cpp")
 
 add_executable(raytracer ${MAIN} ${SRC})
+target_link_libraries(raytracer ${CMAKE_DL_LIBS})
 target_link_libraries(raytracer config++)
 ### TESTS ###
 
@@ -66,4 +67,6 @@ set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/RayTracer/Object/Camera/tests_camera.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
+target_link_libraries(tests_run ${CMAKE_DL_LIBS})
+target_link_libraries(tests_run config++)
 
