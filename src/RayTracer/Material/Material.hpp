@@ -16,8 +16,8 @@ namespace RayTracer {
             Material(void): _emissionColor(Maths::Vertex(0, 0, 0)), _emissionStrength(0), _color(Maths::Vertex(1, 1, 1)) {};
             ~Material() = default;
 
-            Maths::Vertex getColor() const { return _color; };
-            Maths::Vertex getEmissionColor() const { return _emissionColor; };
+            const Maths::Vertex &getColor() const { return _color; };
+            const Maths::Vertex &getEmissionColor() const { return _emissionColor; };
             double getEmissionStrength() const { return _emissionStrength; };
 
             void setColor(const Maths::Vertex &color) { _color = color; };

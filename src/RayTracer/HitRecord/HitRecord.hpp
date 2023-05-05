@@ -18,8 +18,8 @@ namespace RayTracer {
             HitRecord(void) = default;
             virtual ~HitRecord() = default;
 
-            Maths::Vertex getIntersectionPoint() const { return _intersection_point; };
-            Maths::Vector getNormal() const { return _normal; };
+            const Maths::Vertex &getIntersectionPoint() const { return _intersection_point; };
+            const Maths::Vector &getNormal() const { return _normal; };
             const RayTracer::Material &getMaterial() const { return _material; };
             bool isFrontFace() const { return _frontFace; };
             bool isHit() const { return _hit; };

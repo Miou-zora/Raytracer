@@ -16,11 +16,11 @@ namespace RayTracer {
             ~Renderer() = default;
 
             void render(const RayTracer::Scene &scene, RayTracer::Frame &frame);
+            RayTracer::RGBAColor cast(const RayTracer::Scene &scene, const Maths::Ray &ray);
         protected:
         private:
             Maths::Vertex trace(const RayTracer::Scene &scene, const Maths::Ray &ray);
             RayTracer::HitRecord castRay(const Scene &scene, const Maths::Ray &ray) const;
-            RayTracer::RGBAColor cast(const RayTracer::Scene &scene, const Maths::Ray &ray);
             RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
             const std::vector<std::shared_ptr<IShape>> &m_shapes;
             const Maths::Vertex m_ambientColor;
