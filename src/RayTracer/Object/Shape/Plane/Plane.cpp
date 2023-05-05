@@ -6,7 +6,6 @@
 */
 
 #include "Plane.hpp"
-
 #include "MathsUtils.hpp"
 
 RayTracer::Plane::Plane(const Maths::Vertex &position)
