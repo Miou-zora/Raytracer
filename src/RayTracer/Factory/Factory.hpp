@@ -32,7 +32,6 @@ namespace RayTracer {
                {"Plane", [](const std::string& name){ return std::make_shared<RayTracer::Plane>(name);}},
             };
             std::map<std::string, std::function<std::shared_ptr<RayTracer::ILight>(const std::string&)>> _lightMap = {
-            //    {"PointLight", [](const std::string& name){ return std::make_shared<RayTracer::PointLight>(name);}},
             };
     };
 }
