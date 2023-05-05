@@ -42,10 +42,10 @@ void RayTracer::Core::run(void)
     blueMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     blueMaterial.setEmissionStrength(0);
 
-    std::shared_ptr<RayTracer::Sphere> sphere = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0, 10, 10), 5, flashMaterial);
+    std::shared_ptr<RayTracer::Sphere> sphere = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0, 40, 5), 10, flashMaterial);
     sphere->setRotation(Maths::Vertex(0, 0, 0));
 
-    std::shared_ptr<RayTracer::Sphere> sphere2 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0.5, 0.5, -0.7), 0.3, redMaterial);
+    std::shared_ptr<RayTracer::Sphere> sphere2 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0.5, 0.5, -0.85), 0.3, redMaterial);
     sphere2->setRotation(Maths::Vertex(0, 0, 0));
 
     std::shared_ptr<RayTracer::Sphere> sphere3 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(-0.7, 0.4, -0.6), 0.4, whiteMaterial);
@@ -56,19 +56,19 @@ void RayTracer::Core::run(void)
 
     std::shared_ptr<RayTracer::Plane> plane = std::make_shared<RayTracer::Plane>(Maths::Vertex(0, 0, -1), Maths::Vertex(0, 0, 0), greenMaterial);
 
-    std::shared_ptr<RayTracer::Camera> camera = std::make_shared<RayTracer::Camera>(RayTracer::Camera(1920, 1080, 90));
-    camera->setPosition(Maths::Vertex(0, -0.5, -0.5));
-    camera->setRotation(Maths::Vertex(0, 0, 0));
+    std::shared_ptr<RayTracer::Camera> camera = std::make_shared<RayTracer::Camera>(RayTracer::Camera(1000, 1000, 80));
+    camera->setPosition(Maths::Vertex(0, -1, 0.5));
+    camera->setRotation(Maths::Vertex(-M_PI/16, 0, 0));
 
     _scene = std::make_shared<RayTracer::Scene>();
     _scene->addShape(sphere);
-    // _scene->addShape(sphere2);
+    _scene->addShape(sphere2);
     _scene->addShape(sphere3);
-    // _scene->addShape(sphere4);
+    _scene->addShape(sphere4);
     _scene->addShape(plane);
     _scene->setCamera(camera);
 
-    RayTracer::Frame frame = RayTracer::Frame(1920, 1080);
+    RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
 
     _renderer = std::make_shared<RayTracer::Renderer>();
     _renderer->render(*_scene, frame);
