@@ -54,7 +54,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: sudo dnf update -y && sudo dnf -y install libconfig
+      - run: sudo dnf update -y && sudo dnf install libconfig
         timeout-minutes: 2
 
       - run: cmake .
@@ -79,7 +79,7 @@ jobs:
               fi
           done
 
-          dnf -y install libconfig
+      - name: Fail if needed
         if: env.FAIL_TASK == 'true'
         run: exit 1
 
