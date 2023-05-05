@@ -54,6 +54,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: dnf install libconfig++-dev
+        timeout-minutes: 2
+
       - run: cmake .
         timeout-minutes: 2
 
