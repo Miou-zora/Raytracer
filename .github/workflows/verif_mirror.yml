@@ -54,7 +54,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: sudo dnf update -y && sudo dnf install libconfig -y
+      - run: sudo dnf update -y && sudo dnf install libconfig-devel -y
         timeout-minutes: 2
 
       - run: cmake .
