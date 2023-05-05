@@ -14,7 +14,7 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
     double distance = records[0].getDistance();
     RayTracer::HitRecord closestHit = records[0];
 
-    for (auto &record : records) {
+    for (const auto &record : records) {
         if (record.getDistance() < distance) {
             distance = record.getDistance();
             closestHit = record;
@@ -51,7 +51,7 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
     for (std::size_t i = 0; i < MAX_DEPTH; i++) {
         RayTracer::HitRecord record = this->castRay(scene, newRay);
         if (!record.isHit()) {
-            incomingLight += (Maths::Vertex(0.25, 0.25, 0.35) * rayColor);
+            incomingLight += m_ambientColor * rayColor;
             break;
         }
         newRay._origin = record.getIntersectionPoint();

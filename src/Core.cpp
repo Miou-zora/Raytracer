@@ -74,7 +74,7 @@ void RayTracer::Core::run(void)
 
     RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
 
-    _renderer = std::make_shared<RayTracer::Renderer>();
+    _renderer = std::make_shared<RayTracer::Renderer>(_scene->getShapes());
     _renderer->render(*_scene, frame);
     _displayer = std::make_shared<RayTracer::PPMDisplayer>();
     _displayer->display(frame);
