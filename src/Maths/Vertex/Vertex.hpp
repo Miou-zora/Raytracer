@@ -27,7 +27,7 @@ namespace Maths {
              * @param y
              * @param z
              */
-            Vertex(float x, float y, float z);
+            Vertex(double x, double y, double z);
 
             /**
              * @brief Destroy the Vertex object
@@ -152,7 +152,7 @@ namespace Maths {
              * @param value Value to add
              * @return Vertex Result of the addition
              */
-            Vertex operator+(const float &value) const;
+            Vertex operator+(const double &value) const;
 
             /**
              * @brief Add a value to a Vertex
@@ -160,7 +160,7 @@ namespace Maths {
              * @param value Value to add
              * @return Vertex Result of the addition
              */
-            Vertex &operator+=(const float &value);
+            Vertex &operator+=(const double &value);
 
             /**
              * @brief Substract a value to a Vertex
@@ -168,7 +168,7 @@ namespace Maths {
              * @param value Value to substract
              * @return Vertex Result of the substraction
              */
-            Vertex operator-(const float &value) const;
+            Vertex operator-(const double &value) const;
 
             /**
              * @brief Substract a value to a Vertex
@@ -176,7 +176,7 @@ namespace Maths {
              * @param value Value to substract
              * @return Vertex Result of the substraction
              */
-            Vertex &operator-=(const float &value);
+            Vertex &operator-=(const double &value);
 
             /**
              * @brief Multiply a value to a Vertex
@@ -184,7 +184,7 @@ namespace Maths {
              * @param value Value to multiply
              * @return Vertex Result of the multiplication
              */
-            Vertex operator*(const float &value) const;
+            Vertex operator*(const double &value) const;
 
             /**
              * @brief Multiply a value to a Vertex
@@ -192,7 +192,7 @@ namespace Maths {
              * @param value Value to multiply
              * @return Vertex Result of the multiplication
              */
-            Vertex &operator*=(const float &value);
+            Vertex &operator*=(const double &value);
 
             /**
              * @brief Divide a value to a Vertex
@@ -200,7 +200,7 @@ namespace Maths {
              * @param value Value to divide
              * @return Vertex Result of the division
              */
-            Vertex operator/(const float &value) const;
+            Vertex operator/(const double &value) const;
 
             /**
              * @brief Divide a value to a Vertex
@@ -208,7 +208,7 @@ namespace Maths {
              * @param value Value to divide
              * @return Vertex Result of the division
              */
-            Vertex &operator/=(const float &value);
+            Vertex &operator/=(const double &value);
 
             /**
              * @brief Rotate a Vertex
@@ -224,7 +224,7 @@ namespace Maths {
              * @param rotation Vertex to rotate
              * @return Vertex Result of the rotation
              */
-            Vertex &rotateX(const float &angle);
+            Vertex &rotateX(const double &angle);
 
             /**
              * @brief Rotate a Vertex on Y axis
@@ -232,7 +232,7 @@ namespace Maths {
              * @param rotation Vertex to rotate
              * @return Vertex Result of the rotation
              */
-            Vertex &rotateY(const float &angle);
+            Vertex &rotateY(const double &angle);
 
             /**
              * @brief Rotate a Vertex on Z axis
@@ -240,22 +240,22 @@ namespace Maths {
              * @param rotation Vertex to rotate
              * @return Vertex Result of the rotation
              */
-            Vertex &rotateZ(const float &angle);
+            Vertex &rotateZ(const double &angle);
 
             /**
              * @brief Make the dot product of two Vertex
              *
              * @param other Vertex to make the dot product
-             * @return float Result of the dot product
+             * @return double Result of the dot product
              */
-            float dot(const Vertex &other) const;
+            double dot(const Vertex &other) const;
 
             /// @brief X coordinate
-            float _x;
+            double _x;
             /// @brief Y coordinate
-            float _y;
+            double _y;
             /// @brief Z coordinate
-            float _z;
+            double _z;
     };
 }
 

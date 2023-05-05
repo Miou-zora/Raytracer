@@ -33,26 +33,26 @@ RayTracer::Plane::Plane(const Maths::Vertex &position, const Maths::Vertex &rota
 RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
 {
     RayTracer::HitRecord hitRecord;
-    float denominator = ray._direction.dot(getNormal());
+    double denominator = ray._direction.dot(getNormal());
 
-    hitRecord._hit = false;
+    hitRecord.setHit(false);
     if (denominator == 0)
         return hitRecord;
-    float t = (getPosition() - ray._origin).dot(VectorToVertex(getNormal())) / denominator;
+    double t = (getPosition() - ray._origin).dot(VectorToVertex(getNormal())) / denominator;
     if (t < 0)
         return hitRecord;
-    hitRecord._intersection_point = ray._origin + ray._direction * t;
-    float distance = Maths::MathsUtils::distance(ray._origin, hitRecord._intersection_point);
+    hitRecord.setIntersectionPoint(ray._origin + ray._direction * t);
+    double distance = Maths::MathsUtils::distance(ray._origin, hitRecord.getIntersectionPoint());
     if (distance <= 0)
         return hitRecord;
-    hitRecord._hit = true;
-    hitRecord._distance = distance;
-    hitRecord._frontFace = ray._direction.dot(getNormal()) < 0;
-    if (hitRecord._frontFace)
-        hitRecord._normal = getNormal();
+    hitRecord.setHit(true);
+    hitRecord.setDistance(distance);
+    hitRecord.setFrontFace(ray._direction.dot(getNormal()) < 0);
+    if (hitRecord.isFrontFace())
+        hitRecord.setNormal(getNormal());
     else
-        hitRecord._normal = -getNormal();
-    hitRecord._material = getMaterial();
+        hitRecord.setNormal(getNormal() * -1);
+    hitRecord.setMaterial(getMaterial());
     return hitRecord;
 }
 

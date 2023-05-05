@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-Maths::Vertex::Vertex(float x, float y, float z)
+Maths::Vertex::Vertex(double x, double y, double z)
 {
     _x = x;
     _y = y;
@@ -108,12 +108,12 @@ bool Maths::Vertex::operator!=(const Maths::Vertex &other) const
     return (_x != other._x || _y != other._y || _z != other._z);
 }
 
-Maths::Vertex Maths::Vertex::operator+(const float &value) const
+Maths::Vertex Maths::Vertex::operator+(const double &value) const
 {
     return (Maths::Vertex(_x + value, _y + value, _z + value));
 }
 
-Maths::Vertex &Maths::Vertex::operator+=(const float &value)
+Maths::Vertex &Maths::Vertex::operator+=(const double &value)
 {
     _x += value;
     _y += value;
@@ -121,12 +121,12 @@ Maths::Vertex &Maths::Vertex::operator+=(const float &value)
     return (*this);
 }
 
-Maths::Vertex Maths::Vertex::operator-(const float &value) const
+Maths::Vertex Maths::Vertex::operator-(const double &value) const
 {
     return (Maths::Vertex(_x - value, _y - value, _z - value));
 }
 
-Maths::Vertex &Maths::Vertex::operator-=(const float &value)
+Maths::Vertex &Maths::Vertex::operator-=(const double &value)
 {
     _x -= value;
     _y -= value;
@@ -134,12 +134,12 @@ Maths::Vertex &Maths::Vertex::operator-=(const float &value)
     return (*this);
 }
 
-Maths::Vertex Maths::Vertex::operator*(const float &value) const
+Maths::Vertex Maths::Vertex::operator*(const double &value) const
 {
     return (Maths::Vertex(_x * value, _y * value, _z * value));
 }
 
-Maths::Vertex &Maths::Vertex::operator*=(const float &value)
+Maths::Vertex &Maths::Vertex::operator*=(const double &value)
 {
     _x *= value;
     _y *= value;
@@ -147,12 +147,12 @@ Maths::Vertex &Maths::Vertex::operator*=(const float &value)
     return (*this);
 }
 
-Maths::Vertex Maths::Vertex::operator/(const float &value) const
+Maths::Vertex Maths::Vertex::operator/(const double &value) const
 {
     return (Maths::Vertex(_x / value, _y / value, _z / value));
 }
 
-Maths::Vertex &Maths::Vertex::operator/=(const float &value)
+Maths::Vertex &Maths::Vertex::operator/=(const double &value)
 {
     _x /= value;
     _y /= value;
@@ -168,30 +168,30 @@ Maths::Vertex &Maths::Vertex::rotate(const Maths::Vertex &rotation)
     return (*this);
 }
 
-Maths::Vertex &Maths::Vertex::rotateX(const float &angle)
+Maths::Vertex &Maths::Vertex::rotateX(const double &angle)
 {
-    float y = _y;
-    float z = _z;
+    double y = _y;
+    double z = _z;
 
     _y = y * cos(angle) - z * sin(angle);
     _z = y * sin(angle) + z * cos(angle);
     return (*this);
 }
 
-Maths::Vertex &Maths::Vertex::rotateY(const float &angle)
+Maths::Vertex &Maths::Vertex::rotateY(const double &angle)
 {
-    float x = _x;
-    float z = _z;
+    double x = _x;
+    double z = _z;
 
     _x = x * cos(angle) + z * sin(angle);
     _z = -x * sin(angle) + z * cos(angle);
     return (*this);
 }
 
-Maths::Vertex &Maths::Vertex::rotateZ(const float &angle)
+Maths::Vertex &Maths::Vertex::rotateZ(const double &angle)
 {
-    float x = _x;
-    float y = _y;
+    double x = _x;
+    double y = _y;
 
     _x = x * cos(angle) - y * sin(angle);
     _y = x * sin(angle) + y * cos(angle);
@@ -199,7 +199,7 @@ Maths::Vertex &Maths::Vertex::rotateZ(const float &angle)
 }
 
 
-float Maths::Vertex::dot(const Maths::Vertex &other) const
+double Maths::Vertex::dot(const Maths::Vertex &other) const
 {
     return (_x * other._x + _y * other._y + _z * other._z);
 }

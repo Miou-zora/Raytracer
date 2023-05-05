@@ -15,7 +15,7 @@ RayTracer::RGBAColor::RGBAColor(const RGBAColor &&color)
     _a = color.getAlpha();
 }
 
-RayTracer::RGBAColor::RGBAColor(float r, float g, float b)
+RayTracer::RGBAColor::RGBAColor(double r, double g, double b)
 {
     _r = r;
     _g = g;
@@ -32,7 +32,7 @@ RayTracer::RGBAColor &RayTracer::RGBAColor::operator=(const RayTracer::RGBAColor
     return (*this);
 }
 
-void RayTracer::RGBAColor::setColor(float r, float g, float b)
+void RayTracer::RGBAColor::setColor(double r, double g, double b)
 {
     _r = r;
     _g = g;
@@ -54,42 +54,42 @@ void RayTracer::RGBAColor::setColor(const Maths::Vertex &color)
     _b = color._z;
 }
 
-void RayTracer::RGBAColor::setRed(float r)
+void RayTracer::RGBAColor::setRed(double r)
 {
     _r = r;
 }
 
-void RayTracer::RGBAColor::setGreen(float g)
+void RayTracer::RGBAColor::setGreen(double g)
 {
     _g = g;
 }
 
-void RayTracer::RGBAColor::setBlue(float b)
+void RayTracer::RGBAColor::setBlue(double b)
 {
     _b = b;
 }
 
-void RayTracer::RGBAColor::setAlpha(float a)
+void RayTracer::RGBAColor::setAlpha(double a)
 {
     _a = a;
 }
 
-float RayTracer::RGBAColor::getRed(void) const
+double RayTracer::RGBAColor::getRed(void) const
 {
     return (_r);
 }
 
-float RayTracer::RGBAColor::getGreen(void) const
+double RayTracer::RGBAColor::getGreen(void) const
 {
     return (_g);
 }
 
-float RayTracer::RGBAColor::getBlue(void) const
+double RayTracer::RGBAColor::getBlue(void) const
 {
     return (_b);
 }
 
-float RayTracer::RGBAColor::getAlpha(void) const
+double RayTracer::RGBAColor::getAlpha(void) const
 {
     return (_a);
 }

@@ -18,11 +18,11 @@ namespace RayTracer {
 
             Maths::Vertex getColor() const { return _color; };
             Maths::Vertex getEmissionColor() const { return _emissionColor; };
-            float getEmissionStrength() const { return _emissionStrength; };
+            double getEmissionStrength() const { return _emissionStrength; };
 
             void setColor(const Maths::Vertex &color) { _color = color; };
             void setEmissionColor(const Maths::Vertex &color) { _emissionColor = color; };
-            void setEmissionStrength(float strength) { _emissionStrength = strength; };
+            void setEmissionStrength(double strength) { _emissionStrength = strength; };
 
             bool operator==(const Material &other) const {
                 return _color == other.getColor() &&
@@ -36,7 +36,7 @@ namespace RayTracer {
         protected:
         private:
             Maths::Vertex _emissionColor;
-            float _emissionStrength;
+            double _emissionStrength;
             Maths::Vertex _color;
     };
 };

@@ -21,7 +21,7 @@ Maths::Rect3D::Rect3D(const Maths::Vertex &origin, const Maths::Vertex &bottom_s
     _left_side = left_side;
 }
 
-Maths::Vertex Maths::Rect3D::pointAt(float u, float v) const
+Maths::Vertex Maths::Rect3D::pointAt(double u, double v) const
 {
     return (_origin + (_bottom_side * u) + (_left_side * v));
 }

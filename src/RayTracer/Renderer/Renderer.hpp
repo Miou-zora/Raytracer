@@ -21,8 +21,9 @@ namespace RayTracer {
             Maths::Vertex trace(const RayTracer::Scene &scene, const Maths::Ray &ray);
             RayTracer::HitRecord castRay(const Scene &scene, const Maths::Ray &ray) const;
             RayTracer::RGBAColor cast(const RayTracer::Scene &scene, const Maths::Ray &ray);
+            RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
     };
 }
 
-constexpr std::size_t MAX_DEPTH = 20;
-constexpr std::size_t RAY_PER_PIXEL = 20;
+    constexpr std::size_t MAX_DEPTH = 20;
+    constexpr std::size_t RAY_PER_PIXEL = 20;

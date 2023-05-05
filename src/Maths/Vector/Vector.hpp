@@ -29,7 +29,7 @@ namespace Maths {
              * @param y
              * @param z
              */
-            Vector(float x, float y, float z);
+            Vector(double x, double y, double z);
 
             /**
              * @brief Construct a new Vector object
@@ -136,7 +136,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator+ (float value) const;
+            Vector operator+ (double value) const;
 
             /**
              * @brief Add a value to a vector
@@ -144,7 +144,7 @@ namespace Maths {
              * @param value
              * @return Vector&
              */
-            Vector &operator+= (float value);
+            Vector &operator+= (double value);
 
             /**
              * @brief Subtract a value to a vector
@@ -152,7 +152,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator- (float value) const;
+            Vector operator- (double value) const;
 
             /**
              * @brief Subtract a value to a vector
@@ -160,7 +160,7 @@ namespace Maths {
              * @param value
              * @return Vector&
              */
-            Vector &operator-= (float value);
+            Vector &operator-= (double value);
 
             /**
              * @brief Multiply a vector by a value
@@ -168,7 +168,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator* (float value) const;
+            Vector operator* (double value) const;
 
             /**
              * @brief Multiply a vector by a value
@@ -176,7 +176,7 @@ namespace Maths {
              * @param value
              * @return Vector&
              */
-            Vector &operator*= (float value);
+            Vector &operator*= (double value);
 
             /**
              * @brief Divide a vector by a value
@@ -184,7 +184,7 @@ namespace Maths {
              * @param value
              * @return Vector
              */
-            Vector operator/ (float value) const;
+            Vector operator/ (double value) const;
 
             /**
              * @brief Divide a vector by a value
@@ -192,15 +192,15 @@ namespace Maths {
              * @param value
              * @return Vector&
              */
-            Vector &operator/= (float value);
+            Vector &operator/= (double value);
 
             /**
              * @brief Make the dot product of two vectors
              *
              * @param other The other vector
-             * @return float The dot product
+             * @return double The dot product
              */
-            float dot(const Vector &other) const;
+            double dot(const Vector &other) const;
 
             /**
              * @brief Make the cross product of two vectors
@@ -213,9 +213,9 @@ namespace Maths {
             /**
              * @brief Get the length of the vector
              *
-             * @return float The length
+             * @return double The length
              */
-            float length(void) const;
+            double length(void) const;
 
             /**
              * @brief Normalize the vector
@@ -269,7 +269,7 @@ namespace Maths {
              * @param angle The angle
              * @return Vector& The rotated vector
              */
-            Vector &rotateX(float angle);
+            Vector &rotateX(double angle);
 
             /**
              * @brief Rotate a Vector on Y axis
@@ -277,7 +277,7 @@ namespace Maths {
              * @param angle The angle
              * @return Vector& The rotated vector
              */
-            Vector &rotateY(float angle);
+            Vector &rotateY(double angle);
 
             /**
              * @brief Rotate a Vector on Z axis
@@ -285,11 +285,11 @@ namespace Maths {
              * @param angle The angle
              * @return Vector& The rotated vector
              */
-            Vector &rotateZ(float angle);
+            Vector &rotateZ(double angle);
 
-            float _x;
-            float _y;
-            float _z;
+            double _x;
+            double _y;
+            double _z;
     };
 }
 

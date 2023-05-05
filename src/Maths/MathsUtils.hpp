@@ -44,22 +44,22 @@ namespace Maths {
                     GetReflectedRay(normal, incident._direction)));
             }
 
-            static float distance(const Maths::Vertex &lhs, const Maths::Vertex &rhs)
+            static double distance(const Maths::Vertex &lhs, const Maths::Vertex &rhs)
             {
                 return (std::sqrt(std::pow(rhs._x - lhs._x, 2) +
                                   std::pow(rhs._y - lhs._y, 2) +
                                   std::pow(rhs._z - lhs._z, 2)));
             }
 
-            static float getRandomValue(float max)
+            static double getRandomValue(double max)
             {
-                return (static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max)));
+                return (static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / max)));
             }
 
-            static float getRandomValueFromNormalDistribution(float max)
+            static double getRandomValueFromNormalDistribution(double max)
             {
-                float theta = 2 * M_PI * getRandomValue(max);
-                float rho = sqrt(-2 * log(1 - getRandomValue(max)));
+                double theta = 2 * M_PI * getRandomValue(max);
+                double rho = sqrt(-2 * log(1 - getRandomValue(max)));
                 return (rho * cos(theta));
             }
 
@@ -72,7 +72,7 @@ namespace Maths {
                 return (vector.normalize());
             }
 
-            static Maths::Vector getRandomVector(float max)
+            static Maths::Vector getRandomVector(double max)
             {
                 Maths::Vector vector;
                 vector._x = getRandomValue(max);

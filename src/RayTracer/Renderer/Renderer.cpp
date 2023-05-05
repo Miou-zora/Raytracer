@@ -9,23 +9,37 @@
 #include "ICamera.hpp"
 #include "MathsUtils.hpp"
 
-RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
+RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
 {
-    float distance = -1;
-    RayTracer::HitRecord closestHit;
-    RayTracer::HitRecord record;
+    double distance = records[0].getDistance();
+    RayTracer::HitRecord closestHit = records[0];
 
-    for (const std::shared_ptr<RayTracer::IShape> &shape : scene.getShapes()) {
-        record = shape->hit(ray);
-        if (record._hit && (record._distance < distance || distance == -1)) {
-            distance = record._distance;
+    for (auto &record : records) {
+        if (record.getDistance() < distance) {
+            distance = record.getDistance();
             closestHit = record;
         }
     }
-    if (distance <= 0) {
-        closestHit._hit = false;
-    }
     return closestHit;
+}
+
+
+RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
+{
+    std::vector<RayTracer::HitRecord> records;
+
+    for (auto &shape : scene.getShapes()) {
+        RayTracer::HitRecord record = shape.get()->hit(ray);
+        if (record.isHit() && record.isFrontFace()) {
+            records.push_back(record);
+        }
+    }
+    if (records.empty()) {
+        RayTracer::HitRecord record;
+        record.setHit(false);
+        return record;
+    }
+    return this->getClosestHit(records);
 }
 
 Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
@@ -36,18 +50,16 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
 
     for (std::size_t i = 0; i < MAX_DEPTH; i++) {
         RayTracer::HitRecord record = this->castRay(scene, newRay);
-        if (record._hit) {
-            newRay._origin = record._intersection_point;
-            newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record._normal);
-
-            Maths::Vertex emittedLight = record._material.getEmissionColor();
-            emittedLight *= record._material.getEmissionStrength();
-            incomingLight += (emittedLight * rayColor);
-            rayColor *= record._material.getColor();
-        } else {
+        if (!record.isHit()) {
             incomingLight += (Maths::Vertex(0.25, 0.25, 0.35) * rayColor);
             break;
         }
+        newRay._origin = record.getIntersectionPoint();
+        newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
+        RayTracer::Material material = record.getMaterial();
+        Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
+        incomingLight += (emittedLight * rayColor);
+        rayColor *= material.getColor();
     }
     return incomingLight;
 }
@@ -69,8 +81,8 @@ void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame
 
     for (std::size_t i = 0; i < frame.getWidth(); i++) {
         for (std::size_t j = 0; j < frame.getHeight(); j++) {
-            float x = i / (float)frame.getWidth();
-            float y = j / (float)frame.getHeight();
+            double x = i / (double)frame.getWidth();
+            double y = j / (double)frame.getHeight();
             Maths::Ray ray = camera.ray(x, y);
             frame.setPixel(std::pair<int, int>(i, j), cast(scene, ray));
         }

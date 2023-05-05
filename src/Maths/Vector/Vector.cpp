@@ -8,7 +8,7 @@
 #include "Vector.hpp"
 #include <cmath>
 
-Maths::Vector::Vector(float x, float y, float z)
+Maths::Vector::Vector(double x, double y, double z)
 {
     _x = x;
     _y = y;
@@ -98,12 +98,12 @@ Maths::Vector &Maths::Vector::operator/=(const Maths::Vector &other)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator+(float value) const
+Maths::Vector Maths::Vector::operator+(double value) const
 {
     return (Maths::Vector(_x + value, _y + value, _z + value));
 }
 
-Maths::Vector &Maths::Vector::operator+=(float value)
+Maths::Vector &Maths::Vector::operator+=(double value)
 {
     _x += value;
     _y += value;
@@ -111,12 +111,12 @@ Maths::Vector &Maths::Vector::operator+=(float value)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator-(float value) const
+Maths::Vector Maths::Vector::operator-(double value) const
 {
     return (Maths::Vector(_x - value, _y - value, _z - value));
 }
 
-Maths::Vector &Maths::Vector::operator-=(float value)
+Maths::Vector &Maths::Vector::operator-=(double value)
 {
     _x -= value;
     _y -= value;
@@ -124,12 +124,12 @@ Maths::Vector &Maths::Vector::operator-=(float value)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator*(float value) const
+Maths::Vector Maths::Vector::operator*(double value) const
 {
     return (Maths::Vector(_x * value, _y * value, _z * value));
 }
 
-Maths::Vector &Maths::Vector::operator*=(float value)
+Maths::Vector &Maths::Vector::operator*=(double value)
 {
     _x *= value;
     _y *= value;
@@ -137,12 +137,12 @@ Maths::Vector &Maths::Vector::operator*=(float value)
     return (*this);
 }
 
-Maths::Vector Maths::Vector::operator/(float value) const
+Maths::Vector Maths::Vector::operator/(double value) const
 {
     return (Maths::Vector(_x / value, _y / value, _z / value));
 }
 
-Maths::Vector &Maths::Vector::operator/=(float value)
+Maths::Vector &Maths::Vector::operator/=(double value)
 {
     _x /= value;
     _y /= value;
@@ -151,7 +151,7 @@ Maths::Vector &Maths::Vector::operator/=(float value)
 }
 
 
-float Maths::Vector::dot(const Maths::Vector &other) const
+double Maths::Vector::dot(const Maths::Vector &other) const
 {
     return (_x * other._x + _y * other._y + _z * other._z);
 }
@@ -165,7 +165,7 @@ Maths::Vector Maths::Vector::cross(const Maths::Vector &other) const
 }
 
 
-float Maths::Vector::length(void) const
+double Maths::Vector::length(void) const
 {
     return (sqrt(_x * _x + _y * _y + _z * _z));
 }
@@ -173,7 +173,7 @@ float Maths::Vector::length(void) const
 
 Maths::Vector &Maths::Vector::normalize(void)
 {
-    float length = this->length();
+    double length = this->length();
 
     _x /= length;
     _y /= length;
@@ -183,7 +183,7 @@ Maths::Vector &Maths::Vector::normalize(void)
 
 Maths::Vector Maths::Vector::normalized(void) const
 {
-    float length = this->length();
+    double length = this->length();
 
     return (Maths::Vector(_x / length, _y / length, _z / length));
 }
@@ -222,30 +222,30 @@ Maths::Vector &Maths::Vector::rotate(const Maths::Vertex &rotation)
     return (*this);
 }
 
-Maths::Vector &Maths::Vector::rotateX(float angle)
+Maths::Vector &Maths::Vector::rotateX(double angle)
 {
-    float y = _y;
-    float z = _z;
+    double y = _y;
+    double z = _z;
 
     _y = y * cos(angle) - z * sin(angle);
     _z = y * sin(angle) + z * cos(angle);
     return (*this);
 }
 
-Maths::Vector &Maths::Vector::rotateY(float angle)
+Maths::Vector &Maths::Vector::rotateY(double angle)
 {
-    float x = _x;
-    float z = _z;
+    double x = _x;
+    double z = _z;
 
     _x = x * cos(angle) + z * sin(angle);
     _z = -x * sin(angle) + z * cos(angle);
     return (*this);
 }
 
-Maths::Vector &Maths::Vector::rotateZ(float angle)
+Maths::Vector &Maths::Vector::rotateZ(double angle)
 {
-    float x = _x;
-    float y = _y;
+    double x = _x;
+    double y = _y;
 
     _x = x * cos(angle) - y * sin(angle);
     _y = x * sin(angle) + y * cos(angle);

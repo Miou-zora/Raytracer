@@ -12,16 +12,16 @@ namespace RayTracer {
     class Sphere : public RayTracer::AShape {
         public:
             Sphere(void) = default;
-            Sphere(const Maths::Vertex &center, float radius);
-            Sphere(const Maths::Vertex &center, float radius, const RayTracer::Material &material);
+            Sphere(const Maths::Vertex &center, double radius);
+            Sphere(const Maths::Vertex &center, double radius, const RayTracer::Material &material);
             virtual ~Sphere() = default;
 
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
 
-            float getRadius() const { return _radius; };
-            void setRadius(float radius) { _radius = radius; };
+            double getRadius() const { return _radius; };
+            void setRadius(double radius) { _radius = radius; };
 
         private:
-            float _radius;
+            double _radius;
     };
 }

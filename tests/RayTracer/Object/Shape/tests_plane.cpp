@@ -14,7 +14,7 @@ Test(plane, dontHit) {
     Maths::Ray ray(Maths::Vertex(0, 0, 1), Maths::Vector(0, 1, 0));
 
     RayTracer::HitRecord hit = plane.hit(ray);
-    cr_assert(hit._hit == false);
+    cr_assert(hit.isHit() == false);
 }
 
 Test(plane, hitFrontFace) {
@@ -22,11 +22,11 @@ Test(plane, hitFrontFace) {
     Maths::Ray ray(Maths::Vertex(0, 0, 1), Maths::Vector(0, 0, -1));
 
     RayTracer::HitRecord hit = plane.hit(ray);
-    cr_assert(hit._hit);
-    cr_assert(hit._material == plane.getMaterial());
-    cr_assert(hit._normal == Maths::Vector(0, 0, 1));
-    cr_assert(hit._intersection_point == Maths::Vertex(0, 0, 0));
-    cr_assert(hit._frontFace == true);
+    cr_assert(hit.isHit());
+    cr_assert(hit.getMaterial() == plane.getMaterial());
+    cr_assert(hit.getNormal() == Maths::Vector(0, 0, 1));
+    cr_assert(hit.getIntersectionPoint() == Maths::Vertex(0, 0, 0));
+    cr_assert(hit.isFrontFace() == true);
 }
 
 Test(plane, hitBackFace) {
@@ -34,9 +34,9 @@ Test(plane, hitBackFace) {
     Maths::Ray ray(Maths::Vertex(0, 0, -1), Maths::Vector(0, 0, 1));
 
     RayTracer::HitRecord hit = plane.hit(ray);
-    cr_assert(hit._hit);
-    cr_assert(hit._material == plane.getMaterial());
-    cr_assert(hit._normal == Maths::Vector(0, 0, -1));
-    cr_assert(hit._intersection_point == Maths::Vertex(0, 0, 0));
-    cr_assert(hit._frontFace == false);
+    cr_assert(hit.isHit());
+    cr_assert(hit.getMaterial() == plane.getMaterial());
+    cr_assert(hit.getNormal() == Maths::Vector(0, 0, -1));
+    cr_assert(hit.getIntersectionPoint() == Maths::Vertex(0, 0, 0));
+    cr_assert(hit.isFrontFace() == false);
 }
