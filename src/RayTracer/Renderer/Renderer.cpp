@@ -28,7 +28,7 @@ RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene,
 {
     std::vector<RayTracer::HitRecord> records;
 
-    for (auto &shape : scene.getShapes()) {
+    for (const auto &shape : scene.getShapes()) {
         RayTracer::HitRecord record = shape.get()->hit(ray);
         if (record.isHit() && record.isFrontFace()) {
             records.push_back(record);
