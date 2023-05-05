@@ -54,12 +54,8 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
             incomingLight += (Maths::Vertex(0.25, 0.25, 0.35) * rayColor);
             break;
         }
-        // std::cout << record.getNormal() << std::endl;
         newRay._origin = record.getIntersectionPoint();
-        // std::cout << newRay._origin << std::endl;
         newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
-        // std::cout << newRay._direction << std::endl;
-
         RayTracer::Material material = record.getMaterial();
         Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
         incomingLight += (emittedLight * rayColor);
@@ -69,7 +65,6 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
         materialColor._z = material.getColor().getBlue();
         rayColor *= materialColor;
     }
-    // std::cout << incomingLight << std::endl;
     return incomingLight;
 }
 

@@ -42,9 +42,7 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
     double t = (getPosition() - ray._origin).dot(VectorToVertex(getNormal())) / denominator;
     if (t < 0)
         return hitRecord;
-    // std::cout << ray._origin << ray._direction << std::endl;
     hitRecord.setIntersectionPoint(ray._origin + ray._direction * t);
-    // std::cout << hitRecord.getIntersectionPoint() << std::endl;
     double distance = Maths::MathsUtils::distance(ray._origin, hitRecord.getIntersectionPoint());
     if (distance <= 0)
         return hitRecord;
