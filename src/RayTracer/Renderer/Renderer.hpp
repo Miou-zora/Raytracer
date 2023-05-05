@@ -20,7 +20,6 @@ namespace RayTracer {
         private:
             Maths::Vertex trace(const RayTracer::Scene &scene, const Maths::Ray &ray);
             RayTracer::HitRecord castRay(const Scene &scene, const Maths::Ray &ray) const;
-            RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
             RayTracer::RGBAColor cast(const RayTracer::Scene &scene, const Maths::Ray &ray);
     };
 }

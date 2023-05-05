@@ -18,31 +18,31 @@
 void RayTracer::Core::run(void)
 {
     RayTracer::Material redMaterial = RayTracer::Material();
-    redMaterial.setColor(RayTracer::RGBAColor(0.8, 0.1, 0.1));
+    redMaterial.setColor(Maths::Vertex(0.8, 0.1, 0.1));
     redMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     redMaterial.setEmissionStrength(0);
     RayTracer::Material whiteMaterial = RayTracer::Material();
-    whiteMaterial.setColor(RayTracer::RGBAColor(1, 1, 1));
+    whiteMaterial.setColor(Maths::Vertex(1, 1, 1));
     whiteMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     whiteMaterial.setEmissionStrength(0);
     RayTracer::Material greyMaterial = RayTracer::Material();
-    greyMaterial.setColor(RayTracer::RGBAColor(0.3, 0.3, 0.3));
+    greyMaterial.setColor(Maths::Vertex(0.3, 0.3, 0.3));
     greyMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     greyMaterial.setEmissionStrength(0);
     RayTracer::Material flashMaterial = RayTracer::Material();
-    flashMaterial.setColor(RayTracer::RGBAColor(0, 0, 0));
+    flashMaterial.setColor(Maths::Vertex(0, 0, 0));
     flashMaterial.setEmissionColor(Maths::Vertex(1, 1, 1));
     flashMaterial.setEmissionStrength(1);
     RayTracer::Material flashMaterial2 = RayTracer::Material();
-    flashMaterial2.setColor(RayTracer::RGBAColor(0, 0, 0));
+    flashMaterial2.setColor(Maths::Vertex(0, 0, 0));
     flashMaterial2.setEmissionColor(Maths::Vertex(0.5, 0.5, 1));
     flashMaterial2.setEmissionStrength(1);
     RayTracer::Material greenMaterial = RayTracer::Material();
-    greenMaterial.setColor(RayTracer::RGBAColor(0.1, 0.8, 0.1));
+    greenMaterial.setColor(Maths::Vertex(0.1, 0.8, 0.1));
     greenMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     greenMaterial.setEmissionStrength(0);
     RayTracer::Material blueMaterial = RayTracer::Material();
-    blueMaterial.setColor(RayTracer::RGBAColor(0.1, 0.1, 0.8));
+    blueMaterial.setColor(Maths::Vertex(0.1, 0.1, 0.8));
     blueMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     blueMaterial.setEmissionStrength(0);
 
