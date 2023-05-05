@@ -13,7 +13,7 @@
 namespace RayTracer {
     class Material {
         public:
-            Material(void) = default;
+            Material(void): _ambient(0.1), _diffuse(0.9), _specular(0.9), _reflective(0.0), _color(RayTracer::RGBAColor(255, 255, 255)) {};
             ~Material() = default;
 
             RayTracer::RGBAColor getColor() const { return _color; };
