@@ -20,6 +20,7 @@ set(INCLUDE_SRC "src"
                 "src/RayTracer/Object/Light"
                 "src/RayTracer/Object/Shape"
                 "src/RayTracer/Object/Shape/Sphere"
+                "src/RayTracer/Object/Shape/Plane"
                 "src/RayTracer/Renderer"
                 "src/RayTracer/Scene"
                 "src/RayTracer/Transformation"
@@ -34,9 +35,12 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/Maths/Vertex/Vertex.cpp"
         "src/RayTracer/Object/Camera/Camera.cpp"
         "src/RayTracer/Object/Shape/Sphere/Sphere.cpp"
+        "src/RayTracer/Object/Shape/Plane/Plane.cpp"
         "src/RayTracer/Object/Object.cpp"
         "src/RayTracer/RGBAColor/RGBAColor.cpp"
+        "src/RayTracer/Renderer/Renderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
+        "src/RayTracer/Frame/Frame.cpp"
         "src/Core.cpp")
 
 include_directories(${INCLUDE_SRC})
@@ -56,6 +60,9 @@ set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/Maths/tests_rect3D.cpp"
 "tests/Maths/tests_ray.cpp"
 "tests/RayTracer/Object/Shape/tests_sphere.cpp"
+"tests/RayTracer/Object/Shape/tests_plane.cpp"
+"tests/RayTracer/Frame/tests_frame.cpp"
+"tests/RayTracer/Displayer/PPMDisplayer/tests_ppmdisplayer.cpp"
 "tests/RayTracer/Object/Camera/tests_camera.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})

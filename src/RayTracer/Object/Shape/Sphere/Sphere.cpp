@@ -36,19 +36,23 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
                pow(_radius, 2);
     double discriminant = b * b - 4 * a * c;
 
-    if (discriminant < 0) {
-        hit_record.setHit(false);
+    hit_record.setHit(false);
+    if (discriminant < 0)
         return hit_record;
-    }
     if (discriminant == 0) {
         double t = -b / (2 * a);
-        hit_record.setHit(true);
         hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
+        double distance = Maths::MathsUtils::distance(ray._origin, hit_record.getIntersectionPoint());
+        if (distance < 0)
+            return hit_record;
+        hit_record.setHit(true);
+        hit_record.setDistance(distance);
         hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
                                            hit_record.getIntersectionPoint()._y - this->getPosition()._y,
                                            hit_record.getIntersectionPoint()._z - this->getPosition()._z));
         hit_record.setFrontFace(ray._direction.dot(hit_record.getNormal()) < 0);
         hit_record.setMaterial(this->getMaterial());
+
         return hit_record;
     }
     double t1 = (-b + sqrt(discriminant)) / (2 * a);
@@ -58,8 +62,12 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
         return hit_record;
     }
     double t = (abs(t1) < abs(t2)) ? t1 : t2;
-    hit_record.setHit(true);
     hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
+    double distance = Maths::MathsUtils::distance(ray._origin, hit_record.getIntersectionPoint());
+    hit_record.setDistance(distance);
+    if (distance < 0)
+        return hit_record;
+    hit_record.setHit(true);
     hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
                                        hit_record.getIntersectionPoint()._y - this->getPosition()._y,
                                        hit_record.getIntersectionPoint()._z - this->getPosition()._z));

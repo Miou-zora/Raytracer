@@ -23,12 +23,14 @@ namespace RayTracer {
             const RayTracer::Material &getMaterial() const { return _material; };
             bool isFrontFace() const { return _frontFace; };
             bool isHit() const { return _hit; };
+            double getDistance() const { return _distance; };
 
             void setIntersectionPoint(const Maths::Vertex &intersection_point) { this->_intersection_point = intersection_point; };
             void setNormal(const Maths::Vector &normal) { this->_normal = normal; };
             void setMaterial(const RayTracer::Material &material) { this->_material = material; };
             void setFrontFace(bool frontFace) { this->_frontFace = frontFace; };
             void setHit(bool hit) { this->_hit = hit; };
+            void setDistance(double distance) { this->_distance = distance; };
 
         private:
             Maths::Vertex _intersection_point;
@@ -36,5 +38,6 @@ namespace RayTracer {
             RayTracer::Material _material;
             bool _frontFace;
             bool _hit;
+            double _distance;
     };
 }

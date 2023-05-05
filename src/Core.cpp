@@ -35,7 +35,7 @@ void RayTracer::Core::buildScene(void)
 
 }
 
-std::shared_ptr<RayTracer::AScene> RayTracer::Core::getScene(void) const
+std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
 {
     return (nullptr);
 }
