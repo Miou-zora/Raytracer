@@ -13,21 +13,21 @@
 namespace RayTracer {
     class Material {
         public:
-            Material(void): _ambient(0.1), _diffuse(0.9), _specular(0.9), _reflective(0.0), _color(RayTracer::RGBAColor(255, 255, 255)) {};
+            Material(void): _emissionColor(Maths::Vertex(0, 0, 0)), _emissionStrength(0), _color(RayTracer::RGBAColor(255, 255, 255)) {};
             ~Material() = default;
 
             RayTracer::RGBAColor getColor() const { return _color; };
-            Maths::Vertex getEmissionColor() const { return emissionColor; };
-            double getEmissionStrength() const { return emissionStrength; };
+            Maths::Vertex getEmissionColor() const { return _emissionColor; };
+            double getEmissionStrength() const { return _emissionStrength; };
 
             void setColor(const RayTracer::RGBAColor &color) { _color = color; };
-            void setEmissionColor(const Maths::Vertex &color) { emissionColor = color; };
-            void setEmissionStrength(double strength) { emissionStrength = strength; };
+            void setEmissionColor(const Maths::Vertex &color) { _emissionColor = color; };
+            void setEmissionStrength(double strength) { _emissionStrength = strength; };
 
             bool operator==(const Material &other) const {
                 return _color == other.getColor() &&
-                    emissionColor == other.getEmissionColor() &&
-                    emissionStrength == other.getEmissionStrength();
+                    _emissionColor == other.getEmissionColor() &&
+                    _emissionStrength == other.getEmissionStrength();
             }
 
             bool operator!=(const Material &other) const {
@@ -35,8 +35,8 @@ namespace RayTracer {
             }
         protected:
         private:
-            Maths::Vertex emissionColor;
-            double emissionStrength;
+            Maths::Vertex _emissionColor;
+            double _emissionStrength;
             RayTracer::RGBAColor _color;
     };
 };
