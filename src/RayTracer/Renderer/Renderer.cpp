@@ -11,12 +11,12 @@
 
 RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
 {
-    double distance = records[0].getDistance();
+    float distance = records[0]._distance;
     RayTracer::HitRecord closestHit = records[0];
 
     for (auto &record : records) {
-        if (record.getDistance() < distance) {
-            distance = record.getDistance();
+        if (record._distance < distance) {
+            distance = record._distance;
             closestHit = record;
         }
     }
@@ -26,20 +26,23 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
 
 RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
-    std::vector<RayTracer::HitRecord> records;
+    float distance = -1;
+    RayTracer::HitRecord closestHit;
+    RayTracer::HitRecord record;
 
     for (auto &shape : scene.getShapes()) {
-        RayTracer::HitRecord record = shape.get()->hit(ray);
-        if (record.isHit() && record.isFrontFace()) {
-            records.push_back(record);
+        record = shape.get()->hit(ray);
+        if (record._hit && record._frontFace) {
+            if (record._distance < distance || distance == -1) {
+                distance = record._distance;
+                closestHit = record;
+            }
         }
     }
-    if (records.empty()) {
-        RayTracer::HitRecord record;
-        record.setHit(false);
-        return record;
+    if (distance <= 0) {
+        closestHit._hit = false;
     }
-    return this->getClosestHit(records);
+    return closestHit;
 }
 
 Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
@@ -50,13 +53,13 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
 
     for (std::size_t i = 0; i < MAX_DEPTH; i++) {
         RayTracer::HitRecord record = this->castRay(scene, newRay);
-        if (!record.isHit()) {
+        if (!record._hit) {
             incomingLight += (Maths::Vertex(0.25, 0.25, 0.35) * rayColor);
             break;
         }
-        newRay._origin = record.getIntersectionPoint();
-        newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
-        RayTracer::Material material = record.getMaterial();
+        newRay._origin = record._intersection_point;
+        newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record._normal);
+        RayTracer::Material material = record._material;
         Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
         incomingLight += (emittedLight * rayColor);
         Maths::Vertex materialColor = Maths::Vertex(0, 0, 0);
@@ -85,8 +88,8 @@ void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame
 
     for (std::size_t i = 0; i < frame.getWidth(); i++) {
         for (std::size_t j = 0; j < frame.getHeight(); j++) {
-            double x = i / (double)frame.getWidth();
-            double y = j / (double)frame.getHeight();
+            float x = i / (float)frame.getWidth();
+            float y = j / (float)frame.getHeight();
             Maths::Ray ray = camera.ray(x, y);
             frame.setPixel(std::pair<int, int>(i, j), cast(scene, ray));
         }

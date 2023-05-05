@@ -23,15 +23,15 @@ namespace RayTracer {
             void setPosition(const Maths::Vertex &position) { _position = position; };
             void setRotation(const Maths::Vertex &rotation) { _rotation = rotation; };
 
-            void translate(double x, double y, double z);
-            void translateX(double x);
-            void translateY(double y);
-            void translateZ(double z);
+            void translate(float x, float y, float z);
+            void translateX(float x);
+            void translateY(float y);
+            void translateZ(float z);
 
-            void rotate(double x, double y, double z);
-            void rotateX(double x);
-            void rotateY(double y);
-            void rotateZ(double z);
+            void rotate(float x, float y, float z);
+            void rotateX(float x);
+            void rotateY(float y);
+            void rotateZ(float z);
         private:
             Maths::Vertex _position;
             Maths::Vertex _rotation;

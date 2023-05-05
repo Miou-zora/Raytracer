@@ -15,33 +15,33 @@ namespace RayTracer {
             RGBAColor(void) = default;
             RGBAColor(const RGBAColor &color) = default;
             RGBAColor(const RGBAColor &&color);
-            RGBAColor(double r, double g, double b);
+            RGBAColor(float r, float g, float b);
             virtual ~RGBAColor() = default;
 
             RGBAColor &operator=(const RGBAColor &color) = default;
             RGBAColor &operator=(const RGBAColor &&color);
 
-            void setColor(double r, double g, double b);
+            void setColor(float r, float g, float b);
             void setColor(const RGBAColor &color);
             void setColor(const Maths::Vertex &color);
-            void setRed(double r);
-            void setGreen(double g);
-            void setBlue(double b);
-            void setAlpha(double a);
+            void setRed(float r);
+            void setGreen(float g);
+            void setBlue(float b);
+            void setAlpha(float a);
 
-            double getRed(void) const;
-            double getGreen(void) const;
-            double getBlue(void) const;
-            double getAlpha(void) const;
+            float getRed(void) const;
+            float getGreen(void) const;
+            float getBlue(void) const;
+            float getAlpha(void) const;
             Maths::Vertex getColor(void) const;
 
             bool operator==(const RGBAColor &other) const;
             bool operator!=(const RGBAColor &other) const;
 
         private:
-            double _r;
-            double _g;
-            double _b;
-            double _a;
+            float _r;
+            float _g;
+            float _b;
+            float _a;
     };
 }

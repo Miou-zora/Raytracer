@@ -11,21 +11,21 @@
 
 #include <iostream>
 
-RayTracer::Camera::Camera(int width, int height, double fov)
+RayTracer::Camera::Camera(int width, int height, float fov)
 {
     setPosition(Maths::Vertex(0, 0, 0));
     setRotation(Maths::Vertex(0, 0, 0));
     _screen = Maths::Rect3D();
 
-    double aspectRatio = (double)height / (double)width;
-    double halfWidth = aspectRatio / 2;
-    double distance = (halfWidth * sin((180.0 - fov / 2 - 90.0) * M_PI / 180.0)) / sin(fov * M_PI / 180.0);
+    float aspectRatio = (float)height / (float)width;
+    float halfWidth = aspectRatio / 2;
+    float distance = (halfWidth * sin((180.0 - fov / 2 - 90.0) * M_PI / 180.0)) / sin(fov * M_PI / 180.0);
     _screen._origin = Maths::Vertex(-0.5 , distance, -halfWidth);
     _screen._left_side = Maths::Vertex(1, 0, 0);
     _screen._bottom_side = Maths::Vertex(0, 0, aspectRatio);
 }
 
-Maths::Ray RayTracer::Camera::ray(double x, double y) const
+Maths::Ray RayTracer::Camera::ray(float x, float y) const
 {
     Maths::Vertex rotation = this->getRotation();
     Maths::Vertex origin = this->getPosition();

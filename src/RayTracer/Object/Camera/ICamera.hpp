@@ -12,6 +12,6 @@
 namespace RayTracer {
     class ICamera {
         public:
-            virtual Maths::Ray ray(double u, double v) const = 0;
+            virtual Maths::Ray ray(float u, float v) const = 0;
     };
 };

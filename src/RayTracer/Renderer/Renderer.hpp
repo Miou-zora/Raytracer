@@ -25,5 +25,5 @@ namespace RayTracer {
     };
 }
 
-    constexpr std::size_t MAX_DEPTH = 20;
-    constexpr std::size_t RAY_PER_PIXEL = 20;
+constexpr std::size_t MAX_DEPTH = 20;
+constexpr std::size_t RAY_PER_PIXEL = 20;

@@ -10,9 +10,9 @@
 namespace RayTracer {
     class ITranslation {
         public:
-            virtual void translate(double x, double y, double z) = 0;
-            virtual void translateX(double x) = 0;
-            virtual void translateY(double y) = 0;
-            virtual void translateZ(double z) = 0;
+            virtual void translate(float x, float y, float z) = 0;
+            virtual void translateX(float x) = 0;
+            virtual void translateY(float y) = 0;
+            virtual void translateZ(float z) = 0;
     };
 }
