@@ -22,8 +22,8 @@ namespace RayTracer {
             Factory(void);
             ~Factory();
 
-            std::shared_ptr<RayTracer::ILight> createLight(std::string name);
-            std::shared_ptr<RayTracer::IShape> createShape(std::string name);
+            std::shared_ptr<RayTracer::ILight> createLight(const std::string &name);
+            std::shared_ptr<RayTracer::IShape> createShape(const std::string &name);
 
         protected:
         private:
