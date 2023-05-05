@@ -26,9 +26,10 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
 RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
     std::vector<RayTracer::HitRecord> records;
+    RayTracer::HitRecord record;
 
     for (const auto &shape : scene.getShapes()) {
-        RayTracer::HitRecord record = shape.get()->hit(ray);
+        record = shape.get()->hit(ray);
         if (record.isHit() && record.isFrontFace()) {
             records.push_back(record);
         }
