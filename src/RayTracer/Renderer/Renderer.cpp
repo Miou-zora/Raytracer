@@ -28,14 +28,14 @@ RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene,
     std::vector<RayTracer::HitRecord> records;
     RayTracer::HitRecord record;
 
-    for (const auto &shape : scene.getShapes()) {
+    (void)scene;
+    for (const auto &shape : m_shapes) {
         record = shape.get()->hit(ray);
         if (record.isHit() && record.isFrontFace()) {
             records.push_back(record);
         }
     }
     if (records.empty()) {
-        RayTracer::HitRecord record;
         record.setHit(false);
         return record;
     }

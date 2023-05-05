@@ -22,7 +22,7 @@ namespace RayTracer {
             Maths::Vertex trace(const RayTracer::Scene &scene, const Maths::Ray &ray);
             RayTracer::HitRecord castRay(const Scene &scene, const Maths::Ray &ray) const;
             RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
-            const std::vector<std::shared_ptr<IShape>> &m_shapes;
+            const std::vector<std::shared_ptr<IShape>> m_shapes;
             const Maths::Vertex m_ambientColor;
     };
 }
