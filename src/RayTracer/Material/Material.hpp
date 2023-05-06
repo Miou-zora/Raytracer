@@ -33,6 +33,17 @@ namespace RayTracer {
             bool operator!=(const Material &other) const {
                 return !(*this == other);
             }
+
+            static RayTracer::Material flatColor(RayTracer::RGBAColor color) {
+                RayTracer::Material material;
+
+                material.setColor(color);
+                material.setAmbient(0.0);
+                material.setDiffuse(1.0);
+                material.setSpecular(0.0);
+                material.setReflective(0.0);
+                return material;
+            }
         protected:
         private:
             Maths::Vertex _emissionColor;
