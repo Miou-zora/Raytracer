@@ -34,14 +34,12 @@ namespace RayTracer {
                 return !(*this == other);
             }
 
-            static RayTracer::Material flatColor(RayTracer::RGBAColor color) {
+            static RayTracer::Material flatColor(Maths::Vertex color) {
                 RayTracer::Material material;
 
                 material.setColor(color);
-                material.setAmbient(0.0);
-                material.setDiffuse(1.0);
-                material.setSpecular(0.0);
-                material.setReflective(0.0);
+                material.setEmissionColor(Maths::Vertex(0, 0, 0));
+                material.setEmissionStrength(0);
                 return material;
             }
         protected:
