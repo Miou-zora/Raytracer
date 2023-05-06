@@ -13,7 +13,7 @@
 namespace RayTracer {
     class Material {
         public:
-            Material(void) = default;
+            Material(void): _ambient(0.1), _diffuse(0.9), _specular(0.9), _reflective(0.0), _color(RayTracer::RGBAColor(255, 255, 255)) {};
             ~Material() = default;
 
             double getAmbient() const { return _ambient; };
@@ -38,6 +38,17 @@ namespace RayTracer {
 
             bool operator!=(const Material &other) const {
                 return !(*this == other);
+            }
+
+            static RayTracer::Material flatColor(RayTracer::RGBAColor color) {
+                RayTracer::Material material;
+
+                material.setColor(color);
+                material.setAmbient(0.0);
+                material.setDiffuse(1.0);
+                material.setSpecular(0.0);
+                material.setReflective(0.0);
+                return material;
             }
         protected:
         private:

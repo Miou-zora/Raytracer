@@ -14,7 +14,7 @@
 namespace RayTracer {
     class AShape: public RayTracer::Object, public RayTracer::IShape {
         public:
-            AShape(void) = default;
+            AShape(void): RayTracer::Object(), _material(RayTracer::Material()), _isShadow(true) {};
             virtual ~AShape() = default;
 
             RayTracer::Material getMaterial() const { return _material; };
