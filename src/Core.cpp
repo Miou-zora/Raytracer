@@ -9,6 +9,7 @@
 
 void RayTracer::Core::run(void)
 {
+
 }
 
 void RayTracer::Core::setScene(std::string scenePath)
