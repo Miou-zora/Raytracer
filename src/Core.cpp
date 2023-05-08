@@ -31,7 +31,16 @@ void RayTracer::Core::setScene(std::string scenePath)
 
 void RayTracer::Core::buildScene(void)
 {
+    libconfig::Config cfg;
 
+    cfg.readFile(_scenePath.c_str());
+    libconfig::Setting &root = cfg.getRoot();
+    libconfig::Setting &camera = root["camera"];
+    libconfig::Setting &lights = root["lights"];
+    libconfig::Setting &primitives = root["primitives"];
+    (void)camera;
+    (void)lights;
+    (void)primitives;
 }
 
 std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
