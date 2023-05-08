@@ -64,7 +64,7 @@ void RayTracer::Core::initCamera(libconfig::Setting &cameraSetting)
         pos.lookupValue("z", position._z);
         camera->setPosition(Maths::Vertex(position._x, position._y, position._z));
         setTransformation(cameraSetting, *camera);
-        //_scene->setCamera(camera);
+        _scene->setCamera(camera);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("Invalid 'camera' setting in configuration file.");
     }
@@ -73,21 +73,21 @@ void RayTracer::Core::initCamera(libconfig::Setting &cameraSetting)
 void RayTracer::Core::setTransformation(libconfig::Setting &setting, RayTracer::Camera &camera)
 {
     try {
-        if (setting.lookup("rotation")) {
+        if (setting.exists("rotation")) {
             libconfig::Setting &rotation = setting["rotation"];
             Maths::Vector rotationVector;
             (void) rotation;
-            //rotation.lookupValue("x", rotationVector._x);
-            //rotation.lookupValue("y", rotationVector._y);
-            //rotation.lookupValue("z", rotationVector._z);
+            rotation.lookupValue("x", rotationVector._x);
+            rotation.lookupValue("y", rotationVector._y);
+            rotation.lookupValue("z", rotationVector._z);
             camera.setRotation(Maths::Vertex(rotationVector._x, rotationVector._y, rotationVector._z));
-        } else if (setting.lookup("translation")) {
+        } else if (setting.exists("translation")) {
             libconfig::Setting &translation = setting["translation"];
             Maths::Vector translationVector;
-            (void) translation;
-            //translation.lookupValue("x", translationVector._x);
-            //translation.lookupValue("y", translationVector._y);
-            //translation.lookupValue("z", translationVector._z);
+
+            translation.lookupValue("x", translationVector._x);
+            translation.lookupValue("y", translationVector._y);
+            translation.lookupValue("z", translationVector._z);
             camera.setTranslation(Maths::Vertex(translationVector._x, translationVector._y, translationVector._z));
         }
     } catch (const libconfig::SettingTypeException &stex) {
