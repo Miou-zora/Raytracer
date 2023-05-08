@@ -32,6 +32,7 @@ void RayTracer::Core::setScene(std::string scenePath)
 void RayTracer::Core::buildScene(void)
 {
     libconfig::Config cfg;
+    _scene = std::make_shared<RayTracer::Scene>();
 
     cfg.readFile(_scenePath.c_str());
     libconfig::Setting &root = cfg.getRoot();
@@ -64,7 +65,6 @@ void RayTracer::Core::initCamera(libconfig::Setting &cameraSetting)
         pos.lookupValue("z", position._z);
         camera->setPosition(Maths::Vertex(position._x, position._y, position._z));
         setTransformation(cameraSetting, *camera);
-        _scene->setCamera(camera);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("Invalid 'camera' setting in configuration file.");
     }
