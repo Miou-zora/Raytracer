@@ -42,6 +42,16 @@ RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene,
     return this->getClosestHit(records);
 }
 
+Maths::Vector reflect(const Maths::Vector &v, const Maths::Vector &n)
+{
+    return v - n * 2 * v.dot(n);
+}
+
+Maths::Vector lerp(const Maths::Vector &startValue, const Maths::Vector &endValue, double t)
+{
+    return startValue + (endValue - startValue) * t;
+}
+
 Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
 {
     Maths::Vertex rayColor(1, 1, 1);
@@ -54,7 +64,9 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
             break;
         }
         newRay._origin = record.getIntersectionPoint();
-        newRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
+        Maths::Vector diffuseDir = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
+        Maths::Vector specularDir = reflect(newRay._direction.normalized(), record.getNormal().normalized());
+        newRay._direction = lerp(diffuseDir, specularDir, record.getMaterial().getSmoothness());
         const RayTracer::Material& material = record.getMaterial();
         Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
         incomingLight += emittedLight * rayColor;
