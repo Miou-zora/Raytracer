@@ -11,6 +11,7 @@
 #include "Scene.hpp"
 #include "IRenderer.hpp"
 #include "IDisplayer.hpp"
+#include <libconfig.h++>
 
 namespace RayTracer {
     class Core {
@@ -24,6 +25,9 @@ namespace RayTracer {
             std::shared_ptr<RayTracer::Scene> getScene(void) const;
 
         private:
+
+            void initCamera(libconfig::Setting &cameraSetting);
+
             std::string _scenePath;
             std::shared_ptr<RayTracer::Scene> _scene;
             std::shared_ptr<RayTracer::IRenderer> _renderer;
