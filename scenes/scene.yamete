@@ -8,10 +8,47 @@ camera :
 # Primitives in the scene
 primitives :
     {
-    # List of spheres
-    spheres = (
-        {x = 60; y = 5; z = 40; r = 25; color = {r = 255; g = 64; b = 64;};} ,
-        {x = -40; y = 20; z = -10; r = 35; color = {r = 64; g = 255; b = 64;};}
+    # List of shapes
+    shapes = (
+        {
+            type = "sphere";
+            position = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            material = {
+                r = 255;
+                g = 64;
+                b = 64;
+            };
+            translate = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            radius = 10;
+        },
+        {
+            type = "cube";
+            position = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            material = {
+                r = 64;
+                g = 64;
+                b = 255;
+            };
+            translate = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            radius = 2;
+            height = 10;
+        }
     );
     # List of planes
     planes = (
