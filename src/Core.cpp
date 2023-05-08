@@ -39,10 +39,11 @@ void RayTracer::Core::buildScene(void)
     try {
         libconfig::Setting &camera = root["camera"];
         initCamera(camera);
+        initPrimitives(root);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("No 'camera' setting in configuration file.");
     } catch (const std::exception &e) {
-        throw std::invalid_argument("Error while parsing 'camera' setting: " + std::string(e.what()));
+        throw std::invalid_argument("Error while parsing: " + std::string(e.what()));
     }
 }
 
@@ -95,6 +96,28 @@ void RayTracer::Core::setTransformation(libconfig::Setting &setting, RayTracer::
     }
 }
 
+void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
+{
+    try {
+        libconfig::Setting &primitives = setting["primitives"]["shapes"];
+        int nb_primitive = primitives.getLength();
+        std::string type;
+
+        for(int i = 0; i < nb_primitive; ++i) {
+            libconfig::Setting &primitive = primitives[i];
+            primitive.lookupValue("type", type);
+            if (type == "Sphere") {
+                std::cout << "Sphere" << std::endl;
+            } else if (type == "Cylinder") {
+                std::cout << "Cylinder" << std::endl;
+            } else {
+                throw std::invalid_argument("Invalid primitive type in configuration file.");
+            }
+        }
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        throw std::invalid_argument("Invalid 'primitives' setting in configuration file.");
+    }
+}
 
 
 std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
