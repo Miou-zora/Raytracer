@@ -1,9 +1,9 @@
 # Configuration of the camera
 camera :
 {
-    resolution = { width = 1920; height = 1080; };
+    resolution = { width = 1920; height = 1080; fov: 80;};
     position = { x = 0; y = -100; z = 20; };
-    rotation = { x = 0; y = 0; z = 0; };
+    rotation = { x = 8; y = 45; z = 1; };
 };
 # Primitives in the scene
 primitives :
