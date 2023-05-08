@@ -7,7 +7,6 @@
 
 #include "Core.hpp"
 
-
 void RayTracer::Core::run(void)
 {
 
@@ -48,17 +47,55 @@ void RayTracer::Core::buildScene(void)
 
 void RayTracer::Core::initCamera(libconfig::Setting &cameraSetting)
 {
-    std::shared_ptr<RayTracer::ICamera> camera = std::make_shared<RayTracer::Camera>();
     try {
-        libconfig::Setting &position = cameraSetting["position"];
-    } catch (const libconfig::SettingNotFoundException &nfex) {
-        throw std::invalid_argument("No 'position' setting in 'camera' setting.");
-    }
-    libconfig::Setting &rotation = cameraSetting["rotation"];
+        libconfig::Setting &resolution = cameraSetting["resolution"];
+        libconfig::Setting &pos = cameraSetting["position"];
+        int width = 0;
+        int height = 0;
+        int fov = 0;
+        Maths::Vector position;
 
-    (void)position;
-    (void)rotation;
+        resolution.lookupValue("width", width);
+        resolution.lookupValue("height", height);
+        resolution.lookupValue("fov", fov);
+        std::shared_ptr<RayTracer::Camera> camera = std::make_shared<RayTracer::Camera>(width, height, fov);
+        pos.lookupValue("x", position._x);
+        pos.lookupValue("y", position._y);
+        pos.lookupValue("z", position._z);
+        camera->setPosition(Maths::Vertex(position._x, position._y, position._z));
+        setTransformation(cameraSetting, *camera);
+        //_scene->setCamera(camera);
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        throw std::invalid_argument("Invalid 'camera' setting in configuration file.");
+    }
 }
+
+void RayTracer::Core::setTransformation(libconfig::Setting &setting, RayTracer::Camera &camera)
+{
+    try {
+        if (setting.lookup("rotation")) {
+            libconfig::Setting &rotation = setting["rotation"];
+            Maths::Vector rotationVector;
+            (void) rotation;
+            //rotation.lookupValue("x", rotationVector._x);
+            //rotation.lookupValue("y", rotationVector._y);
+            //rotation.lookupValue("z", rotationVector._z);
+            camera.setRotation(Maths::Vertex(rotationVector._x, rotationVector._y, rotationVector._z));
+        } else if (setting.lookup("translation")) {
+            libconfig::Setting &translation = setting["translation"];
+            Maths::Vector translationVector;
+            (void) translation;
+            //translation.lookupValue("x", translationVector._x);
+            //translation.lookupValue("y", translationVector._y);
+            //translation.lookupValue("z", translationVector._z);
+            camera.setTranslation(Maths::Vertex(translationVector._x, translationVector._y, translationVector._z));
+        }
+    } catch (const libconfig::SettingTypeException &stex) {
+        throw std::invalid_argument("Invalid 'camera' setting type in configuration file.");
+    }
+}
+
+
 
 std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
 {
