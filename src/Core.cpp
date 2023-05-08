@@ -6,7 +6,7 @@
 */
 
 #include "Core.hpp"
-#include <libconfig.h++>
+
 
 void RayTracer::Core::run(void)
 {
@@ -35,12 +35,28 @@ void RayTracer::Core::buildScene(void)
 
     cfg.readFile(_scenePath.c_str());
     libconfig::Setting &root = cfg.getRoot();
-    libconfig::Setting &camera = root["camera"];
-    libconfig::Setting &lights = root["lights"];
-    libconfig::Setting &primitives = root["primitives"];
-    (void)camera;
-    (void)lights;
-    (void)primitives;
+    try {
+        libconfig::Setting &camera = root["camera"];
+        initCamera(camera);
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        throw std::invalid_argument("No 'camera' setting in configuration file.");
+    } catch (const std::exception &e) {
+        throw std::invalid_argument("Error while parsing 'camera' setting: " + std::string(e.what()));
+    }
+}
+
+void RayTracer::Core::initCamera(libconfig::Setting &cameraSetting)
+{
+    std::shared_ptr<RayTracer::ICamera> camera = std::make_shared<RayTracer::Camera>();
+    try {
+        libconfig::Setting &position = cameraSetting["position"];
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        throw std::invalid_argument("No 'position' setting in 'camera' setting.");
+    }
+    libconfig::Setting &rotation = cameraSetting["rotation"];
+
+    (void)position;
+    (void)rotation;
 }
 
 std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
