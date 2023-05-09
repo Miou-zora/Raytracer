@@ -50,8 +50,8 @@ primitives :
             height = 10;
         }
     );
-    # List of planes
-    planes : {
+
+    plane : {
         axis = "Z";
         position = -20;
         color = {
