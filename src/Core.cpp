@@ -115,10 +115,18 @@ void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
             }
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
-        throw std::invalid_argument("Invalid 'primitives' setting in configuration file.");
+        //pass, it not mandatory
+    }
+    try {
+        libconfig::Setting &plane = setting["primitives"]["plane"];
+        std::cout << "Plane" << std::endl;
+        (void)plane;
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        //pass, it not mandatory
+    } catch (const std::exception &e) {
+        throw std::invalid_argument("Invalid 'plane' setting in configuration file.");
     }
 }
-
 
 std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
 {
