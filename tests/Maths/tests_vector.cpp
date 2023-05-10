@@ -212,7 +212,7 @@ Test(Vector, dot)
 {
     Maths::Vector vector(1, 2, 3);
     Maths::Vector vector2(4, 5, 6);
-    float dot = vector.dot(vector2);
+    double dot = vector.dot(vector2);
     cr_assert_eq(dot, 32);
 }
 
@@ -229,7 +229,7 @@ Test(Vector, cross)
 Test(Vector, length)
 {
     Maths::Vector vector(1, 2, 3);
-    float length = vector.length();
+    double length = vector.length();
     cr_assert_eq(static_cast<int>(length * 1000000), static_cast<int>(sqrt(14) * 1000000));
 }
 
