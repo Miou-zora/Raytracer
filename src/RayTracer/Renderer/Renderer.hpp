@@ -31,7 +31,7 @@ namespace RayTracer {
             const Maths::Vector m_directionalLightDirection;
             const double m_ambientIntensity = 1;
             const double m_directionalLightIntensity = 0.5;
-            const double m_directionalFocus = 1;
+            const double m_directionalFocus = 0.8;
     };
 }
 

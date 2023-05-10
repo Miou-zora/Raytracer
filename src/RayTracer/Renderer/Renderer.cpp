@@ -61,7 +61,8 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
     for (std::size_t i = 0; i < MAX_DEPTH; i++) {
         record = this->castRay(scene, newRay);
         if (!record.isHit()) {
-            newRay._direction = -m_directionalLightDirection;
+            newRay._direction = lerp(newRay._direction, -m_directionalLightDirection, m_directionalFocus);
+            // newRay._direction = -m_directionalLightDirection;
             newRay._origin = newRay._origin + newRay._direction * -0.0001;
             RayTracer::HitRecord directionalLightRecord = this->castRay(scene, newRay);
             if (!directionalLightRecord.isHit()) {
