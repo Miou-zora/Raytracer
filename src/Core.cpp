@@ -40,6 +40,7 @@ void RayTracer::Core::buildScene(void)
         libconfig::Setting &camera = root["camera"];
         initCamera(camera);
         initPrimitives(root);
+        initLights(root);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("No 'camera' setting in configuration file.");
     } catch (const std::exception &e) {
@@ -125,6 +126,29 @@ void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
         //pass, it not mandatory
     } catch (const std::exception &e) {
         throw std::invalid_argument("Invalid 'plane' setting in configuration file.");
+    }
+}
+
+void RayTracer::Core::initLights(libconfig::Setting &setting)
+{
+    try {
+        libconfig::Setting &lights = setting["lights"];
+        int nb_lights = lights.getLength();
+        std::string type;
+
+        for(int i = 0; i < nb_lights; ++i) {
+            libconfig::Setting &light = lights[i];
+            light.lookupValue("type", type);
+            if (type == "Point") {
+                std::cout << "Point" << std::endl;
+            } else if (type == "Directional") {
+                std::cout << "Directional" << std::endl;
+            } else {
+                throw std::invalid_argument("Invalid light type in configuration file.");
+            }
+        }
+    } catch (const libconfig::SettingNotFoundException &nfex) {
+        //pass, it not mandatory
     }
 }
 
