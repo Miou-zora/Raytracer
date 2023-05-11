@@ -25,6 +25,18 @@ namespace Raytracer {
                     return std::shared_ptr<ObjectInterface>(builder());
                 }
 
+                std::string loadName(const std::string &objectPath)
+                {
+                    _handle = dlopen(libPath.c_str(), RTLD_LAZY);
+                    std::string (*name)() = nullptr;
+                    if (!_handle)
+                        throw LoaderException(dlerror());
+                    name = reinterpret_cast<std::string (*)()>(dlsym(_handle, "NameEntryPoint"));
+                    if (!name)
+                        throw LoaderException(dlerror());
+                    return name();
+                }
+
                 void closeLib()
                 {
                     if (dlclose(_handle) != 0)
