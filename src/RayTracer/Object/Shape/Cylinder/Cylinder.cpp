@@ -50,8 +50,8 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
         hit_record.setHit(true);
         hit_record.setDistance(distance);
         hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
-                                           0,
-                                           hit_record.getIntersectionPoint()._y - this->getPosition()._y));
+                                           hit_record.getIntersectionPoint()._y - this->getPosition()._y,
+                                           0));
         hit_record.setFrontFace(ray._direction.dot(hit_record.getNormal()) < 0);
         hit_record.setMaterial(this->getMaterial());
 
@@ -71,8 +71,8 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
         return hit_record;
     hit_record.setHit(true);
     hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
-                                       0,
-                                       hit_record.getIntersectionPoint()._y - this->getPosition()._y));
+                                        hit_record.getIntersectionPoint()._y - this->getPosition()._y,
+                                        0));
     hit_record.setFrontFace(true);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;

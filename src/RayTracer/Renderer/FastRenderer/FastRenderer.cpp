@@ -57,8 +57,6 @@ RayTracer::HitRecord RayTracer::FastRenderer::castRay(const RayTracer::Scene &sc
 
 Maths::Vertex RayTracer::FastRenderer::findDirectionalLightCoeff(const RayTracer::Scene &scene, const RayTracer::HitRecord &record, const Maths::Ray &ray) const
 {
-    (void)scene;
-    (void)record;
     Maths::Vertex lightAccumulate = Maths::Vertex(0, 0, 0);
     for (const auto &light : scene.getLights()) {
         lightAccumulate += light->hit(record.getIntersectionPoint() - ray._direction * 0.0001, scene, record);
