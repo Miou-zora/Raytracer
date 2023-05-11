@@ -160,6 +160,16 @@ Maths::Vertex &Maths::Vertex::operator/=(const double &value)
     return (*this);
 }
 
+Maths::Vertex &Maths::Vertex::normalize(void)
+{
+    double length = sqrt(_x * _x + _y * _y + _z * _z);
+
+    _x /= length;
+    _y /= length;
+    _z /= length;
+    return (*this);
+}
+
 Maths::Vertex &Maths::Vertex::rotate(const Maths::Vertex &rotation)
 {
     rotateX(rotation._x);

@@ -13,49 +13,44 @@
 namespace RayTracer {
     class Material {
         public:
-            Material(void): _ambient(0.1), _diffuse(0.9), _specular(0.9), _reflective(0.0), _color(RayTracer::RGBAColor(255, 255, 255)) {};
+            Material(void): _emissionColor(Maths::Vertex(0, 0, 0)), _emissionStrength(0), _color(Maths::Vertex(1, 1, 1)), _smoothness(0) {};
             ~Material() = default;
 
-            double getAmbient() const { return _ambient; };
-            double getDiffuse() const { return _diffuse; };
-            double getSpecular() const { return _specular; };
-            double getReflective() const { return _reflective; };
-            RayTracer::RGBAColor getColor() const { return _color; };
+            const Maths::Vertex &getColor() const { return _color; };
+            const Maths::Vertex &getEmissionColor() const { return _emissionColor; };
+            double getEmissionStrength() const { return _emissionStrength; };
+            double getSmoothness() const { return _smoothness; };
 
-            void setAmbient(double ambient) { _ambient = ambient; };
-            void setDiffuse(double diffuse) { _diffuse = diffuse; };
-            void setSpecular(double specular) { _specular = specular; };
-            void setReflective(double reflective) { _reflective = reflective; };
-            void setColor(const RayTracer::RGBAColor &color) { _color = color; };
+            void setColor(const Maths::Vertex &color) { _color = color; };
+            void setEmissionColor(const Maths::Vertex &color) { _emissionColor = color; };
+            void setEmissionStrength(double strength) { _emissionStrength = strength; };
+            void setSmoothness(double smoothness) { _smoothness = smoothness; };
 
             bool operator==(const Material &other) const {
-                return _ambient == other.getAmbient() &&
-                    _diffuse == other.getDiffuse() &&
-                    _specular == other.getSpecular() &&
-                    _reflective == other.getReflective() &&
-                    _color == other.getColor();
+                return _color == other.getColor() &&
+                    _emissionColor == other.getEmissionColor() &&
+                    _emissionStrength == other.getEmissionStrength() &&
+                    _smoothness == other._smoothness;
             }
 
             bool operator!=(const Material &other) const {
                 return !(*this == other);
             }
 
-            static RayTracer::Material flatColor(RayTracer::RGBAColor color) {
+            static RayTracer::Material flatColor(Maths::Vertex color) {
                 RayTracer::Material material;
 
                 material.setColor(color);
-                material.setAmbient(0.0);
-                material.setDiffuse(1.0);
-                material.setSpecular(0.0);
-                material.setReflective(0.0);
+                material.setEmissionColor(Maths::Vertex(0, 0, 0));
+                material.setEmissionStrength(0);
+                material.setSmoothness(0);
                 return material;
             }
         protected:
         private:
-            double _ambient;
-            double _diffuse;
-            double _specular;
-            double _reflective;
-            RayTracer::RGBAColor _color;
+            Maths::Vertex _emissionColor;
+            double _emissionStrength;
+            Maths::Vertex _color;
+            double _smoothness;
     };
 };
