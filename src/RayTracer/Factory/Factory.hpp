@@ -18,22 +18,28 @@
 #include "Cylindre.hpp"
 
 namespace RayTracer {
-    class Factory {
-        public:
-            Factory(void);
-            ~Factory();
+    template <typename ObjectInterface>
+        class Factory {
+            public:
+                Factory(void) = default;
+                ~Factory() = default;
 
-            std::shared_ptr<RayTracer::ILight> createLight(const std::string &name);
-            std::shared_ptr<RayTracer::IShape> createShape(const std::string &name);
+                std::shared_ptr<ObjectInterface> createObject(const std::string &name) const
+                {
+                    auto it = _shapeMap.find(name);
+                    if (it == _shapeMap.end())
+                        throw RayTracer::InvalidShapeException("Invalid shape name");
+                    std::shared_ptr<ObjectInterface> shape = it->second(name);
+                    return (shape);
+                }
 
-        protected:
-        private:
-            std::map<std::string, std::function<std::shared_ptr<RayTracer::IShape>(const std::string&)>> _shapeMap = {
-               {"Sphere", [](const std::string& name){ return std::make_shared<RayTracer::Sphere>(name);}},
-               {"Plane", [](const std::string& name){ return std::make_shared<RayTracer::Plane>(name);}},
-               {"Cylindre", [](const std::string& name){ return std::make_shared<RayTracer::Cylindre>(name);}},
-            };
-            std::map<std::string, std::function<std::shared_ptr<RayTracer::ILight>(const std::string&)>> _lightMap = {
-            };
-    };
+                void addObject(const std::string &name, std::function<std::shared_ptr<ObjectInterface>()> function) {
+                    _shapeMap.insert({name, function});
+                }
+
+            protected:
+            private:
+                std::map<std::string, std::function<std::shared_ptr<ObjectInterface>()>> _shapeMap = {
+                };
+        };
 }

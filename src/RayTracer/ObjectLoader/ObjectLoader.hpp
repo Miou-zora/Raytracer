@@ -6,7 +6,10 @@
 */
 
 #pragma once
-namespace Raytracer {
+
+#include "LoaderExceptions.hpp"
+
+namespace RayTracer {
     template <typename ObjectInterface>
         class ObjectLoader {
             public:
