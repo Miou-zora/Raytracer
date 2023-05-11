@@ -9,18 +9,16 @@
 #include <cmath>
 #include "MathsUtils.hpp"
 
-RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, double height)
+RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius)
 {
     setPosition(center);
     _radius = radius;
-    _height = height;
 }
 
-RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, double height, const RayTracer::Material &material)
+RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, const RayTracer::Material &material)
 {
     setPosition(center);
     _radius = radius;
-    _height = height;
     setMaterial(material);
 }
 
@@ -44,8 +42,6 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
         hit_record.setIntersectionPoint(ray._origin + ray._direction * t);
         double distance = Maths::MathsUtils::distance(ray._origin, hit_record.getIntersectionPoint());
         if (distance < 0)
-            return hit_record;
-        if (hit_record.getIntersectionPoint()._z < this->getPosition()._z || hit_record.getIntersectionPoint()._z > this->getPosition()._z + _height)
             return hit_record;
         hit_record.setHit(true);
         hit_record.setDistance(distance);
