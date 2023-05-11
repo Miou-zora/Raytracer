@@ -7,11 +7,12 @@
 
 #include "FastRenderer.hpp"
 
+#include "MathsUtils.hpp"
 #include "Vertex.hpp"
 
 RayTracer::FastRenderer::FastRenderer(void) :
-    m_ambientColor(Maths::Vertex(1, 1, 1)),
-    m_ambientIntensity(0.5)
+    m_ambientLightColor(Maths::Vertex(1, 1, 1)),
+    m_ambientLightIntensity(0.2)
 {
 
 }
@@ -54,14 +55,37 @@ RayTracer::HitRecord RayTracer::FastRenderer::castRay(const RayTracer::Scene &sc
     return this->getClosestHit(records);
 }
 
+Maths::Vertex RayTracer::FastRenderer::findDirectionalLightCoeff(const RayTracer::Scene &scene, const RayTracer::HitRecord &record, const Maths::Ray &ray) const
+{
+    (void)scene;
+    (void)record;
+    Maths::Vertex lightAccumulate = Maths::Vertex(0, 0, 0);
+    for (const auto &light : scene.getLights()) {
+        lightAccumulate += light->hit(record.getIntersectionPoint() - ray._direction * 0.0001, scene, record);
+    }
+    if (lightAccumulate._x > 1)
+        lightAccumulate._x = 1;
+    if (lightAccumulate._y > 1)
+        lightAccumulate._y = 1;
+    if (lightAccumulate._z > 1)
+        lightAccumulate._z = 1;
+    return (lightAccumulate);
+}
+
 RayTracer::RGBAColor RayTracer::FastRenderer::cast(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
     RayTracer::HitRecord record = this->castRay(scene, ray);
+    Maths::Vertex color;
 
     if (!record.isHit()) {
         return RayTracer::RGBAColor(0, 0, 0);
     }
-    Maths::Vertex color = record.getMaterial().getColor() * this->m_ambientColor * this->m_ambientIntensity;
+    Maths::Vertex ambiantLightCoeff = this->m_ambientLightColor * this->m_ambientLightIntensity;
+    Maths::Vertex directionalLightCoeff = findDirectionalLightCoeff(scene, record, ray);
+    Maths::Vertex lightCoeff = Maths::Vertex(std::max(ambiantLightCoeff._x, directionalLightCoeff._x),
+                                            std::max(ambiantLightCoeff._y, directionalLightCoeff._y),
+                                            std::max(ambiantLightCoeff._z, directionalLightCoeff._z));
+    color = lightCoeff * record.getMaterial().getColor();
     return RayTracer::RGBAColor(color._x * 255, color._y * 255, color._z * 255);
 }
 

@@ -19,8 +19,9 @@ namespace RayTracer {
         private:
             RayTracer::HitRecord castRay(const Scene &scene, const Maths::Ray &ray) const;
             RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
+            Maths::Vertex findDirectionalLightCoeff(const RayTracer::Scene &scene, const RayTracer::HitRecord &record, const Maths::Ray &ray) const;
             RayTracer::RGBAColor cast(const RayTracer::Scene &scene, const Maths::Ray &ray) const;
-            const Maths::Vertex m_ambientColor;
-            const float m_ambientIntensity;
+            const Maths::Vertex m_ambientLightColor;
+            const float m_ambientLightIntensity;
     };
 }

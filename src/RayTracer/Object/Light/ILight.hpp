@@ -8,11 +8,17 @@
 #pragma once
 
 #include "Vertex.hpp"
+#include "Ray.hpp"
+#include "Scene.hpp"
+#include "HitRecord.hpp"
+
 
 namespace RayTracer {
+    class Scene;
+
     class ILight {
         public:
-            bool hits(const Maths::Vertex &vertex) const;
+            virtual Maths::Vertex hit(const Maths::Vertex &position, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const = 0;
     };
 }
 

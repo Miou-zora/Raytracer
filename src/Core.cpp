@@ -14,6 +14,7 @@
 #include "EnhanceRenderer.hpp"
 #include "FastRenderer.hpp"
 #include "PPMDisplayer.hpp"
+#include "DirectionalLight.hpp"
 #include <cmath>
 
 void RayTracer::Core::run(void)
@@ -61,6 +62,11 @@ void RayTracer::Core::run(void)
     camera->setPosition(Maths::Vertex(0, -1, 0.5));
     camera->setRotation(Maths::Vertex(-M_PI/16, 0, 0));
 
+    std::shared_ptr<RayTracer::DirectionalLight> dLight = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(1, 0, 0), 1, Maths::Vector(-1, -1, -1));
+    std::shared_ptr<RayTracer::DirectionalLight> dLight2 = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(0, 1, 0), 1, Maths::Vector(1, -1, -1));
+    std::shared_ptr<RayTracer::DirectionalLight> dLight3 = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(0, 0, 1), 1, Maths::Vector(-1, 1, -1));
+    std::shared_ptr<RayTracer::DirectionalLight> dLight4 = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(1, 1, 1), 1, Maths::Vector(1, 1, -1));
+
     _scene = std::make_shared<RayTracer::Scene>();
     _scene->addShape(sphere);
     _scene->addShape(sphere2);
@@ -68,6 +74,10 @@ void RayTracer::Core::run(void)
     _scene->addShape(sphere4);
     _scene->addShape(plane);
     _scene->setCamera(camera);
+    _scene->addLight(dLight);
+    _scene->addLight(dLight2);
+    _scene->addLight(dLight3);
+    _scene->addLight(dLight4);
 
     RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
 
