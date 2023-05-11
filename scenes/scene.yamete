@@ -61,3 +61,25 @@ primitives :
             };
         }
 };
+
+# List of lights
+lights = (
+    {
+        type = "Point";
+        position = {
+            x = 0;
+            y = 0;
+            z = 20;
+            };
+        intensity = 1;
+        },
+    {
+        type = "Directional";
+        position = {
+            x = 0;
+            y = 0;
+            z = 20;
+        };
+        intensity = 1;
+    }
+);
