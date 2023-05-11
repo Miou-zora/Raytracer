@@ -8,6 +8,20 @@
 #include "Plane.hpp"
 #include "MathsUtils.hpp"
 
+extern "C"
+{
+    RayTracer::Object *ObjectEntryPoint()
+    {
+        return new RayTracer::Plane();
+    }
+
+    std::string NameEntryPoint()
+    {
+        return "Plane";
+    }
+}
+
+
 RayTracer::Plane::Plane(const Maths::Vertex &position)
 {
     setPosition(position);

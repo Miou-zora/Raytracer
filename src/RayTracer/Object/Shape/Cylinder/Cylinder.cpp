@@ -9,6 +9,20 @@
 #include <cmath>
 #include "MathsUtils.hpp"
 
+extern "C"
+{
+    RayTracer::Object *ObjectEntryPoint()
+    {
+        return new RayTracer::Cylinder();
+    }
+
+    std::string NameEntryPoint()
+    {
+        return "Cylinder";
+    }
+}
+
+
 RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, double height)
 {
     setPosition(center);

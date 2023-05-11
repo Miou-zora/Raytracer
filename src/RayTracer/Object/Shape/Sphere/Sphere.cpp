@@ -9,6 +9,19 @@
 #include <cmath>
 #include "MathsUtils.hpp"
 
+extern "C"
+{
+    RayTracer::Object *ObjectEntryPoint()
+    {
+        return new RayTracer::Sphere();
+    }
+
+    std::string NameEntryPoint()
+    {
+        return "Sphere";
+    }
+}
+
 RayTracer::Sphere::Sphere(const Maths::Vertex &center, double radius)
 {
     setPosition(center);
