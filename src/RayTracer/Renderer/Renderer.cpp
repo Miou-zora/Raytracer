@@ -72,7 +72,6 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
                 incomingLight += lightIntensity * rayColor;
             } else
                 incomingLight += m_ambientColor * m_ambientIntensity * rayColor;
-                // incomingLight = Maths::Vertex(0, 0, 0);
             break;
         }
         newRay._origin = record.getIntersectionPoint();
