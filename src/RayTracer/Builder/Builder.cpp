@@ -10,9 +10,10 @@
 #include "Factory.hpp"
 #include "LoaderExceptions.hpp"
 
-void RayTracer::Builder::buildLightFactory(RayTracer::Factory<RayTracer::ILight> &factory)
+void RayTracer::Builder::buildLightFactory()
 {
     std::string path = "./lib/";
+    RayTracer::Factory<RayTracer::ILight> &factory;
     std::vector<std::string> libs;
     RayTracer::ObjectLoader<RayTracer::ILight> loader;
 
@@ -26,13 +27,15 @@ void RayTracer::Builder::buildLightFactory(RayTracer::Factory<RayTracer::ILight>
         std::cerr << e.what() << std::endl;
         throw LoaderException("Error while loading Light libs");
     }
+    _lightFactory = factory;
 }
 
-void RayTracer::Builder::buildShapeFactory(RayTracer::Factory<RayTracer::IShape> &factory)
+void RayTracer::Builder::buildShapeFactory()
 {
     std::string path = "./lib/";
     std::vector<std::string> libs;
     RayTracer::ObjectLoader<RayTracer::IShape> loader;
+    RayTracer::Factory<RayTracer::IShape> &factory;
 
     if (!std::filesystem::exists(path))
         throw LoaderException("Error while loading libs");
@@ -44,4 +47,5 @@ void RayTracer::Builder::buildShapeFactory(RayTracer::Factory<RayTracer::IShape>
         std::cerr << e.what() << std::endl;
         throw LoaderException("Error while loading shape libs");
     }
+    _shapeFactory = factory;
 }

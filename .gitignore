@@ -1,6 +1,7 @@
 .vscode
 .build
-*.cmake
+cmake_install.cmake
+CTestTestfile.cmake
 CMakeCache.txt
 Makefile
 CMakeFiles
@@ -12,3 +13,4 @@ build
 doc/html
 doc/latex
 raytracer
+.bash_history

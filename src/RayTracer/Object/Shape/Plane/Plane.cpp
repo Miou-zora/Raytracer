@@ -59,15 +59,20 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
     hitRecord.setHit(false);
     if (denominator == 0)
         return hitRecord;
-    double t = (getPosition() - ray._origin).dot(VectorToVertex(getNormal())) / denominator;;
+    double t = (getPosition() - ray._origin).dot(VectorToVertex(getNormal())) / denominator;
+    if (t < 0)
+        return hitRecord;
     hitRecord.setIntersectionPoint(ray._origin + ray._direction * t);
     double distance = Maths::MathsUtils::distance(ray._origin, hitRecord.getIntersectionPoint());
-    if (distance < 0)
+    if (distance <= 0)
         return hitRecord;
-    hitRecord.setDistance(distance);
     hitRecord.setHit(true);
-    hitRecord.setNormal(getNormal());
+    hitRecord.setDistance(distance);
     hitRecord.setFrontFace(ray._direction.dot(getNormal()) < 0);
+    if (hitRecord.isFrontFace())
+        hitRecord.setNormal(getNormal());
+    else
+        hitRecord.setNormal(getNormal() * -1);
     hitRecord.setMaterial(getMaterial());
     return hitRecord;
 }

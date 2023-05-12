@@ -18,12 +18,13 @@ namespace RayTracer {
         ~Builder() = default;
 
         void buildScene(std::string sceneFilepath,
-                        RayTracer::Scene &scene,
-                        RayTracer::Factory<RayTracer::ILight> &lightFactory,
-                        RayTracer::Factory<RayTracer::IShape> &shapeFactory) override;
-        void buildLightFactory(RayTracer::Factory<RayTracer::ILight> &factory) override;
-        void buildShapeFactory(RayTracer::Factory<RayTracer::IShape> &factory) override;
+                        RayTracer::Scene &scene) override;
+
+        void buildLightFactory(void) override;
+        void buildShapeFactory(void) override;
     protected:
     private:
+        RayTracer::Factory<RayTracer::ILight> &_lightFactory;
+        RayTracer::Factory<RayTracer::IShape> &_shapeFactory;
     };
 }

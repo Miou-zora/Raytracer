@@ -12,7 +12,12 @@ int main(int ac, char **av)
     RayTracer::Core core;
     if (ac != 2)
         return 84;
-    core.build(av[1]);
+    try {
+        core.build(av[1]);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
+    }
     core.run();
     return 0;
 }

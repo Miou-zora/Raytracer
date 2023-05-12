@@ -1,0 +1,85 @@
+# Configuration of the camera
+camera :
+{
+    resolution = { width = 1920; height = 1080; fov: 80;};
+    position = { x = 0; y = -100; z = 20; };
+    rotation = { x = 8; y = 45; z = 1; };
+};
+# Primitives in the scene
+primitives :
+    {
+    # List of shapes
+    shapes = (
+        {
+            type = "Sphere";
+            position = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            material = {
+                r = 255;
+                g = 64;
+                b = 64;
+            };
+            translate = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            radius = 10;
+        },
+        {
+            type = "Cylinder";
+            position = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            material = {
+                r = 64;
+                g = 64;
+                b = 255;
+            };
+            translate = {
+                x = 0;
+                y = 0;
+                z = 0;
+            };
+            radius = 2;
+            height = 10;
+        }
+    );
+
+    plane : {
+        axis = "Z";
+        position = -20;
+        color = {
+            r = 64;
+            g = 64;
+            b = 255;
+            };
+        }
+};
+
+# List of lights
+lights = (
+    {
+        type = "Point";
+        position = {
+            x = 0;
+            y = 0;
+            z = 20;
+            };
+        intensity = 1;
+        },
+    {
+        type = "Directional";
+        position = {
+            x = 0;
+            y = 0;
+            z = 20;
+        };
+        intensity = 1;
+    }
+);

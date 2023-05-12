@@ -250,6 +250,8 @@ namespace Maths {
              */
             double dot(const Vertex &other) const;
 
+            Maths::Vertex &normalize(void);
+
             /// @brief X coordinate
             double _x;
             /// @brief Y coordinate

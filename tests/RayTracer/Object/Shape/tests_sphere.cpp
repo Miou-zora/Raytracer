@@ -7,6 +7,7 @@
 
 #include <criterion/criterion.h>
 
+#include "MathsUtils.hpp"
 #include "Sphere.hpp"
 
 // Test(sphere, casual) {
@@ -51,7 +52,6 @@
 // Test(sphere, collide) {
 //     RayTracer::Sphere sphere(Maths::Vertex(0, 0, 0), 1);
 //     Maths::Ray ray(Maths::Vertex(0, -1, 0), Maths::Vector(0, 1, 0));
-
 //     RayTracer::HitRecord hit = sphere.hit(ray);
 //     cr_assert(hit.isHit());
 //     cr_assert(hit.getMaterial() == sphere.getMaterial());
