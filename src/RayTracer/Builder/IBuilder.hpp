@@ -15,6 +15,6 @@ namespace RayTracer {
         public:
             virtual void buildLightFactory(void) = 0;
             virtual void buildShapeFactory(void) = 0;
-            virtual void buildScene(std::string sceneFilepath, RayTracer::Scene &scene) = 0;
+            virtual void buildScene(RayTracer::Scene &scene) = 0;
     };
 }
