@@ -14,6 +14,7 @@
 namespace RayTracer {
     class Camera: public AObject, public ICamera {
         public:
+            Camera(void) {};
             Camera(int width, int height, double fov);
             virtual ~Camera() = default;
             Maths::Rect3D getScreen() const { return _screen; };
