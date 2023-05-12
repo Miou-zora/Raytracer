@@ -10,6 +10,7 @@
 #include "Vector.hpp"
 #include "Ray.hpp"
 #include <cmath>
+#include <algorithm>
 
 namespace Maths {
     /**
@@ -94,6 +95,12 @@ namespace Maths {
             {
                 Maths::Vector vector = getRandomVectorFromNormalDistribution();
                 return (vector.dot(normal) < 0) ? -vector : vector;
+            }
+
+            static double smoothStep(double edge0, double edge1, double x)
+            {
+                double t = std::clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+                return (t * t * (3.0f - 2.0f * t));
             }
     };
 }

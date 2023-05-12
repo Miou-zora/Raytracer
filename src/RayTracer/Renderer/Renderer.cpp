@@ -57,10 +57,21 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
     Maths::Vertex rayColor(1, 1, 1);
     Maths::Vertex incomingLight(0, 0, 0);
     Maths::Ray newRay = ray;
+    RayTracer::HitRecord record;
     for (std::size_t i = 0; i < MAX_DEPTH; i++) {
-        RayTracer::HitRecord record = this->castRay(scene, newRay);
+        record = this->castRay(scene, newRay);
         if (!record.isHit()) {
-            incomingLight += m_ambientColor * rayColor;
+            newRay._direction = lerp(newRay._direction, -m_directionalLightDirection, m_directionalFocus);
+            // newRay._direction = -m_directionalLightDirection;
+            newRay._origin = newRay._origin + newRay._direction * -0.0001;
+            RayTracer::HitRecord directionalLightRecord = this->castRay(scene, newRay);
+            if (!directionalLightRecord.isHit()) {
+                Maths::Vertex lightIntensity = Maths::Vertex(std::max(m_ambientColor._x * m_ambientIntensity, m_directionalLightColor._x * m_directionalLightIntensity),
+                                                             std::max(m_ambientColor._y * m_ambientIntensity, m_directionalLightColor._y * m_directionalLightIntensity),
+                                                             std::max(m_ambientColor._z * m_ambientIntensity, m_directionalLightColor._z * m_directionalLightIntensity));
+                incomingLight += lightIntensity * rayColor;
+            } else
+                incomingLight += m_ambientColor * m_ambientIntensity * rayColor;
             break;
         }
         newRay._origin = record.getIntersectionPoint();
