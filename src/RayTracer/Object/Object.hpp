@@ -22,6 +22,7 @@ namespace RayTracer {
             Maths::Vertex getRotation(void) const { return _rotation; };
             void setPosition(const Maths::Vertex &position) { _position = position; };
             void setRotation(const Maths::Vertex &rotation) { _rotation = rotation; };
+            void setTranslation(const Maths::Vertex &translation) { _position += translation; };
 
             void translate(double x, double y, double z);
             void translateX(double x);

@@ -2,14 +2,14 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer
 ** File description:
-** Renderer
+** EnhanceRenderer
 */
 
-#include "Renderer.hpp"
+#include "EnhanceRenderer.hpp"
 #include "ICamera.hpp"
 #include "MathsUtils.hpp"
 
-RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
+RayTracer::HitRecord RayTracer::EnhanceRenderer::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
 {
     double distance = records[0].getDistance();
     RayTracer::HitRecord closestHit = records[0];
@@ -23,7 +23,7 @@ RayTracer::HitRecord RayTracer::Renderer::getClosestHit(const std::vector<RayTra
     return closestHit;
 }
 
-RayTracer::HitRecord RayTracer::Renderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
+RayTracer::HitRecord RayTracer::EnhanceRenderer::castRay(const RayTracer::Scene &scene, const Maths::Ray &ray) const
 {
     std::vector<RayTracer::HitRecord> records;
     RayTracer::HitRecord record;
@@ -52,7 +52,7 @@ Maths::Vector lerp(const Maths::Vector &startValue, const Maths::Vector &endValu
     return startValue + (endValue - startValue) * t;
 }
 
-Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
+Maths::Vertex RayTracer::EnhanceRenderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
 {
     Maths::Vertex rayColor(1, 1, 1);
     Maths::Vertex incomingLight(0, 0, 0);
@@ -86,7 +86,7 @@ Maths::Vertex RayTracer::Renderer::trace(const RayTracer::Scene &scene, const Ma
     return incomingLight;
 }
 
-RayTracer::RGBAColor RayTracer::Renderer::cast(const RayTracer::Scene &scene, const Maths::Ray &ray)
+RayTracer::RGBAColor RayTracer::EnhanceRenderer::cast(const RayTracer::Scene &scene, const Maths::Ray &ray)
 {
     Maths::Vertex totalIncomingLight(0, 0, 0);
 
@@ -97,7 +97,7 @@ RayTracer::RGBAColor RayTracer::Renderer::cast(const RayTracer::Scene &scene, co
     return RayTracer::RGBAColor(totalIncomingLight._x * 255, totalIncomingLight._y * 255, totalIncomingLight._z * 255);
 }
 
-void RayTracer::Renderer::render(const RayTracer::Scene &scene, RayTracer::Frame &frame)
+void RayTracer::EnhanceRenderer::render(const RayTracer::Scene &scene, RayTracer::Frame &frame)
 {
     RayTracer::ICamera &camera = *scene.getCamera().get();
 
