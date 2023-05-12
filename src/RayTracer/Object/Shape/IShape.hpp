@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <libconfig.h++>
 #include "Vector.hpp"
 #include "Vertex.hpp"
 #include "Ray.hpp"
@@ -16,5 +17,6 @@ namespace RayTracer {
     class IShape {
         public:
             virtual RayTracer::HitRecord hit(const Maths::Ray &ray) const = 0;
+            virtual void loadConfig(libconfig::Setting &setting) = 0;
     };
 }
