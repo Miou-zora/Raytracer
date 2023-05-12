@@ -9,6 +9,7 @@
 #include <cmath>
 #include "MathsUtils.hpp"
 #include "type.hpp"
+#include "Convertissor.hpp"
 
 extern "C"
 {
@@ -96,4 +97,16 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
     hit_record.setFrontFace(true);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;
+}
+
+void RayTracer::Cylinder::loadConfig(libconfig::Setting &setting)
+{
+    RayTracer::Convertissor Convertissor;
+    Maths::Vertex translation = Convertissor.ToVertex(setting, "translate");
+    setPosition(Convertissor.ToVertex(setting, "position"));
+    setRotation(Convertissor.ToVertex(setting, "rotation"));
+    setMaterial(Convertissor.ToMaterial(setting, "material"));
+    translate((double)translation._x, (double)translation._y, (double)translation._z);
+    _radius = Convertissor.get<double>(setting, "radius");
+    _height = Convertissor.get<double>(setting, "height");
 }
