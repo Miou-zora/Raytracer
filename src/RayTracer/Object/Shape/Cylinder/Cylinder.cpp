@@ -9,18 +9,16 @@
 #include <cmath>
 #include "MathsUtils.hpp"
 
-RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, double height)
+RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius)
 {
     setPosition(center);
     _radius = radius;
-    _height = height;
 }
 
-RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, double height, const RayTracer::Material &material)
+RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius, const RayTracer::Material &material)
 {
     setPosition(center);
     _radius = radius;
-    _height = height;
     setMaterial(material);
 }
 
@@ -45,13 +43,11 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
         double distance = Maths::MathsUtils::distance(ray._origin, hit_record.getIntersectionPoint());
         if (distance < 0)
             return hit_record;
-        if (hit_record.getIntersectionPoint()._z < this->getPosition()._z || hit_record.getIntersectionPoint()._z > this->getPosition()._z + _height)
-            return hit_record;
         hit_record.setHit(true);
         hit_record.setDistance(distance);
         hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
-                                           0,
-                                           hit_record.getIntersectionPoint()._y - this->getPosition()._y));
+                                           hit_record.getIntersectionPoint()._y - this->getPosition()._y,
+                                           0));
         hit_record.setFrontFace(ray._direction.dot(hit_record.getNormal()) < 0);
         hit_record.setMaterial(this->getMaterial());
 
@@ -71,8 +67,8 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
         return hit_record;
     hit_record.setHit(true);
     hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
-                                       0,
-                                       hit_record.getIntersectionPoint()._y - this->getPosition()._y));
+                                        hit_record.getIntersectionPoint()._y - this->getPosition()._y,
+                                        0));
     hit_record.setFrontFace(true);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;

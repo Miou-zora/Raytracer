@@ -14,6 +14,8 @@
 #include <memory>
 
 namespace RayTracer {
+    class ILight;
+
     /// @brief Scene class that will contain all the objects of the scene
     class Scene {
         public:
