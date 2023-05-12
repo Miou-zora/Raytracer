@@ -12,13 +12,13 @@
 #include "Material.hpp"
 
 namespace RayTracer {
-    class Flash {
-        static RayTracer::Material FlashColor(Maths::Vertex color) {
+    namespace Materials {
+        static RayTracer::Material FlashColor(Maths::Vertex color, float strength) {
             RayTracer::Material material;
 
             material.setColor(color);
-            material.setEmissionColor(Maths::Vertex(0, 0, 1));
-            material.setEmissionStrength(0);
+            material.setEmissionColor(Maths::Vertex(1, 1, 1));
+            material.setEmissionStrength(strength);
             material.setSmoothness(0);
 
             return material;
