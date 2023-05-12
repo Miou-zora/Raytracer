@@ -1,0 +1,27 @@
+/*
+** EPITECH PROJECT, 2023
+** Raytracer
+** File description:
+** Materials mirror
+*/
+
+#pragma once
+
+#include "Vector.hpp"
+#include "RGBAColor.hpp"
+#include "Material.hpp"
+
+namespace RayTracer {
+    class Mirror {
+        static RayTracer::Material MirrorColor(Maths::Vertex color) {
+            RayTracer::Material material;
+
+            material.setColor(color);
+            material.setEmissionColor(Maths::Vertex(1, 0, 0));
+            material.setEmissionStrength(0);
+            material.setSmoothness(0);
+
+            return material;
+        }
+    }
+}
