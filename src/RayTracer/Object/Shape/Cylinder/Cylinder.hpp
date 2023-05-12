@@ -15,7 +15,7 @@ namespace RayTracer {
             Cylinder(const Maths::Vertex &center, double radius, double height);
             Cylinder(const Maths::Vertex &center, double radius, double height, const RayTracer::Material &material);
             virtual ~Cylinder() = default;
-
+            void loadConfig(libconfig::Setting &setting) override;
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
 
         private:
