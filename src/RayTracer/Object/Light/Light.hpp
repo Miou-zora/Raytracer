@@ -11,7 +11,7 @@
 #include "ILight.hpp"
 
 namespace RayTracer {
-    class Light: public ILight, public Object {
+    class Light: public ILight, public AObject {
         public:
             Light(void) = default;
             ~Light() = default;
