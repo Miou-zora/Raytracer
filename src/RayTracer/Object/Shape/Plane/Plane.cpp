@@ -8,10 +8,11 @@
 #include "Plane.hpp"
 #include "MathsUtils.hpp"
 #include "type.hpp"
+#include "Convertissor.hpp"
 
 extern "C"
 {
-    RayTracer::Object *ObjectEntryPoint()
+    RayTracer::AObject *ObjectEntryPoint()
     {
         return new RayTracer::Plane();
     }
@@ -71,3 +72,13 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
     return hitRecord;
 }
 
+void RayTracer::Plane::loadConfig(libconfig::Setting &setting)
+{
+    RayTracer::Convertissor Convertissor;
+
+    setPosition(Convertissor.ToVertex(setting, "position"));
+    setRotation(Convertissor.ToVertex(setting, "rotation"));
+    setMaterial(Convertissor.ToMaterial(setting, "material"));
+    setNormal(Maths::Vector(0, 0, 1));
+    _normal.rotate(getRotation());
+}
