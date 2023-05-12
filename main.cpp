@@ -5,11 +5,11 @@
 ** main
 */
 
-#include "Core.hpp"
+#include "BasicCore.hpp"
 
 int main(int ac, char **av)
 {
-    RayTracer::Core core;
+    RayTracer::BasicCore core;
     if (ac != 2)
         return 84;
     core.setScene(av[1]);

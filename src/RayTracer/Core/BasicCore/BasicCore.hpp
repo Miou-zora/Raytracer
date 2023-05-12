@@ -2,21 +2,21 @@
 ** EPITECH PROJECT, 2023
 ** Raytracer [WSL : Ubuntu]
 ** File description:
-** Core
+** BasicCore
 */
 
 #pragma once
-
+#include "ICore.hpp"
 #include <memory>
 #include "Scene.hpp"
 #include "IRenderer.hpp"
 #include "IDisplayer.hpp"
 
 namespace RayTracer {
-    class Core {
+    class BasicCore : virtual public ICore {
         public:
-            Core(void) = default;
-            virtual ~Core() = default;
+            BasicCore(void);
+            virtual ~BasicCore();
 
             void buildScene(void);
             void run(void);
