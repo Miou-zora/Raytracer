@@ -8,9 +8,12 @@
 #pragma once
 
 #include <memory>
+#include <libconfig.h++>
+#include "Camera.hpp"
 #include "Scene.hpp"
 #include "IRenderer.hpp"
 #include "IDisplayer.hpp"
+#include "Vector.hpp"
 
 namespace RayTracer {
     class Core {
@@ -20,9 +23,16 @@ namespace RayTracer {
 
             void buildScene(void);
             void run(void);
-            void setScene(std::string scenePath);
+            void setScenePath(std::string scenePath);
             std::shared_ptr<RayTracer::Scene> getScene(void) const;
+
         private:
+
+            void initCamera(libconfig::Setting &cameraSetting);
+            void setTransformation(libconfig::Setting &setting, RayTracer::Camera &camera);
+            void initPrimitives(libconfig::Setting &setting);
+            void initLights(libconfig::Setting &setting);
+
             std::string _scenePath;
             std::shared_ptr<RayTracer::Scene> _scene;
             std::shared_ptr<RayTracer::IRenderer> _renderer;
