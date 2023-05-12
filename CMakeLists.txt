@@ -39,13 +39,11 @@ add_subdirectory(src/RayTracer/Object/)
 project(raytracer)
 
 set(SRC "src/Maths/Ray/Ray.cpp"
+        "src/Core.cpp"
         "src/Maths/Rect3D/Rect3D.cpp"
         "src/Maths/Vector/Vector.cpp"
         "src/Maths/Vertex/Vertex.cpp"
         "src/RayTracer/Object/Camera/Camera.cpp"
-        "src/RayTracer/Object/Shape/Sphere/Sphere.cpp"
-        "src/RayTracer/Object/Shape/Plane/Plane.cpp"
-        "src/RayTracer/Object/Shape/Cylinder/Cylinder.cpp"
         "src/RayTracer/Object/Light/DirectionalLight/DirectionalLight.cpp"
         "src/RayTracer/Object/Object.cpp"
         "src/RayTracer/RGBAColor/RGBAColor.cpp"
@@ -53,10 +51,8 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Renderer/FastRenderer/FastRenderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp"
-        "src/Core.cpp"
         "src/RayTracer/Builder/Builder.cpp")
 
-include_directories(${INCLUDE_SRC})
 set(MAIN "main.cpp")
 
 add_executable(raytracer ${MAIN} ${SRC})

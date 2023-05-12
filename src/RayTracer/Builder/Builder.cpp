@@ -15,8 +15,12 @@
 
 RayTracer::Builder::Builder()
 {
-    buildLightFactory();
-    buildShapeFactory();
+    try {
+        buildLightFactory();
+        buildShapeFactory();
+    } catch (RayTracer::LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 RayTracer::Builder::~Builder()
@@ -145,9 +149,4 @@ void RayTracer::Builder::initLights(libconfig::Setting &setting, RayTracer::Scen
     } catch (const libconfig::SettingNotFoundException &nfex) {
         //pass, it not mandatory
     }
-}
-
-std::shared_ptr<RayTracer::Scene> RayTracer::Builder::getScene(void) const
-{
-    return (nullptr);
 }

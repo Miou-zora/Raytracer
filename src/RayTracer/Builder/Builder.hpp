@@ -21,8 +21,8 @@ namespace RayTracer {
 
         void buildLightFactory(void) override;
         void buildShapeFactory(void) override;
+
         void setScenePath(std::string scenePath);
-        std::shared_ptr<RayTracer::Scene> getScene(void) const;
 
         private:
             void initCamera(libconfig::Setting &cameraSetting, RayTracer::Scene &scene);
