@@ -11,6 +11,10 @@
 #include "Scene.hpp"
 #include "IRenderer.hpp"
 #include "IDisplayer.hpp"
+#include "Builder.hpp"
+#include "Factory.hpp"
+#include "ILight.hpp"
+#include "IShape.hpp"
 
 namespace RayTracer {
     class Core {
@@ -18,13 +22,12 @@ namespace RayTracer {
             Core(void) = default;
             virtual ~Core() = default;
 
-            void buildScene(void);
             void run(void);
-            void setScene(std::string scenePath);
-            std::shared_ptr<RayTracer::Scene> getScene(void) const;
+            void build(std::string scenePath);
+            void setScene(RayTracer::Scene &scene) { this->_scene = scene; };
+            RayTracer::Scene getScene(void) const { return _scene; };
         private:
-            std::string _scenePath;
-            std::shared_ptr<RayTracer::Scene> _scene;
+            RayTracer::Scene _scene;
             std::shared_ptr<RayTracer::IRenderer> _renderer;
             std::shared_ptr<RayTracer::IDisplayer> _displayer;
     };

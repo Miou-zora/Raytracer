@@ -8,6 +8,7 @@
 #include "Sphere.hpp"
 #include <cmath>
 #include "MathsUtils.hpp"
+#include "type.hpp"
 
 extern "C"
 {
@@ -19,6 +20,11 @@ extern "C"
     std::string NameEntryPoint()
     {
         return "Sphere";
+    }
+
+    RayTracer::ObjectType TypeEntryPoint()
+    {
+        return RayTracer::ObjectType::SHAPE;
     }
 }
 

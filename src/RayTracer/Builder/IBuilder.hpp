@@ -8,10 +8,16 @@
 #pragma once
 
 #include "Scene.hpp"
+#include "Factory.hpp"
 
 namespace RayTracer {
     class IBuilder {
         public:
-            virtual void build(RayTracer::Scene &scene) = 0;
+            virtual void buildLightFactory(RayTracer::Factory<RayTracer::ILight> &factory) = 0;
+            virtual void buildShapeFactory(RayTracer::Factory<RayTracer::IShape> &factory) = 0;
+            virtual void buildScene(std::string sceneFilepath,
+                        RayTracer::Scene &scene,
+                        RayTracer::Factory<RayTracer::ILight> &lightFactory,
+                        RayTracer::Factory<RayTracer::IShape> &shapeFactory) = 0;
     };
 }

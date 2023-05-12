@@ -12,8 +12,7 @@ int main(int ac, char **av)
     RayTracer::Core core;
     if (ac != 2)
         return 84;
-    core.setScene(av[1]);
-    core.buildScene();
+    core.build(av[1]);
     core.run();
     return 0;
 }

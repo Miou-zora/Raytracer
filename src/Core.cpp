@@ -12,17 +12,17 @@ void RayTracer::Core::run(void)
 
 }
 
-void RayTracer::Core::setScene(std::string scenePath)
+void RayTracer::Core::build(std::string scenePath)
 {
-    (void)scenePath;
-}
+    RayTracer::Builder builder;
+    RayTracer::Factory<RayTracer::IShape> shapeFactory;
+    RayTracer::Factory<RayTracer::ILight> lightFactory;
 
-void RayTracer::Core::buildScene(void)
-{
-
-}
-
-std::shared_ptr<RayTracer::Scene> RayTracer::Core::getScene(void) const
-{
-    return (nullptr);
+    try {
+        builder.buildLightFactory(lightFactory);
+        builder.buildShapeFactory(shapeFactory);
+    } catch (RayTracer::LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+    }
+    builder.buildScene(scenePath, _scene, lightFactory, shapeFactory);
 }

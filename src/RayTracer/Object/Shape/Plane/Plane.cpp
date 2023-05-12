@@ -7,6 +7,7 @@
 
 #include "Plane.hpp"
 #include "MathsUtils.hpp"
+#include "type.hpp"
 
 extern "C"
 {
@@ -18,6 +19,11 @@ extern "C"
     std::string NameEntryPoint()
     {
         return "Plane";
+    }
+
+    RayTracer::ObjectType TypeEntryPoint()
+    {
+        return RayTracer::ObjectType::SHAPE;
     }
 }
 

@@ -13,9 +13,8 @@
 #include <map>
 #include <memory>
 #include <functional>
-#include "Sphere.hpp"
-#include "Plane.hpp"
-#include "Cylindre.hpp"
+#include "LoaderExceptions.hpp"
+#include "type.hpp"
 
 namespace RayTracer {
     template <typename ObjectInterface>
@@ -28,7 +27,7 @@ namespace RayTracer {
                 {
                     auto it = _shapeMap.find(name);
                     if (it == _shapeMap.end())
-                        throw RayTracer::InvalidShapeException("Invalid shape name");
+                        throw RayTracer::LoaderException("Invalid shape name");
                     std::shared_ptr<ObjectInterface> shape = it->second(name);
                     return (shape);
                 }

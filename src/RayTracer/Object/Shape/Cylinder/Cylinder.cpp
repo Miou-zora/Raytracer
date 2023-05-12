@@ -8,6 +8,7 @@
 #include "Cylinder.hpp"
 #include <cmath>
 #include "MathsUtils.hpp"
+#include "type.hpp"
 
 extern "C"
 {
@@ -19,6 +20,11 @@ extern "C"
     std::string NameEntryPoint()
     {
         return "Cylinder";
+    }
+
+    RayTracer::ObjectType TypeEntryPoint()
+    {
+        return RayTracer::ObjectType::SHAPE;
     }
 }
 

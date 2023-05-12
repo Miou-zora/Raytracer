@@ -10,6 +10,7 @@ set(INCLUDE_SRC src/RayTracer/Object/
                 src/RayTracer/Object/Shape/Sphere/
                 src/RayTracer/Object/Shape/Plane/
                 src/RayTracer/Object/Shape/Cylinder/
+                src/RayTracer/ErrorHandling/
                 src/Maths/Ray/
                 src/Maths/Rect3D/
                 src/Maths/Vector/
@@ -25,9 +26,11 @@ set(INCLUDE_SRC src/RayTracer/Object/
                 src/RayTracer/Object/Light/
                 src/RayTracer/RGBAColor/
                 src/RayTracer/Frame/
+                src/RayTracer/Factory/
                 src/RayTracer/Displayer/
                 src/RayTracer/Displayer/PPMDisplayer/
                 src/
+                src/RayTracer/ObjectLoader/
 )
 
 include_directories(${INCLUDE_SRC})
@@ -45,7 +48,8 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Renderer/Renderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp"
-        "src/Core.cpp")
+        "src/Core.cpp"
+        "src/RayTracer/Builder/Builder.cpp")
 include_directories(${INCLUDE_SRC})
 set(MAIN "main.cpp")
 add_executable(raytracer ${MAIN} ${SRC})
