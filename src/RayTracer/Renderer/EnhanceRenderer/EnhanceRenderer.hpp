@@ -12,7 +12,11 @@
 namespace RayTracer {
     class EnhanceRenderer : virtual public IRenderer{
         public:
-            EnhanceRenderer(const std::vector<std::shared_ptr<IShape>> &shapes) : m_shapes(shapes), m_ambientColor(Maths::Vertex(0.25, 0.25, 0.35)) { };
+            EnhanceRenderer(const std::vector<std::shared_ptr<IShape>> &shapes) :
+                m_shapes(shapes),
+                m_ambientColor(Maths::Vertex(0.25, 0.25, 0.35)),
+                m_directionalLightColor(Maths::Vertex(1, 1, 1)),
+                m_directionalLightDirection(Maths::Vector(0, 0, -1)) { };
             ~EnhanceRenderer() = default;
 
             void render(const RayTracer::Scene &scene, RayTracer::Frame &frame);
