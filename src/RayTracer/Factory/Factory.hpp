@@ -23,13 +23,14 @@ namespace RayTracer {
                 Factory(void) = default;
                 ~Factory() = default;
 
-                std::shared_ptr<ObjectInterface> createObject(const std::string &name) const
+                std::shared_ptr<ObjectInterface> createObject(const std::string &name)
                 {
-                    auto it = _shapeMap.find(name);
-                    if (it == _shapeMap.end())
-                        throw RayTracer::LoaderException("Invalid shape name");
-                    std::shared_ptr<ObjectInterface> shape = it->second(name);
-                    return (shape);
+                    try {
+                        std::shared_ptr<ObjectInterface> Obj = _shapeMap[name]();
+                        return Obj;
+                    } catch (std::out_of_range &e) {
+                        throw LoaderException("Object not found");
+                    }
                 }
 
                 void addObject(const std::string &name, std::function<std::shared_ptr<ObjectInterface>()> function) {
