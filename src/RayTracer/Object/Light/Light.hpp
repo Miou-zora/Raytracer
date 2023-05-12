@@ -13,7 +13,7 @@
 namespace RayTracer {
     class Light: public ILight, public Object {
         public:
-            Light(void);
-            ~Light();
+            Light(void) = default;
+            ~Light() = default;
     };
 };
