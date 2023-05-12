@@ -23,7 +23,7 @@ namespace RayTracer {
 
             void buildScene(void);
             void run(void);
-            void setScene(std::string scenePath);
+            void setScenePath(std::string scenePath);
             std::shared_ptr<RayTracer::Scene> getScene(void) const;
 
         private:
