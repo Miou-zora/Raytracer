@@ -101,10 +101,10 @@ namespace RayTracer {
                     return defaultVal;
                 }
                 RayTracer::Material material;
-                material.setColor(ToRGBAColor(setting, "color", defaultVal.getColor()));
-                material.setDiffuse(get<double>(setting, "diffuse", defaultVal.getDiffuse()));
-                material.setSpecular(get<double>(setting, "specular", defaultVal.getSpecular()));
-                material.setReflective(get<double>(setting, "reflection", defaultVal.getReflective()));
+                material.setColor(ToVertex(setting, "color", defaultVal.getColor()));
+                material.setEmissionColor(ToVertex(setting, "emissionColor", defaultVal.getEmissionColor()));
+                material.setEmissionStrength(get<double>(setting, "emissionStrength", defaultVal.getEmissionStrength()));
+                material.setSmoothness(get<double>(setting, "smoothness", defaultVal.getSmoothness()));
                 return material;
             }
     };
