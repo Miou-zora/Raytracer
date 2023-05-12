@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include "Vector.hpp"
-#include "RGBAColor.hpp"
 #include "Material.hpp"
 
 namespace RayTracer {
