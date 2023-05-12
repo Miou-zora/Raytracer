@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.9)
+project(raytracer)
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wshadow -Wuninitialized -lsfml-graphics -lsfml-window -lsfml-system")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wshadow -Wuninitialized")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
-project(raytracer)
-
 
 set(INCLUDE_SRC "src"
                 "src/Maths"
@@ -33,6 +32,7 @@ set(INCLUDE_SRC "src"
                 "src/RayTracer/Frame"
                 "src/RayTracer/Displayer"
                 "src/RayTracer/Displayer/PPMDisplayer")
+include_directories(${INCLUDE_SRC})
 set(SRC "src/Maths/Ray/Ray.cpp"
         "src/Maths/Rect3D/Rect3D.cpp"
         "src/Maths/Vector/Vector.cpp"
@@ -48,9 +48,12 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Renderer/Renderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp")
-include_directories(${INCLUDE_SRC})
 set(MAIN "main.cpp")
 add_executable(raytracer ${MAIN} ${SRC})
+find_package(SFML COMPONENTS graphics window system REQUIRED)
+target_link_libraries(raytracer sfml-graphics sfml-window sfml-system)
+
+
 
 ### TESTS ###
 
@@ -70,4 +73,5 @@ set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/RayTracer/Object/Camera/tests_camera.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
+target_link_libraries(tests_run sfml-graphics sfml-window sfml-system)
 
