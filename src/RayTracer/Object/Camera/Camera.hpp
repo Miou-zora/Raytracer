@@ -12,12 +12,13 @@
 #include "ICamera.hpp"
 
 namespace RayTracer {
-    class Camera: public Object, public ICamera {
+    class Camera: public AObject, public ICamera {
         public:
             Camera(int width, int height, double fov);
             virtual ~Camera() = default;
             Maths::Rect3D getScreen() const { return _screen; };
             void setScreen(Maths::Rect3D screen) { _screen = screen; };
+            void loadConfig(libconfig::Setting &setting) override;
 
             Maths::Ray ray(double x, double y) const override;
         private:
