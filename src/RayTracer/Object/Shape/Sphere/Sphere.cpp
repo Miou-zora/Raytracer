@@ -9,10 +9,11 @@
 #include <cmath>
 #include "MathsUtils.hpp"
 #include "type.hpp"
+#include "Convertissor.hpp"
 
 extern "C"
 {
-    RayTracer::Object *ObjectEntryPoint()
+    RayTracer::AObject *ObjectEntryPoint()
     {
         return new RayTracer::Sphere();
     }
@@ -93,4 +94,13 @@ RayTracer::HitRecord RayTracer::Sphere::hit(const Maths::Ray &ray) const
     hit_record.setFrontFace(((t1 < 0 && t2 >= 0) || (t1 >= 0 && t2 < 0)) ? false : ray._direction.dot(hit_record.getNormal()) < 0);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;
+}
+
+void RayTracer::Sphere::loadConfig(libconfig::Setting &setting)
+{
+    RayTracer::Convertissor Convertissor;
+
+    setPosition(Convertissor.ToVertex(setting, "position"));
+    setRadius(Convertissor.get<double>(setting, "radius"));
+    setMaterial(Convertissor.ToMaterial(setting, "material"));
 }
