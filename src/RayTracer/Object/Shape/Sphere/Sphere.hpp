@@ -15,7 +15,7 @@ namespace RayTracer {
             Sphere(const Maths::Vertex &center, double radius);
             Sphere(const Maths::Vertex &center, double radius, const RayTracer::Material &material);
             virtual ~Sphere() = default;
-
+            void loadConfig(libconfig::Setting &setting) override;
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
 
             double getRadius() const { return _radius; };
