@@ -7,10 +7,10 @@
 
 #include "SFMLCore.hpp"
 
-RayTracer::SFMLCore::SFMLCore(const std::pair<int, int> &windowSize)
+RayTracer::SFMLCore::SFMLCore(int width, int height)
 {
     _isRunning = true;
-    _windowSize = windowSize;
+    _windowSize = std::make_pair(width, height);
 }
 
 RayTracer::SFMLCore::~SFMLCore()
@@ -25,6 +25,7 @@ void RayTracer::SFMLCore::init(void)
 
 void RayTracer::SFMLCore::run(void)
 {
+    createWindow();
     while (_isRunning) {
         sf::Event event;
         while (_window.pollEvent(event)) {
@@ -33,6 +34,7 @@ void RayTracer::SFMLCore::run(void)
         }
         _isRunning = _window.isOpen();
     }
+    closeWindow();
 }
 
 void RayTracer::SFMLCore::createWindow(void)
@@ -49,4 +51,19 @@ void RayTracer::SFMLCore::closeWindow(void)
     _isRunning = false;
     if (_window.isOpen())
         _window.close();
+}
+
+void RayTracer::SFMLCore::buildScene(void)
+{
+
+}
+
+void RayTracer::SFMLCore::setScene(std::string scenePath)
+{
+    _scenePath = scenePath;
+}
+
+std::shared_ptr<RayTracer::Scene> RayTracer::SFMLCore::getScene(void) const
+{
+    return (_scene);
 }
