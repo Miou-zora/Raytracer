@@ -12,7 +12,7 @@ void RayTracer::Core::run(void)
 
 }
 
-void RayTracer::Core::setScene(std::string scenePath)
+void RayTracer::Core::setScenePath(std::string scenePath)
 {
     libconfig::Config cfg;
 
