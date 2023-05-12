@@ -17,6 +17,8 @@ namespace RayTracer {
             Plane(const Maths::Vertex &position, const Maths::Vertex &rotation,const RayTracer::Material &material);
             virtual ~Plane() = default;
 
+            void loadConfig(libconfig::Setting &setting) override;
+
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
 
         private:
