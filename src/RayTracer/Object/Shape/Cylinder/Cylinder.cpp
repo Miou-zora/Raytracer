@@ -13,7 +13,7 @@
 
 extern "C"
 {
-    RayTracer::Object *ObjectEntryPoint()
+    RayTracer::AObject *ObjectEntryPoint()
     {
         return new RayTracer::Cylinder();
     }
@@ -104,5 +104,4 @@ void RayTracer::Cylinder::loadConfig(libconfig::Setting &setting)
     setMaterial(Convertissor.ToMaterial(setting, "material"));
     translate((double)translation._x, (double)translation._y, (double)translation._z);
     _radius = Convertissor.get<double>(setting, "radius");
-    _height = Convertissor.get<double>(setting, "height");
 }
