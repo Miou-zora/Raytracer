@@ -5,11 +5,13 @@
 ** main
 */
 
-#include "BasicCore.hpp"
+#include "SFMLCore.hpp"
 
 int main(int ac, char **av)
 {
-    RayTracer::BasicCore core;
+    RayTracer::SFMLCore core(1920, 1080);
+
+    core.init();
     if (ac != 2)
         return 84;
     try {

@@ -34,6 +34,7 @@ set(INCLUDE_SRC "src"
                 "src/RayTracer/RGBAColor"
                 "src/RayTracer/Frame"
                 "src/RayTracer/Displayer"
+                "src/RayTracer/Displayer/SFMLDisplayer"
                 "src/RayTracer/Displayer/PPMDisplayer")
 include_directories(${INCLUDE_SRC})
 set(SRC "src/Maths/Ray/Ray.cpp"
@@ -52,6 +53,7 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Renderer/EnhanceRenderer/EnhanceRenderer.cpp"
         "src/RayTracer/Renderer/FastRenderer/FastRenderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
+        "src/RayTracer/Displayer/SFMLDisplayer/SFMLDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp")
 set(MAIN "main.cpp")
 

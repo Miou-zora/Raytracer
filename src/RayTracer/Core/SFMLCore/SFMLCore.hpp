@@ -24,7 +24,7 @@ namespace RayTracer {
             void run(void);
 
             void buildScene(void);
-            void setScene(std::string scenePath);
+            void setScenePath(std::string scenePath);
             std::shared_ptr<RayTracer::Scene> getScene(void) const;
         protected:
         private:
@@ -40,5 +40,6 @@ namespace RayTracer {
             std::shared_ptr<RayTracer::Scene> _scene;
             std::shared_ptr<RayTracer::IRenderer> _renderer;
             std::shared_ptr<RayTracer::IDisplayer> _displayer;
+            RayTracer::Frame _frame;
     };
 }
