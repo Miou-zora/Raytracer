@@ -14,8 +14,8 @@ primitives :
             type = "Cylinder";
             position = {
                 x = 0;
-                y = 0;
-                z = 0;
+                y = 2;
+                z = 2;
             };
             material = {
                 r = 255;
@@ -33,8 +33,8 @@ primitives :
             type = "Cylinder";
             position = {
                 x = 0;
-                y = 0;
-                z = 0;
+                y = 1;
+                z = 1;
             };
             material = {
                 r = 64;
@@ -48,16 +48,6 @@ primitives :
             };
             radius = 2;
             height = 10;
-        },
-        {
-            type = "Plane";
-            axis = "Z";
-            position = -20;
-            color = {
-                r = 64;
-                g = 64;
-                b = 255;
-            };
         }
     );
 };
