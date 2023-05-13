@@ -20,17 +20,20 @@ namespace RayTracer {
                 ObjectLoader() {};
                 ~ObjectLoader() {};
 
-                std::function<std::shared_ptr<ObjectInterface>()> loadObject(const std::string &objectPath)
+                std::function<std::shared_ptr<ObjectInterface>(libconfig::Setting &setting)> loadObject(const std::string &objectPath)
                 {
                     _handle = dlopen(objectPath.c_str(), RTLD_LAZY);
-                    ObjectInterface *(*builder)() = nullptr;
+                    ObjectInterface *(*builder)(libconfig::Setting &) = nullptr;
                     if (!_handle)
                         throw LoaderException(dlerror());
-                    builder = reinterpret_cast<ObjectInterface *(*)()>(dlsym(_handle, "ObjectEntryPoint"));
+                    builder = reinterpret_cast<ObjectInterface *(*)(libconfig::Setting &)>(dlsym(_handle, "ObjectEntryPoint"));
                     if (!builder)
                         throw LoaderException(dlerror());
-                    return [builder](){ return std::shared_ptr<ObjectInterface>(builder()); };
+                    return [builder](libconfig::Setting &setting) {
+                        return std::shared_ptr<ObjectInterface>(builder(setting));
+                    };
                 }
+
 
                 std::string loadName(const std::string &objectPath)
                 {
