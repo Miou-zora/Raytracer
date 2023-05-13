@@ -10,6 +10,13 @@
 #include <cmath>
 #include <iostream>
 
+RayTracer::Camera::Camera()
+{
+    setPosition(Maths::Vertex(0, 0, 0));
+    setRotation(Maths::Vertex(0, 0, 0));
+    _screen = Maths::Rect3D();
+}
+
 RayTracer::Camera::Camera(int width, int height, double fov)
 {
     setPosition(Maths::Vertex(0, 0, 0));
@@ -40,9 +47,9 @@ void RayTracer::Camera::loadConfig(libconfig::Setting &setting)
 
     setPosition(Convertissor.ToVertex(setting, "position"));
     setRotation(Convertissor.ToVertex(setting, "rotation"));
-    int width = Convertissor.get<int>(setting, "width");
-    int height = Convertissor.get<int>(setting, "height");
-    double fov = Convertissor.get<double>(setting, "fov");
+    int width = Convertissor.get<int>(setting, "width", 1920);
+    int height = Convertissor.get<int>(setting, "height", 1080);
+    double fov = Convertissor.get<double>(setting, "fov", 90.0);
     double aspectRatio = (double)height / (double)width;
     double halfWidth = aspectRatio / 2;
     double distance = (halfWidth * sin((180.0 - fov / 2 - 90.0) * M_PI / 180.0)) / sin(fov * M_PI / 180.0);
