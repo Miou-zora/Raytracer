@@ -44,12 +44,12 @@ Maths::Ray RayTracer::Camera::ray(double x, double y) const
 void RayTracer::Camera::loadConfig(libconfig::Setting &setting)
 {
     RayTracer::Convertissor Convertissor;
-
     setPosition(Convertissor.ToVertex(setting, "position"));
     setRotation(Convertissor.ToVertex(setting, "rotation"));
-    int width = Convertissor.get<int>(setting, "width", 1920);
-    int height = Convertissor.get<int>(setting, "height", 1080);
-    double fov = Convertissor.get<double>(setting, "fov", 90.0);
+    libconfig::Setting &resolution = setting["resolution"];
+    int width = Convertissor.get<int>(resolution, "width");
+    int height = Convertissor.get<int>(resolution, "height");
+    double fov = Convertissor.get<double>(resolution, "fov");
     double aspectRatio = (double)height / (double)width;
     double halfWidth = aspectRatio / 2;
     double distance = (halfWidth * sin((180.0 - fov / 2 - 90.0) * M_PI / 180.0)) / sin(fov * M_PI / 180.0);
