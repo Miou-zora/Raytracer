@@ -5,7 +5,18 @@
 ** Core
 */
 
+#include <iostream>
+#include "Sphere.hpp"
+#include "Plane.hpp"
+#include "FastRenderer.hpp"
+#include "Camera.hpp"
+#include "PPMDisplayer.hpp"
+#include "Scene.hpp"
+#include <cmath>
 #include "Core.hpp"
+#include "RGBAColor.hpp"
+#include "Cone.hpp"
+#include "DirectionalLight.hpp"
 
 void RayTracer::Core::run(void)
 {
@@ -108,9 +119,9 @@ void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
             libconfig::Setting &primitive = primitives[i];
             primitive.lookupValue("type", type);
             if (type == "Sphere") {
-                std::cout << "Sphere" << std::endl;
+                std::cerr << "Sphere" << std::endl;
             } else if (type == "Cylinder") {
-                std::cout << "Cylinder" << std::endl;
+                std::cerr << "Cylinder" << std::endl;
             } else {
                 throw std::invalid_argument("Invalid primitive type in configuration file.");
             }
@@ -120,7 +131,7 @@ void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
     }
     try {
         libconfig::Setting &plane = setting["primitives"]["plane"];
-        std::cout << "Plane" << std::endl;
+        std::cerr << "Plane" << std::endl;
         (void)plane;
     } catch (const libconfig::SettingNotFoundException &nfex) {
         //pass, it not mandatory
@@ -140,9 +151,9 @@ void RayTracer::Core::initLights(libconfig::Setting &setting)
             libconfig::Setting &light = lights[i];
             light.lookupValue("type", type);
             if (type == "Point") {
-                std::cout << "Point" << std::endl;
+                std::cerr << "Point" << std::endl;
             } else if (type == "Directional") {
-                std::cout << "Directional" << std::endl;
+                std::cerr << "Directional" << std::endl;
             } else {
                 throw std::invalid_argument("Invalid light type in configuration file.");
             }
