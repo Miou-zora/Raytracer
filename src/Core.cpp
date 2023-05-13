@@ -45,13 +45,13 @@ void RayTracer::Core::run(void)
     blueMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     blueMaterial.setEmissionStrength(0);
 
-    std::shared_ptr<RayTracer::Cone> sphere = std::make_shared<RayTracer::Cone>(Maths::Vertex(0, 40, 5), 10, 10, flashMaterial);
+    std::shared_ptr<RayTracer::Cone> sphere = std::make_shared<RayTracer::Cone>(Maths::Vertex(0, 10, 0), 0.25, 1, whiteMaterial);
     sphere->setRotation(Maths::Vertex(0, 0, 0));
 
     std::shared_ptr<RayTracer::Sphere> sphere2 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0.5, 0.5, -0.85), 0.3, redMaterial);
     sphere2->setRotation(Maths::Vertex(0, 0, 0));
 
-    std::shared_ptr<RayTracer::Cone> sphere3 = std::make_shared<RayTracer::Cone>(Maths::Vertex(-0.7, 0.4, -0.6), 0.6, 4, whiteMaterial);
+    std::shared_ptr<RayTracer::Cone> sphere3 = std::make_shared<RayTracer::Cone>(Maths::Vertex(-0.7, 3, -0.6), 0.6, 4, whiteMaterial);
     sphere2->setRotation(Maths::Vertex(0, 0, 0));
 
     std::shared_ptr<RayTracer::Sphere> sphere4 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0, 0.6, -0.75), 0.25, blueMaterial);
@@ -59,7 +59,7 @@ void RayTracer::Core::run(void)
 
     std::shared_ptr<RayTracer::Plane> plane = std::make_shared<RayTracer::Plane>(Maths::Vertex(0, 0, -1), Maths::Vertex(0, 0, 0), greenMaterial);
 
-    std::shared_ptr<RayTracer::DirectionalLight> dlight = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(1, 1, 1), 1, Maths::Vector(0, 0, -1));
+    std::shared_ptr<RayTracer::DirectionalLight> dlight = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(1, 1, 1), 1, Maths::Vector(0, 3, -1));
 
     std::shared_ptr<RayTracer::Camera> camera = std::make_shared<RayTracer::Camera>(RayTracer::Camera(1000, 1000, 80));
     camera->setPosition(Maths::Vertex(0, -1, 0.5));
@@ -68,7 +68,7 @@ void RayTracer::Core::run(void)
     _scene = std::make_shared<RayTracer::Scene>();
     _scene->addShape(sphere);
     _scene->addShape(sphere2);
-    _scene->addShape(sphere3);
+    // _scene->addShape(sphere3);
     _scene->addShape(sphere4);
     _scene->addShape(plane);
     _scene->setCamera(camera);

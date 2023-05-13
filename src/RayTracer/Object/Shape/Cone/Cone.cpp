@@ -21,18 +21,10 @@ RayTracer::HitRecord RayTracer::Cone::hit(const Maths::Ray &ray) const
 {
     RayTracer::HitRecord hit_record;
 
-    const double cos_theta_squared = pow(cos(_angle), 2);
-    const double sin_theta_squared = 1 - cos_theta_squared;
-    const double z_diff = ray._origin._y - getPosition()._y;
-    const double x_diff = ray._origin._x - getPosition()._x;
-    const double y_diff = ray._origin._z - getPosition()._z;
+    float a = pow(ray._direction._x, 2) + pow(ray._direction._y, 2) - pow(ray._direction._z, 2) * pow(tan(_angle), 2);
+    float b = 2 * (ray._direction._x * (ray._origin._x - getPosition()._x) + ray._direction._y * (ray._origin._y - getPosition()._y) - ray._direction._z * (ray._origin._z - getPosition()._z) * pow(tan(_angle), 2));
+    float c = pow(ray._origin._x - getPosition()._x, 2) + pow(ray._origin._y - getPosition()._y, 2) - pow(ray._origin._z - getPosition()._z, 2) * pow(tan(_angle), 2);
 
-    const double a = cos_theta_squared * pow(ray._direction._z, 2) - sin_theta_squared * (
-            pow(ray._direction._x, 2) + pow(ray._direction._y, 2));
-    const double b = 2 * cos_theta_squared * ray._direction._z * y_diff - 2 * sin_theta_squared * (
-            ray._direction._x * x_diff + ray._direction._y * z_diff);
-    const double c = cos_theta_squared * pow(y_diff, 2) - sin_theta_squared * (
-            pow(x_diff, 2) + pow(z_diff, 2));
     double discriminant = pow(b, 2) - 4 * a * c;
 
     hit_record.setHit(false);
@@ -46,9 +38,11 @@ RayTracer::HitRecord RayTracer::Cone::hit(const Maths::Ray &ray) const
             return hit_record;
         hit_record.setHit(true);
         hit_record.setDistance(distance);
-        hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
-                                           hit_record.getIntersectionPoint()._y - this->getPosition()._y,
-                                           hit_record.getIntersectionPoint()._z - this->getPosition()._z));
+        Maths::Vector normal = Maths::Vector(
+            2 * (hit_record.getIntersectionPoint()._x - getPosition()._x),
+            2 * (hit_record.getIntersectionPoint()._y - getPosition()._y),
+            2 * pow(tan(_angle), 2) * (hit_record.getIntersectionPoint()._z - getPosition()._z));
+        hit_record.setNormal(normal);
         hit_record.setFrontFace(true);
         hit_record.setMaterial(this->getMaterial());
 
@@ -66,9 +60,11 @@ RayTracer::HitRecord RayTracer::Cone::hit(const Maths::Ray &ray) const
         return hit_record;
     hit_record.setHit(true);
     hit_record.setDistance(distance);
-    hit_record.setNormal(Maths::Vector(hit_record.getIntersectionPoint()._x - this->getPosition()._x,
-                                       hit_record.getIntersectionPoint()._y - this->getPosition()._y,
-                                       hit_record.getIntersectionPoint()._z - this->getPosition()._z));
+    Maths::Vector normal = Maths::Vector(
+        2 * (hit_record.getIntersectionPoint()._x - getPosition()._x),
+        2 * (hit_record.getIntersectionPoint()._y - getPosition()._y),
+        2 * pow(tan(_angle), 2) * (hit_record.getIntersectionPoint()._z - getPosition()._z));
+    hit_record.setNormal(normal);
     hit_record.setFrontFace(true);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;
