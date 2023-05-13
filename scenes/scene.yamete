@@ -11,7 +11,7 @@ primitives :
     # List of shapes
     shapes = (
         {
-            type = "Sphere";
+            type = "Cylinder";
             position = {
                 x = 0;
                 y = 0;
