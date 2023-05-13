@@ -15,7 +15,8 @@
 #include <cmath>
 #include "Core.hpp"
 #include "RGBAColor.hpp"
-#include "Object/Shape/Cone/Cone.hpp"
+#include "Cone.hpp"
+#include "DirectionalLight.hpp"
 
 void RayTracer::Core::run(void)
 {
@@ -44,19 +45,21 @@ void RayTracer::Core::run(void)
     blueMaterial.setEmissionColor(Maths::Vertex(0, 0, 0));
     blueMaterial.setEmissionStrength(0);
 
-    std::shared_ptr<RayTracer::Cone> sphere = std::make_shared<RayTracer::Cone>(Maths::Vertex(0, 40, 5), 10, flashMaterial);
+    std::shared_ptr<RayTracer::Cone> sphere = std::make_shared<RayTracer::Cone>(Maths::Vertex(0, 40, 5), 10, 10, flashMaterial);
     sphere->setRotation(Maths::Vertex(0, 0, 0));
 
     std::shared_ptr<RayTracer::Sphere> sphere2 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0.5, 0.5, -0.85), 0.3, redMaterial);
     sphere2->setRotation(Maths::Vertex(0, 0, 0));
 
-    std::shared_ptr<RayTracer::Sphere> sphere3 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(-0.7, 0.4, -0.6), 0.4, whiteMaterial);
+    std::shared_ptr<RayTracer::Cone> sphere3 = std::make_shared<RayTracer::Cone>(Maths::Vertex(-0.7, 0.4, -0.6), 0.6, 4, whiteMaterial);
     sphere2->setRotation(Maths::Vertex(0, 0, 0));
 
     std::shared_ptr<RayTracer::Sphere> sphere4 = std::make_shared<RayTracer::Sphere>(Maths::Vertex(0, 0.6, -0.75), 0.25, blueMaterial);
     sphere2->setRotation(Maths::Vertex(0, 0, 0));
 
     std::shared_ptr<RayTracer::Plane> plane = std::make_shared<RayTracer::Plane>(Maths::Vertex(0, 0, -1), Maths::Vertex(0, 0, 0), greenMaterial);
+
+    std::shared_ptr<RayTracer::DirectionalLight> dlight = std::make_shared<RayTracer::DirectionalLight>(Maths::Vertex(1, 1, 1), 1, Maths::Vector(0, 0, -1));
 
     std::shared_ptr<RayTracer::Camera> camera = std::make_shared<RayTracer::Camera>(RayTracer::Camera(1000, 1000, 80));
     camera->setPosition(Maths::Vertex(0, -1, 0.5));
@@ -69,6 +72,7 @@ void RayTracer::Core::run(void)
     _scene->addShape(sphere4);
     _scene->addShape(plane);
     _scene->setCamera(camera);
+    _scene->addLight(dlight);
 
     RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
 
@@ -174,9 +178,9 @@ void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
             libconfig::Setting &primitive = primitives[i];
             primitive.lookupValue("type", type);
             if (type == "Sphere") {
-                std::cout << "Sphere" << std::endl;
+                std::cerr << "Sphere" << std::endl;
             } else if (type == "Cylinder") {
-                std::cout << "Cylinder" << std::endl;
+                std::cerr << "Cylinder" << std::endl;
             } else {
                 throw std::invalid_argument("Invalid primitive type in configuration file.");
             }
@@ -186,7 +190,7 @@ void RayTracer::Core::initPrimitives(libconfig::Setting &setting)
     }
     try {
         libconfig::Setting &plane = setting["primitives"]["plane"];
-        std::cout << "Plane" << std::endl;
+        std::cerr << "Plane" << std::endl;
         (void)plane;
     } catch (const libconfig::SettingNotFoundException &nfex) {
         //pass, it not mandatory
@@ -206,9 +210,9 @@ void RayTracer::Core::initLights(libconfig::Setting &setting)
             libconfig::Setting &light = lights[i];
             light.lookupValue("type", type);
             if (type == "Point") {
-                std::cout << "Point" << std::endl;
+                std::cerr << "Point" << std::endl;
             } else if (type == "Directional") {
-                std::cout << "Directional" << std::endl;
+                std::cerr << "Directional" << std::endl;
             } else {
                 throw std::invalid_argument("Invalid light type in configuration file.");
             }
