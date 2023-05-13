@@ -19,19 +19,22 @@
 #include "IShape.hpp"
 #include "Vector.hpp"
 
-namespace RayTracer {
-    class Core {
-        public:
-            Core(void) = default;
-            virtual ~Core() = default;
+namespace RayTracer
+{
+    class Core
+    {
+    public:
+        Core(void) = default;
+        virtual ~Core() = default;
 
-            void run(void);
-            void build(std::string scenePath);
-            void setScene(RayTracer::Scene &scene) { this->_scene = scene; };
-            RayTracer::Scene getScene(void) const { return _scene; };
-        private:
-            RayTracer::Scene _scene;
-            std::shared_ptr<RayTracer::IRenderer> _renderer;
-            std::shared_ptr<RayTracer::IDisplayer> _displayer;
+        void run(void);
+        void build(std::string scenePath);
+        void setScene(RayTracer::Scene &scene) { this->_scene = scene; };
+        RayTracer::Scene getScene(void) const { return _scene; };
+
+    private:
+        RayTracer::Scene _scene;
+        std::shared_ptr<RayTracer::IRenderer> _renderer;
+        std::shared_ptr<RayTracer::IDisplayer> _displayer;
     };
 }
