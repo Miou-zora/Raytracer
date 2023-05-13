@@ -12,10 +12,10 @@ namespace RayTracer {
     class Cylinder : public RayTracer::AShape {
         public:
             Cylinder(void) = default;
+            Cylinder(libconfig::Setting &setting);
             Cylinder(const Maths::Vertex &center, double radius);
             Cylinder(const Maths::Vertex &center, double radius, const RayTracer::Material &material);
             virtual ~Cylinder() = default;
-            void loadConfig(libconfig::Setting &setting) override;
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
 
         private:

@@ -13,9 +13,9 @@
 
 extern "C"
 {
-    RayTracer::AObject *ObjectEntryPoint()
+    RayTracer::AObject *ObjectEntryPoint(libconfig::Setting &setting)
     {
-        return new RayTracer::Cylinder();
+        return new RayTracer::Cylinder(setting);
     }
 
     std::string NameEntryPoint()
@@ -95,7 +95,7 @@ RayTracer::HitRecord RayTracer::Cylinder::hit(const Maths::Ray& ray) const
     return hit_record;
 }
 
-void RayTracer::Cylinder::loadConfig(libconfig::Setting &setting)
+RayTracer::Cylinder::Cylinder(libconfig::Setting &setting)
 {
     RayTracer::Convertissor Convertissor;
     Maths::Vertex translation = Convertissor.ToVertex(setting, "translate");
@@ -103,5 +103,5 @@ void RayTracer::Cylinder::loadConfig(libconfig::Setting &setting)
     setRotation(Convertissor.ToVertex(setting, "rotation"));
     setMaterial(Convertissor.ToMaterial(setting, "material"));
     translate((double)translation._x, (double)translation._y, (double)translation._z);
-    _radius = Convertissor.get<double>(setting, "radius");
+    _radius = Convertissor.get<double>(setting, "radius", 1gi);
 }
