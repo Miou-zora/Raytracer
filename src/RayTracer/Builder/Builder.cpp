@@ -29,7 +29,7 @@ RayTracer::Builder::~Builder()
 
 void RayTracer::Builder::buildLightFactory()
 {
-    std::string path = "./lib/";
+    std::string path = "./plugins/";
     RayTracer::Factory<RayTracer::ILight> factory;
     std::vector<std::string> libs;
     RayTracer::ObjectLoader<RayTracer::ILight> loader;
