@@ -15,28 +15,29 @@
 #include <functional>
 #include "LoaderExceptions.hpp"
 #include "type.hpp"
+#include <libconfig.h++>
 
 namespace RayTracer {
     template <typename ObjectInterface>
-        class Factory {
-            public:
-                Factory(void) = default;
-                ~Factory() = default;
+    class Factory {
+        public:
+            Factory() = default;
+            ~Factory() = default;
 
-                std::shared_ptr<ObjectInterface> createObject(const std::string &name)
-                {
-                    if (_shapeMap.find(name) == _shapeMap.end())
-                        throw LoaderException("Object \"" + name + "\" not found");
-                    return _shapeMap[name]();
-                }
+            std::shared_ptr<ObjectInterface> createObject(const std::string& name, libconfig::Setting& setting) {
+                auto it = _shapeMap.find(name);
+                if (it == _shapeMap.end())
+                    throw LoaderException("Object \"" + name + "\" not found");
 
-                void addObject(const std::string &name, std::function<std::shared_ptr<ObjectInterface>()> function) {
-                    _shapeMap.insert({name, function});
-                }
+                return it->second(setting);
+            }
 
-            protected:
-            private:
-                std::map<std::string, std::function<std::shared_ptr<ObjectInterface>()>> _shapeMap = {
-                };
-        };
+            void addObject(const std::string& name, std::function<std::shared_ptr<ObjectInterface>(libconfig::Setting&)> function) {
+                _shapeMap.insert(std::make_pair(name, function));
+            }
+
+        private:
+            std::map<std::string, std::function<std::shared_ptr<ObjectInterface>(libconfig::Setting&)>> _shapeMap;
+    };
 }
+
