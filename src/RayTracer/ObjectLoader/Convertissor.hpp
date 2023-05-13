@@ -35,10 +35,13 @@ namespace RayTracer {
             {
                 try {
                     T value;
-                    if (!setting.lookupValue(name, value))
+                    if (!setting.lookupValue(name, value)) {
+                        std::cerr << "[WARNING] Cannot find value " << name << std::endl;
                         throw LoaderExceptions::ConvertissorException("Cannot find value " + name);
+                    }
                     return value;
                 } catch (const libconfig::SettingNotFoundException &e) {
+                    std::cerr << "[WARNING] Cannot find value " << name << std::endl;
                     throw LoaderExceptions::ConvertissorException("Cannot find value " + name);
                 }
             }
@@ -47,20 +50,30 @@ namespace RayTracer {
             {
                 try {
                     T value;
-                    if (!setting.lookupValue(name, value))
+                    if (!setting.lookupValue(name, value)) {
+                        std::cerr << "[WARNING] Cannot find value " << name << std::endl;
                         return defaultValue;
+                    }
                     return value;
                 } catch (const libconfig::SettingNotFoundException &e) {
+                    std::cerr << "[WARNING] Cannot find value " << name << std::endl;
                     return defaultValue;
                 }
             }
 
-            Maths::Vector ToVector(libconfig::Setting &setting, Maths::Vector defaultVal=Maths::Vector(0, 0, 0))
+            Maths::Vector ToVector(libconfig::Setting &setting, const std::string &name, Maths::Vector defaultVal=Maths::Vector(0, 0, 0))
             {
+                try {
+                    setting[name];
+                } catch (const libconfig::SettingNotFoundException &e) {
+                    std::cerr << "[WARNING] Cannot find vector " << name << std::endl;
+                    return defaultVal;
+                }
                 Maths::Vector vector;
-                vector._x = get<double>(setting, "x", defaultVal._x);
-                vector._y = get<double>(setting, "y", defaultVal._y);
-                vector._z = get<double>(setting, "z", defaultVal._z);
+                libconfig::Setting &vectorSetting = setting[name];
+                vector._x = get<double>(vectorSetting, "x");
+                vector._y = get<double>(vectorSetting, "y");
+                vector._z = get<double>(vectorSetting, "z");
                 return vector;
             }
 
@@ -69,6 +82,7 @@ namespace RayTracer {
                 try {
                     setting[name];
                 } catch (const libconfig::SettingNotFoundException &e) {
+                    std::cerr << "[WARNING] Cannot find vertex " << name << std::endl;
                     return defaultVal;
                 }
                 libconfig::Setting &vertexSetting = setting[name];
@@ -84,6 +98,7 @@ namespace RayTracer {
                 try {
                     setting[name];
                 } catch (const libconfig::SettingNotFoundException &e) {
+                    std::cerr << "[WARNING] Cannot find color " << name << std::endl;
                     return defaultVal;
                 }
                 libconfig::Setting &colorSetting = setting[name];
@@ -100,13 +115,15 @@ namespace RayTracer {
                 try {
                     setting[name];
                 } catch (const libconfig::SettingNotFoundException &e) {
+                    std::cerr << "[WARNING] Cannot find material " << name << std::endl;
                     return defaultVal;
                 }
                 RayTracer::Material material;
-                material.setColor(ToVertex(setting, "color", defaultVal.getColor()));
-                material.setEmissionColor(ToVertex(setting, "emissionColor", defaultVal.getEmissionColor()));
-                material.setEmissionStrength(get<double>(setting, "emissionStrength", defaultVal.getEmissionStrength()));
-                material.setSmoothness(get<double>(setting, "smoothness", defaultVal.getSmoothness()));
+                libconfig::Setting &materialSetting = setting[name];
+                material.setColor(ToVertex(materialSetting, "color", defaultVal.getColor()));
+                material.setEmissionColor(ToVertex(materialSetting, "emissionColor", defaultVal.getEmissionColor()));
+                material.setEmissionStrength(get<double>(materialSetting, "emissionStrength", defaultVal.getEmissionStrength()));
+                material.setSmoothness(get<double>(materialSetting, "smoothness", defaultVal.getSmoothness()));
                 return material;
             }
     };
