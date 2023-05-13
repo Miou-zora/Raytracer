@@ -123,11 +123,11 @@ void RayTracer::Builder::initPrimitives(libconfig::Setting &setting, RayTracer::
         libconfig::Setting &primitives = setting["primitives"]["shapes"];
         int nb_primitive = primitives.getLength();
         std::string type;
-
+        std::cerr << "Found " << nb_primitive << " shapes."<<std::endl;
         for(int i = 0; i < nb_primitive; ++i) {
             libconfig::Setting &primitive = primitives[i];
             primitive.lookupValue("type", type);
-            std::shared_ptr<RayTracer::IShape> shape = _factory.createShape(type);
+            std::shared_ptr<RayTracer::IShape> shape = _factory.createShape(type, primitive);
             scene.addShape(shape);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
@@ -147,7 +147,7 @@ void RayTracer::Builder::initLights(libconfig::Setting &setting, RayTracer::Scen
         for(int i = 0; i < nb_lights; ++i) {
             libconfig::Setting &light = lights[i];
             light.lookupValue("type", type);
-            std::shared_ptr<RayTracer::ILight> new_light = _factory.createLight(type);
+            std::shared_ptr<RayTracer::ILight> new_light = _factory.createLight(type, light);
             scene.addLight(new_light);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
