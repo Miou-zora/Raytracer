@@ -17,6 +17,10 @@ RayTracer::Builder::Builder()
 {
     try {
         buildLightFactory();
+    } catch (RayTracer::LoaderException &e) {
+        std::cerr << e.what() << std::endl;
+    }
+    try {
         buildShapeFactory();
     } catch (RayTracer::LoaderException &e) {
         std::cerr << e.what() << std::endl;
@@ -49,7 +53,7 @@ void RayTracer::Builder::buildLightFactory()
 
 void RayTracer::Builder::buildShapeFactory()
 {
-    std::string path = "./lib/";
+    std::string path = "./plugins/";
     std::vector<std::string> libs;
     RayTracer::ObjectLoader<RayTracer::IShape> loader;
     RayTracer::Factory<RayTracer::IShape> factory;
