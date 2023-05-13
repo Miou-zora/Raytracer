@@ -25,10 +25,6 @@ namespace RayTracer {
 
                 std::shared_ptr<ObjectInterface> createObject(const std::string &name)
                 {
-                    std::cout << "Available objects:" << std::endl;
-                    for (auto &it : _shapeMap) {
-                        std::cout << it.first << std::endl;
-                    }
                     if (_shapeMap.find(name) == _shapeMap.end())
                         throw LoaderException("Object \"" + name + "\" not found");
                     return _shapeMap[name]();
