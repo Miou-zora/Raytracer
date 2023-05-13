@@ -19,7 +19,6 @@ namespace RayTracer {
         public:
             AObject(void): _position(Maths::Vertex(0, 0, 0)), _rotation(Maths::Vertex(0, 0, 0)) {};
             virtual ~AObject() = default;
-            virtual void loadConfig(libconfig::Setting &setting) = 0;
 
             Maths::Vertex getPosition(void) const { return _position; };
             Maths::Vertex getRotation(void) const { return _rotation; };

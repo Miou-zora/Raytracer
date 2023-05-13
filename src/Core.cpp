@@ -6,10 +6,17 @@
 */
 
 #include "Core.hpp"
+#include "FastRenderer.hpp"
+#include "PPMDisplayer.hpp"
 
 void RayTracer::Core::run(void)
 {
+    RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
 
+    _renderer = std::make_shared<RayTracer::FastRenderer>();
+    _renderer->render(_scene, frame);
+    _displayer = std::make_shared<RayTracer::PPMDisplayer>();
+    _displayer->display(frame);
 }
 
 void RayTracer::Core::build(std::string scenePath)

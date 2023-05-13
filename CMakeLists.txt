@@ -21,6 +21,8 @@ set(INCLUDE_SRC src/RayTracer/Object/
                 src/RayTracer/HitRecord/
                 src/RayTracer/Material/
                 src/RayTracer/Renderer/
+                src/RayTracer/Renderer/EnhanceRenderer/
+                src/RayTracer/Renderer/FastRenderer/
                 src/RayTracer/Scene/
                 src/RayTracer/Object/Camera/
                 src/RayTracer/Object/Light/

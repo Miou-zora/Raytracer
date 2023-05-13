@@ -19,7 +19,7 @@ namespace RayTracer {
             virtual ~Camera() = default;
             Maths::Rect3D getScreen() const { return _screen; };
             void setScreen(Maths::Rect3D screen) { _screen = screen; };
-            void loadConfig(libconfig::Setting &setting) override;
+            void loadConfig(libconfig::Setting &setting);
 
             Maths::Ray ray(double x, double y) const override;
         private:
