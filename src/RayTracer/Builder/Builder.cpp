@@ -98,7 +98,7 @@ void RayTracer::Builder::buildScene(RayTracer::Scene &scene)
         libconfig::Setting &camera = root["camera"];
         initCamera(camera, scene);
         initPrimitives(root, scene);
-        //initLights(root, scene);
+        initLights(root, scene);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("No 'camera' setting in configuration file.");
     } catch (const std::exception &e) {
@@ -123,8 +123,6 @@ void RayTracer::Builder::initPrimitives(libconfig::Setting &setting, RayTracer::
         libconfig::Setting &primitives = setting["primitives"]["shapes"];
         int nb_primitive = primitives.getLength();
         std::string type;
-        std::cout << "Number shapes found : " << nb_primitive << std::endl;
-        (void)scene;
 
         for(int i = 0; i < nb_primitive; ++i) {
             libconfig::Setting &primitive = primitives[i];
@@ -145,16 +143,18 @@ void RayTracer::Builder::initLights(libconfig::Setting &setting, RayTracer::Scen
     try {
         libconfig::Setting &lights = setting["lights"];
         int nb_lights = lights.getLength();
-        std::string filepath;
+        std::string type;
 
         for(int i = 0; i < nb_lights; ++i) {
             libconfig::Setting &light = lights[i];
-            light.lookupValue("filepath", filepath);
-            std::shared_ptr<RayTracer::ILight> new_light = _lightFactory.createObject(filepath);
+            light.lookupValue("type", type);
+            std::shared_ptr<RayTracer::ILight> new_light = _lightFactory.createObject(type);
             new_light->loadConfig(lights[i]);
             scene.addLight(new_light);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
         //pass, it not mandatory
+    } catch (const std::exception &e) {
+        std::cerr << "An error occured during lights creation because there are not implemented yet. "<< e.what()<< std::endl;
     }
 }
