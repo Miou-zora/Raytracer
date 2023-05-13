@@ -6,11 +6,7 @@
 */
 
 #include <iostream>
-#include "Sphere.hpp"
-#include "Plane.hpp"
-#include "Cone.hpp"
 #include "Camera.hpp"
-#include "Renderer.hpp"
 #include "PPMDisplayer.hpp"
 #include <cmath>
 #include "Core.hpp"
