@@ -12,9 +12,9 @@
 
 extern "C"
 {
-    RayTracer::AObject *ObjectEntryPoint()
+    RayTracer::AObject *ObjectEntryPoint(libconfig::Setting &setting)
     {
-        return new RayTracer::Plane();
+        return new RayTracer::Plane(setting);
     }
 
     std::string NameEntryPoint()
@@ -77,7 +77,7 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
     return hitRecord;
 }
 
-void RayTracer::Plane::loadConfig(libconfig::Setting &setting)
+RayTracer::Plane::Plane(libconfig::Setting &setting)
 {
     RayTracer::Convertissor Convertissor;
 
