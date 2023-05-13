@@ -33,18 +33,20 @@ namespace RayTracer {
 
             template<typename T> T get(libconfig::Setting &setting, const std::string name) const
             {
-                T value;
-
-                if (!setting.lookupValue(name, value))
-                    throw LoaderExceptions::ConvertissorException("Can't find value " + name);
-                return value;
+                try {
+                    T value;
+                    if (!setting.lookupValue(name, value))
+                        throw LoaderExceptions::ConvertissorException("Cannot find value " + name);
+                    return value;
+                } catch (const libconfig::SettingNotFoundException &e) {
+                    throw LoaderExceptions::ConvertissorException("Cannot find value " + name);
+                }
             }
 
             template<typename T> T get(libconfig::Setting &setting, const std::string name, const T defaultValue) const
             {
                 try {
                     T value;
-
                     if (!setting.lookupValue(name, value))
                         return defaultValue;
                     return value;
