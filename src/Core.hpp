@@ -11,7 +11,7 @@
 #include <libconfig.h++>
 #include "Camera.hpp"
 #include "Scene.hpp"
-#include "IRenderer.hpp"
+#include "FastRenderer.hpp"
 #include "IDisplayer.hpp"
 #include "Vector.hpp"
 
@@ -35,7 +35,7 @@ namespace RayTracer {
 
             std::string _scenePath;
             std::shared_ptr<RayTracer::Scene> _scene;
-            std::shared_ptr<RayTracer::IRenderer> _renderer;
+            std::shared_ptr<RayTracer::FastRenderer> _renderer;
             std::shared_ptr<RayTracer::IDisplayer> _displayer;
     };
 }
