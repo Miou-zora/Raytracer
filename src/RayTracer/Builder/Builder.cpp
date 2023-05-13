@@ -94,11 +94,11 @@ void RayTracer::Builder::buildScene(RayTracer::Scene &scene)
         libconfig::Setting &camera = root["camera"];
         initCamera(camera, scene);
         initPrimitives(root, scene);
-        initLights(root, scene);
+        //initLights(root, scene);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("No 'camera' setting in configuration file.");
     } catch (const std::exception &e) {
-        throw std::invalid_argument("Error while parsing: " + std::string(e.what()));
+        throw std::invalid_argument("Error while building scene: " + std::string(e.what()));
     }
 }
 
@@ -118,17 +118,21 @@ void RayTracer::Builder::initPrimitives(libconfig::Setting &setting, RayTracer::
     try {
         libconfig::Setting &primitives = setting["primitives"]["shapes"];
         int nb_primitive = primitives.getLength();
-        std::string filepath;
+        std::string type;
+        std::cout << "Number shapes found : " << nb_primitive << std::endl;
+        (void)scene;
 
         for(int i = 0; i < nb_primitive; ++i) {
             libconfig::Setting &primitive = primitives[i];
-            primitive.lookupValue("filepath", filepath);
-            std::shared_ptr<RayTracer::IShape> shape = _shapeFactory.createObject(filepath);
+            primitive.lookupValue("type", type);
+            std::shared_ptr<RayTracer::IShape> shape = _shapeFactory.createObject(type);
             shape->loadConfig(primitives[i]);
             scene.addShape(shape);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
         //pass, it not mandatory
+    } catch (const std::exception &e) {
+        throw std::invalid_argument(std::string(e.what()));
     }
 }
 
