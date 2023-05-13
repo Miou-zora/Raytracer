@@ -48,18 +48,18 @@ primitives :
             };
             radius = 2;
             height = 10;
-        }
-    );
-
-    plane : {
-        axis = "Z";
-        position = -20;
-        color = {
-            r = 64;
-            g = 64;
-            b = 255;
+        },
+        {
+            type = "Plane";
+            axis = "Z";
+            position = -20;
+            color = {
+                r = 64;
+                g = 64;
+                b = 255;
             };
         }
+    );
 };
 
 # List of lights
