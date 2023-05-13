@@ -11,7 +11,7 @@
 namespace RayTracer {
     class Sphere : public RayTracer::AShape {
         public:
-            Sphere(void) = default;
+            Sphere(void) { std::cerr << "Sphere created" << std::endl; };
             Sphere(const Maths::Vertex &center, double radius);
             Sphere(libconfig::Setting &setting);
             Sphere(const Maths::Vertex &center, double radius, const RayTracer::Material &material);

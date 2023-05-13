@@ -29,9 +29,7 @@ namespace RayTracer {
                     builder = reinterpret_cast<ObjectInterface *(*)()>(dlsym(_handle, "ObjectEntryPoint"));
                     if (!builder)
                         throw LoaderException(dlerror());
-                    return [builder]() {
-                        return std::shared_ptr<ObjectInterface>(builder());
-                    };
+                    return [builder](){ return std::shared_ptr<ObjectInterface>(builder()); };
                 }
 
                 std::string loadName(const std::string &objectPath)

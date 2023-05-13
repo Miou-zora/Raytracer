@@ -11,23 +11,23 @@
 #include "type.hpp"
 #include "Convertissor.hpp"
 
-extern "C"
-{
-    RayTracer::AObject *ObjectEntryPoint(libconfig::Setting &setting)
-    {
-        return new RayTracer::Cylinder(setting);
-    }
+// extern "C"
+// {
+//     RayTracer::AObject *ObjectEntryPoint()
+//     {
+//         return new RayTracer::Cylinder();
+//     }
 
-    std::string NameEntryPoint()
-    {
-        return "Cylinder";
-    }
+//     std::string NameEntryPoint()
+//     {
+//         return "Cylinder";
+//     }
 
-    RayTracer::ObjectType TypeEntryPoint()
-    {
-        return RayTracer::ObjectType::SHAPE;
-    }
-}
+//     RayTracer::ObjectType TypeEntryPoint()
+//     {
+//         return RayTracer::ObjectType::SHAPE;
+//     }
+// }
 
 
 RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius)
@@ -103,5 +103,5 @@ RayTracer::Cylinder::Cylinder(libconfig::Setting &setting)
     setRotation(Convertissor.ToVertex(setting, "rotation"));
     setMaterial(Convertissor.ToMaterial(setting, "material"));
     translate((double)translation._x, (double)translation._y, (double)translation._z);
-    _radius = Convertissor.get<double>(setting, "radius", 1gi);
+    _radius = 1;
 }

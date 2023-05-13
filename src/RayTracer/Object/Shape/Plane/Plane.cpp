@@ -10,23 +10,23 @@
 #include "type.hpp"
 #include "Convertissor.hpp"
 
-extern "C"
-{
-    RayTracer::AObject *ObjectEntryPoint(libconfig::Setting &setting)
-    {
-        return new RayTracer::Plane(setting);
-    }
+// extern "C"
+// {
+//     RayTracer::AObject *ObjectEntryPoint()
+//     {
+//         return new RayTracer::Plane();
+//     }
 
-    std::string NameEntryPoint()
-    {
-        return "Plane";
-    }
+//     std::string NameEntryPoint()
+//     {
+//         return "Plane";
+//     }
 
-    RayTracer::ObjectType TypeEntryPoint()
-    {
-        return RayTracer::ObjectType::SHAPE;
-    }
-}
+//     RayTracer::ObjectType TypeEntryPoint()
+//     {
+//         return RayTracer::ObjectType::SHAPE;
+//     }
+// }
 
 
 RayTracer::Plane::Plane(const Maths::Vertex &position)
@@ -79,6 +79,7 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
 
 RayTracer::Plane::Plane(libconfig::Setting &setting)
 {
+    std::cerr << "Loading plane" << std::endl;
     RayTracer::Convertissor Convertissor;
 
     setPosition(Convertissor.ToVertex(setting, "position"));

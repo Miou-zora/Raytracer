@@ -15,16 +15,16 @@
 
 RayTracer::Builder::Builder()
 {
-    try {
-        buildLightFactory();
-    } catch (RayTracer::LoaderException &e) {
-        std::cerr << e.what() << std::endl;
-    }
-    try {
-        buildShapeFactory();
-    } catch (RayTracer::LoaderException &e) {
-        std::cerr << e.what() << std::endl;
-    }
+    // try {
+    //     buildLightFactory();
+    // } catch (RayTracer::LoaderException &e) {
+    //     std::cerr << e.what() << std::endl;
+    // }
+    // try {
+    //     buildShapeFactory();
+    // } catch (RayTracer::LoaderException &e) {
+    //     std::cerr << e.what() << std::endl;
+    // }
 }
 
 RayTracer::Builder::~Builder()
@@ -33,42 +33,42 @@ RayTracer::Builder::~Builder()
 
 void RayTracer::Builder::buildLightFactory()
 {
-    std::string path = "./plugins/";
-    RayTracer::Factory<RayTracer::ILight> factory;
-    std::vector<std::string> libs;
-    RayTracer::ObjectLoader<RayTracer::ILight> loader;
+    // std::string path = "./plugins/";
+    // RayTracer::Factory<RayTracer::ILight> factory;
+    // std::vector<std::string> libs;
+    // RayTracer::ObjectLoader<RayTracer::ILight> loader;
 
-    if (!std::filesystem::exists(path))
-        throw LoaderException("Error while loading libs");
-    try {
-        for (const auto &entry : std::filesystem::directory_iterator(path))
-            if (entry.path().extension() == ".so" && loader.loadType(path + entry.path().filename().string()) == RayTracer::ObjectType::LIGHT)
-                factory.addObject(loader.loadName(path + entry.path().filename().string()), loader.loadObject(path + entry.path().filename().string()));
-    } catch (const std::filesystem::filesystem_error &e) {
-        std::cerr << e.what() << std::endl;
-        throw LoaderException("Error while loading Light libs");
-    }
-    _lightFactory = factory;
+    // if (!std::filesystem::exists(path))
+    //     throw LoaderException("Error while loading libs");
+    // try {
+    //     for (const auto &entry : std::filesystem::directory_iterator(path))
+    //         if (entry.path().extension() == ".so" && loader.loadType(path + entry.path().filename().string()) == RayTracer::ObjectType::LIGHT)
+    //             factory.addObject(loader.loadName(path + entry.path().filename().string()), loader.loadObject(path + entry.path().filename().string()));
+    // } catch (const std::filesystem::filesystem_error &e) {
+    //     std::cerr << e.what() << std::endl;
+    //     throw LoaderException("Error while loading Light libs");
+    // }
+    // _lightFactory = factory;
 }
 
 void RayTracer::Builder::buildShapeFactory()
 {
-    std::string path = "./plugins/";
-    std::vector<std::string> libs;
-    RayTracer::ObjectLoader<RayTracer::IShape> loader;
-    RayTracer::Factory<RayTracer::IShape> factory;
+    // std::string path = "./plugins/";
+    // std::vector<std::string> libs;
+    // RayTracer::ObjectLoader<RayTracer::IShape> loader;
+    // RayTracer::Factory<RayTracer::IShape> factory;
 
-    if (!std::filesystem::exists(path))
-        throw LoaderException("Error while loading libs");
-    try {
-        for (const auto &entry : std::filesystem::directory_iterator(path))
-            if (entry.path().extension() == ".so" && loader.loadType(path + entry.path().filename().string()) == RayTracer::ObjectType::SHAPE)
-                factory.addObject(loader.loadName(path + entry.path().filename().string()), loader.loadObject(path + entry.path().filename().string()));
-    } catch (const std::filesystem::filesystem_error &e) {
-        std::cerr << e.what() << std::endl;
-        throw LoaderException("Error while loading shape libs");
-    }
-    _shapeFactory = factory;
+    // if (!std::filesystem::exists(path))
+    //     throw LoaderException("Error while loading libs");
+    // try {
+    //     for (const auto &entry : std::filesystem::directory_iterator(path))
+    //         if (entry.path().extension() == ".so" && loader.loadType(path + entry.path().filename().string()) == RayTracer::ObjectType::SHAPE)
+    //             factory.addObject(loader.loadName(path + entry.path().filename().string()), loader.loadObject(path + entry.path().filename().string()));
+    // } catch (const std::filesystem::filesystem_error &e) {
+    //     std::cerr << e.what() << std::endl;
+    //     throw LoaderException("Error while loading shape libs");
+    // }
+    // _shapeFactory = factory;
 }
 
 void RayTracer::Builder::setScenePath(std::string scenePath)
@@ -125,8 +125,9 @@ void RayTracer::Builder::initPrimitives(libconfig::Setting &setting, RayTracer::
         std::string type;
 
         for(int i = 0; i < nb_primitive; ++i) {
-            primitives[i].lookupValue("type", type);
-            std::shared_ptr<RayTracer::IShape> shape = _shapeFactory.createObject(type, primitives[i]);
+            libconfig::Setting &primitive = primitives[i];
+            primitive.lookupValue("type", type);
+            std::shared_ptr<RayTracer::IShape> shape = _factory.createShape(type);
             scene.addShape(shape);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
@@ -144,9 +145,9 @@ void RayTracer::Builder::initLights(libconfig::Setting &setting, RayTracer::Scen
         std::string type;
 
         for(int i = 0; i < nb_lights; ++i) {
-            lights[i].lookupValue("type", type);
-            std::shared_ptr<RayTracer::ILight> new_light = _lightFactory.createObject(type, lights[i]);
-            new_light->loadConfig(lights[i]);
+            libconfig::Setting &light = lights[i];
+            light.lookupValue("type", type);
+            std::shared_ptr<RayTracer::ILight> new_light = _factory.createLight(type);
             scene.addLight(new_light);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {

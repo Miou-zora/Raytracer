@@ -36,7 +36,7 @@ set(INCLUDE_SRC src/RayTracer/Object/
 )
 
 include_directories(${INCLUDE_SRC})
-add_subdirectory(src/RayTracer/Object/)
+# add_subdirectory(src/RayTracer/Object/)
 
 project(raytracer)
 
@@ -47,13 +47,18 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/Maths/Vertex/Vertex.cpp"
         "src/RayTracer/Object/Camera/Camera.cpp"
         "src/RayTracer/Object/Light/DirectionalLight/DirectionalLight.cpp"
+        "src/RayTracer/Object/Shape/Sphere/Sphere.cpp"
+        "src/RayTracer/Object/Shape/Plane/Plane.cpp"
+        "src/RayTracer/Object/Shape/Cylinder/Cylinder.cpp"
         "src/RayTracer/Object/Object.cpp"
         "src/RayTracer/RGBAColor/RGBAColor.cpp"
         "src/RayTracer/Renderer/EnhanceRenderer/EnhanceRenderer.cpp"
         "src/RayTracer/Renderer/FastRenderer/FastRenderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp"
-        "src/RayTracer/Builder/Builder.cpp")
+        "src/RayTracer/Builder/Builder.cpp"
+
+        )
 
 set(MAIN "main.cpp")
 

@@ -7,6 +7,7 @@
 
 #pragma once
 #include "AShape.hpp"
+#include "Material.hpp"
 
 namespace RayTracer {
     class Cylinder : public RayTracer::AShape {

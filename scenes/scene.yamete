@@ -1,9 +1,9 @@
 # Configuration of the camera
 camera :
 {
-    resolution = { width = 1920; height = 1080; fov: 80;};
-    position = { x = 0; y = -100; z = 20; };
-    rotation = { x = 8; y = 45; z = 1; };
+    resolution = { width = 1000; height = 1000; fov: 80;};
+    position = { x = 0; y = 0; z = 0; };
+    rotation = { x = 0; y = 0; z = 0; };
 };
 # Primitives in the scene
 primitives :
@@ -15,30 +15,11 @@ primitives :
             position = {
                 x = 0;
                 y = 2;
-                z = 2;
+                z = 0;
             };
             material = {
                 r = 255;
-                g = 64;
-                b = 64;
-            };
-            translate = {
-                x = 0;
-                y = 0;
-                z = 0;
-            };
-            radius = 10;
-        },
-        {
-            type = "Cylinder";
-            position = {
-                x = 0;
-                y = 1;
-                z = 1;
-            };
-            material = {
-                r = 64;
-                g = 64;
+                g = 255;
                 b = 255;
             };
             translate = {
@@ -46,30 +27,8 @@ primitives :
                 y = 0;
                 z = 0;
             };
-            radius = 2;
-            height = 10;
+            radius = 1;
         }
     );
 };
 
-# List of lights
-lights = (
-    {
-        type = "Point";
-        position = {
-            x = 0;
-            y = 0;
-            z = 20;
-            };
-        intensity = 1;
-        },
-    {
-        type = "Directional";
-        position = {
-            x = 0;
-            y = 0;
-            z = 20;
-        };
-        intensity = 1;
-    }
-);
