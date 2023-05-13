@@ -11,7 +11,7 @@
 #include <libconfig.h++>
 #include "Camera.hpp"
 #include "Scene.hpp"
-#include "IRenderer.hpp"
+#include "FastRenderer.hpp"
 #include "IDisplayer.hpp"
 #include "Builder.hpp"
 #include "Factory.hpp"

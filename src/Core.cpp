@@ -5,6 +5,14 @@
 ** Core
 */
 
+#include <iostream>
+#include "Sphere.hpp"
+#include "Plane.hpp"
+#include "FastRenderer.hpp"
+#include "Camera.hpp"
+#include "PPMDisplayer.hpp"
+#include "Scene.hpp"
+#include <cmath>
 #include "Core.hpp"
 #include "FastRenderer.hpp"
 #include "PPMDisplayer.hpp"
