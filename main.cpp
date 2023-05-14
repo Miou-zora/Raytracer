@@ -10,10 +10,13 @@
 int main(int ac, char **av)
 {
     RayTracer::Core core;
-    if (ac != 2)
+    if (ac != 2 || ac != 3)
         return 84;
     try {
-        core.build(av[1]);
+        if (ac == 2)
+            core.build(av[1]);
+        if (ac == 3)
+            core.build(av[1], av[2]);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;

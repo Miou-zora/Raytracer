@@ -12,8 +12,7 @@
 namespace RayTracer {
     class EnhanceRenderer : virtual public IRenderer{
         public:
-            EnhanceRenderer(const std::vector<std::shared_ptr<IShape>> &shapes) :
-                m_shapes(shapes),
+            EnhanceRenderer(void) :
                 m_ambientColor(Maths::Vertex(0.25, 0.25, 0.35)),
                 m_directionalLightColor(Maths::Vertex(1, 1, 1)),
                 m_directionalLightDirection(Maths::Vector(0, 0, -1)) { };
@@ -26,7 +25,6 @@ namespace RayTracer {
             Maths::Vertex trace(const RayTracer::Scene &scene, const Maths::Ray &ray);
             RayTracer::HitRecord castRay(const Scene &scene, const Maths::Ray &ray) const;
             RayTracer::HitRecord getClosestHit(const std::vector<RayTracer::HitRecord> &records) const;
-            const std::vector<std::shared_ptr<IShape>> m_shapes;
             const Maths::Vertex m_ambientColor;
             const Maths::Vertex m_directionalLightColor;
             const Maths::Vector m_directionalLightDirection;
