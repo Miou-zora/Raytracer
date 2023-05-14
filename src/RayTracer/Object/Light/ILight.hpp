@@ -7,11 +7,11 @@
 
 #pragma once
 
+#include <libconfig.h++>
 #include "Vertex.hpp"
 #include "Ray.hpp"
 #include "Scene.hpp"
 #include "HitRecord.hpp"
-
 
 namespace RayTracer {
     class Scene;

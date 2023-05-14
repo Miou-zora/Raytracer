@@ -11,13 +11,15 @@
 #include "IRotation.hpp"
 #include "Vertex.hpp"
 
+#include <libconfig.h++>
 #include <cstddef>
 
 namespace RayTracer {
-    class Object: public RayTracer::ITranslation, public RayTracer::IRotation {
+    class AObject: public RayTracer::ITranslation, public RayTracer::IRotation {
         public:
-            Object(void): _position(Maths::Vertex(0, 0, 0)), _rotation(Maths::Vertex(0, 0, 0)) {};
-            virtual ~Object() = default;
+            AObject(void): _position(Maths::Vertex(0, 0, 0)), _rotation(Maths::Vertex(0, 0, 0)) {};
+            virtual ~AObject() = default;
+
             Maths::Vertex getPosition(void) const { return _position; };
             Maths::Vertex getRotation(void) const { return _rotation; };
             void setPosition(const Maths::Vertex &position) { _position = position; };

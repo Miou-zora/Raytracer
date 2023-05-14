@@ -6,21 +6,22 @@
 */
 
 #include "SFMLCore.hpp"
+#include "BasicCore.hpp"
+#include "Core.hpp"
 
 int main(int ac, char **av)
 {
-    RayTracer::SFMLCore core(1920, 1080);
+    Core core;
 
-    core.init();
-    if (ac != 2)
-        return 84;
     try {
-        core.setScenePath(av[1]);
-        core.buildScene();
+        core.checkArgs(ac, av);
+        if (core.isSFML())
+            core.runSFML(av[1]);
+        else
+            core.runBasic(av[1]);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;
     }
-    core.run();
     return 0;
 }

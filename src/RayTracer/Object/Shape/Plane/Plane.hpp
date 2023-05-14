@@ -12,10 +12,12 @@ namespace RayTracer {
     class Plane : public RayTracer::AShape {
         public:
             Plane(void) = default;
+            Plane(libconfig::Setting &setting);
             Plane(const Maths::Vertex &position);
             Plane(const Maths::Vertex &position, const RayTracer::Material &material);
             Plane(const Maths::Vertex &position, const Maths::Vertex &rotation,const RayTracer::Material &material);
             virtual ~Plane() = default;
+
 
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
 

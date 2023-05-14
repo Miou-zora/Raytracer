@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "AScene.hpp"
-#include <string>
+#include "Scene.hpp"
+#include "Factory.hpp"
 
 namespace RayTracer {
     class IBuilder {
         public:
-            virtual void build(const RayTracer::AScene &scene, std::string scenePath) = 0;
+            virtual void buildScene(RayTracer::Scene &scene) = 0;
     };
 }

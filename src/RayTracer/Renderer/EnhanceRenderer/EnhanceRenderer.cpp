@@ -29,7 +29,7 @@ RayTracer::HitRecord RayTracer::EnhanceRenderer::castRay(const RayTracer::Scene 
     RayTracer::HitRecord record;
 
     (void)scene;
-    for (const auto &shape : m_shapes) {
+    for (const auto &shape : scene.getShapes()) {
         record = shape.get()->hit(ray);
         if (record.isHit() && record.isFrontFace()) {
             records.push_back(record);

@@ -13,27 +13,47 @@
 #include <map>
 #include <memory>
 #include <functional>
+#include "LoaderExceptions.hpp"
 #include "Sphere.hpp"
 #include "Plane.hpp"
-#include "Cylindre.hpp"
+#include "Cylinder.hpp"
+#include "DirectionalLight.hpp"
+#include "Cone.hpp"
 
-namespace RayTracer {
-    class Factory {
-        public:
-            Factory(void);
-            ~Factory();
+namespace RayTracer
+{
+    // template <typename ObjectInterface>
+    class Factory
+    {
+    public:
+        Factory(void) = default;
+        ~Factory() = default;
 
-            std::shared_ptr<RayTracer::ILight> createLight(const std::string &name);
-            std::shared_ptr<RayTracer::IShape> createShape(const std::string &name);
+        std::shared_ptr<RayTracer::ILight> createLight(const std::string &name, libconfig::Setting &setting)
+        {
+            std::cerr << "[INFO] create light \"" << name << "\"" <<std::endl;
+            if (_lightMap.find(name) == _lightMap.end())
+                throw LoaderException("Light not found");
+            return _lightMap[name](setting);
+        };
+        std::shared_ptr<RayTracer::IShape> createShape(const std::string &name, libconfig::Setting &setting)
+        {
+            std::cerr << "[INFO] create shape \"" << name << "\"" <<std::endl;
+            if (_shapeMap.find(name) == _shapeMap.end())
+                throw LoaderException("Shape not found");
+            return _shapeMap[name](setting);
+        }
 
-        protected:
-        private:
-            std::map<std::string, std::function<std::shared_ptr<RayTracer::IShape>(const std::string&)>> _shapeMap = {
-               {"Sphere", [](const std::string& name){ return std::make_shared<RayTracer::Sphere>(name);}},
-               {"Plane", [](const std::string& name){ return std::make_shared<RayTracer::Plane>(name);}},
-               {"Cylindre", [](const std::string& name){ return std::make_shared<RayTracer::Cylindre>(name);}},
-            };
-            std::map<std::string, std::function<std::shared_ptr<RayTracer::ILight>(const std::string&)>> _lightMap = {
-            };
+    private:
+        std::map<std::string, std::function<std::shared_ptr<RayTracer::IShape>(libconfig::Setting &)>> _shapeMap = {
+            {"Sphere", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Sphere>(setting); }},
+            {"Plane", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Plane>(setting); }},
+            {"Cylinder", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Cylinder>(setting); }},
+            {"Cone", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Cone>(setting); }}
+        };
+        std::map<std::string, std::function<std::shared_ptr<RayTracer::ILight>(libconfig::Setting &)>> _lightMap = {
+            {"DirectionalLight", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::DirectionalLight>(setting); }}
+        };
     };
+
 }
