@@ -48,7 +48,7 @@ void RayTracer::Builder::buildScene(RayTracer::Scene &scene)
         libconfig::Setting &camera = root["camera"];
         initCamera(camera, scene);
         initPrimitives(root, scene);
-        //initLights(root, scene);
+        initLights(root, scene);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("No 'camera' setting in configuration file.");
     } catch (const std::exception &e) {
@@ -73,7 +73,7 @@ void RayTracer::Builder::initPrimitives(libconfig::Setting &setting, RayTracer::
         libconfig::Setting &primitives = setting["primitives"]["shapes"];
         int nb_primitive = primitives.getLength();
         std::string type;
-        std::cerr << "Found " << nb_primitive << " shapes."<<std::endl;
+        std::cerr << "[INFO] Found " << nb_primitive << " shapes."<<std::endl;
         for(int i = 0; i < nb_primitive; ++i) {
             libconfig::Setting &primitive = primitives[i];
             primitive.lookupValue("type", type);
@@ -93,7 +93,7 @@ void RayTracer::Builder::initLights(libconfig::Setting &setting, RayTracer::Scen
         libconfig::Setting &lights = setting["lights"];
         int nb_lights = lights.getLength();
         std::string type;
-
+        std::cerr << "[INFO] Found " << nb_lights << " lights."<<std::endl;
         for(int i = 0; i < nb_lights; ++i) {
             libconfig::Setting &light = lights[i];
             light.lookupValue("type", type);
