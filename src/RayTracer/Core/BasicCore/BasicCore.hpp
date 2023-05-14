@@ -29,9 +29,6 @@ namespace RayTracer
 
         void run(void);
         void build(std::string scenePath, std::string flag = "-f");
-        void setScene(RayTracer::Scene &scene) { this->_scene = scene; };
-        RayTracer::Scene getScene(void) const { return _scene; };
-
     private:
         RayTracer::Scene _scene;
         std::shared_ptr<RayTracer::IRenderer> _renderer;

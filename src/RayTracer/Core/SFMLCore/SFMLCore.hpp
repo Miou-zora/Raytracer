@@ -19,13 +19,8 @@ namespace RayTracer {
             SFMLCore(int width, int height);
             ~SFMLCore();
 
-            void init(void);
-
+            void build(std::string scenePath, std::string flag = "-f");
             void run(void);
-
-            void buildScene(void);
-            void setScenePath(std::string scenePath);
-            std::shared_ptr<RayTracer::Scene> getScene(void) const;
         protected:
         private:
             bool _isRunning;
@@ -36,10 +31,10 @@ namespace RayTracer {
             void createWindow(void);
             void closeWindow(void);
 
-            std::string _scenePath;
-            std::shared_ptr<RayTracer::Scene> _scene;
+            RayTracer::Scene _scene;
             std::shared_ptr<RayTracer::IRenderer> _renderer;
             std::shared_ptr<RayTracer::IDisplayer> _displayer;
             RayTracer::Frame _frame;
+            bool _useFastRenderer;
     };
 }

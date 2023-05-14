@@ -18,7 +18,7 @@ void RayTracer::SFMLDisplayer::display(const RayTracer::Frame &frame)
             color = sf::Color(frame.getPixel(std::pair<size_t, size_t>(j, i)).getRed(),
                             frame.getPixel(std::pair<size_t, size_t>(j, i)).getGreen(),
                             frame.getPixel(std::pair<size_t, size_t>(j, i)).getBlue());
-            image.setPixel(j, i, color);
+            image.setPixel(j, frame.getHeight() - i - 1, color);
         }
     }
     sf::Texture texture;

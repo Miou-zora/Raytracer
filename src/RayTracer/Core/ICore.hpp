@@ -10,6 +10,7 @@
 namespace RayTracer {
     class ICore {
         public:
-            void run(void);
+            virtual void run(void) = 0;
+            virtual void build(std::string scenePath, std::string flag) = 0;
     };
 }

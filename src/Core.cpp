@@ -39,8 +39,19 @@ void Core::checkArgs(int ac, char **av)
 
 void Core::runSFML(std::string scenePath)
 {
-    (void)scenePath;
-    std::cout << "SFML" << std::endl;
+    RayTracer::SFMLCore core(1000, 1000);
+
+    try {
+        if (_isFast == true) {
+            core.build(scenePath);
+        } else {
+            core.build(scenePath, "-e");
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+        throw std::invalid_argument("Error while loading scene");
+    }
+    core.run();
 }
 
 void Core::runBasic(std::string scenePath)
@@ -50,10 +61,8 @@ void Core::runBasic(std::string scenePath)
     try {
         if (_isFast == true) {
             core.build(scenePath);
-            std::cerr << "Fast" << std::endl;
         } else {
             core.build(scenePath, "-e");
-            std::cerr << "Enhance" << std::endl;
         }
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;

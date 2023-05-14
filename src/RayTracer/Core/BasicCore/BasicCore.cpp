@@ -22,6 +22,7 @@ void RayTracer::BasicCore::run(void)
 {
     RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
 
+    std::cerr << "Rendering..." << std::endl;
     if (_useFastRenderer == false)
         _renderer = std::make_shared<RayTracer::EnhanceRenderer>();
     else if (_useFastRenderer == true)
