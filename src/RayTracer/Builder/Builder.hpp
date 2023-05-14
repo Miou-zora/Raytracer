@@ -19,9 +19,6 @@ namespace RayTracer {
 
         void buildScene(RayTracer::Scene &scene) override;
 
-        void buildLightFactory(void) override;
-        void buildShapeFactory(void) override;
-
         void setScenePath(std::string scenePath);
 
         private:
@@ -30,8 +27,6 @@ namespace RayTracer {
             void initLights(libconfig::Setting &setting, RayTracer::Scene &scene);
 
             std::string _scenePath;
-            // RayTracer::Factory<RayTracer::ILight> _lightFactory;
-            // RayTracer::Factory<RayTracer::IShape> _shapeFactory;
             RayTracer::Factory _factory;
     };
 }

@@ -5,13 +5,6 @@
 ** LoaderExceptions
 */
 
-/*
-** EPITECH PROJECT, 2023
-** B-OOP-400-NAN-4-1-arcade-architecture
-** File description:
-** ErrorManagement
-*/
-
 #pragma once
 #include <exception>
 #include <string>

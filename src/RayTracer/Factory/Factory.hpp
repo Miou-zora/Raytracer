@@ -18,6 +18,8 @@
 #include "Sphere.hpp"
 #include "Plane.hpp"
 #include "Cylinder.hpp"
+#include "DirectionalLight.hpp"
+#include "Cone.hpp"
 
 namespace RayTracer
 {
@@ -47,8 +49,11 @@ namespace RayTracer
             {"Sphere", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Sphere>(setting); }},
             {"Plane", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Plane>(setting); }},
             {"Cylinder", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Cylinder>(setting); }},
+            {"Cone", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::Cone>(setting); }}
         };
-        std::map<std::string, std::function<std::shared_ptr<RayTracer::ILight>(libconfig::Setting &)>> _lightMap = {};
+        std::map<std::string, std::function<std::shared_ptr<RayTracer::ILight>(libconfig::Setting &)>> _lightMap = {
+            {"DirectionalLight", [](libconfig::Setting &setting) { return std::make_shared<RayTracer::DirectionalLight>(setting); }}
+        };
     };
 
 }

@@ -13,8 +13,6 @@
 namespace RayTracer {
     class IBuilder {
         public:
-            virtual void buildLightFactory(void) = 0;
-            virtual void buildShapeFactory(void) = 0;
             virtual void buildScene(RayTracer::Scene &scene) = 0;
     };
 }
