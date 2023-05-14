@@ -38,7 +38,6 @@ set(INCLUDE_SRC src/RayTracer/Object/
 )
 
 include_directories(${INCLUDE_SRC})
-# add_subdirectory(src/RayTracer/Object/)
 
 project(raytracer)
 
