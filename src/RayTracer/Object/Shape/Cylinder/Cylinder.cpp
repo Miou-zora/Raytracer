@@ -8,27 +8,7 @@
 #include "Cylinder.hpp"
 #include <cmath>
 #include "MathsUtils.hpp"
-#include "type.hpp"
 #include "Convertissor.hpp"
-
-// extern "C"
-// {
-//     RayTracer::AObject *ObjectEntryPoint()
-//     {
-//         return new RayTracer::Cylinder();
-//     }
-
-//     std::string NameEntryPoint()
-//     {
-//         return "Cylinder";
-//     }
-
-//     RayTracer::ObjectType TypeEntryPoint()
-//     {
-//         return RayTracer::ObjectType::SHAPE;
-//     }
-// }
-
 
 RayTracer::Cylinder::Cylinder(const Maths::Vertex &center, double radius)
 {

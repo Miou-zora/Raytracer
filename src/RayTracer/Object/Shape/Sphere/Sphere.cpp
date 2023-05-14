@@ -8,26 +8,7 @@
 #include "Sphere.hpp"
 #include <cmath>
 #include "MathsUtils.hpp"
-#include "type.hpp"
 #include "Convertissor.hpp"
-
-// extern "C"
-// {
-//     RayTracer::AObject *ObjectEntryPoint()
-//     {
-//         return new RayTracer::Sphere();
-//     }
-
-//     std::string NameEntryPoint()
-//     {
-//         return "Sphere";
-//     }
-
-//     RayTracer::ObjectType TypeEntryPoint()
-//     {
-//         return RayTracer::ObjectType::SHAPE;
-//     }
-// }
 
 RayTracer::Sphere::Sphere(const Maths::Vertex &center, double radius)
 {

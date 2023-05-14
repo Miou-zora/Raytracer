@@ -14,7 +14,6 @@
 #include <memory>
 #include <functional>
 #include "LoaderExceptions.hpp"
-#include "type.hpp"
 #include "Sphere.hpp"
 #include "Plane.hpp"
 #include "Cylinder.hpp"

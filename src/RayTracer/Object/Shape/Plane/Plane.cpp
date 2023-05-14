@@ -7,27 +7,7 @@
 
 #include "Plane.hpp"
 #include "MathsUtils.hpp"
-#include "type.hpp"
 #include "Convertissor.hpp"
-
-// extern "C"
-// {
-//     RayTracer::AObject *ObjectEntryPoint()
-//     {
-//         return new RayTracer::Plane();
-//     }
-
-//     std::string NameEntryPoint()
-//     {
-//         return "Plane";
-//     }
-
-//     RayTracer::ObjectType TypeEntryPoint()
-//     {
-//         return RayTracer::ObjectType::SHAPE;
-//     }
-// }
-
 
 RayTracer::Plane::Plane(const Maths::Vertex &position)
 {
