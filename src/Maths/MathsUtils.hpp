@@ -102,6 +102,16 @@ namespace Maths {
                 double t = std::clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
                 return (t * t * (3.0f - 2.0f * t));
             }
+
+            static Maths::Vector reflect(const Maths::Vector &v, const Maths::Vector &n)
+            {
+                return v - n * 2 * v.dot(n);
+            }
+
+            static Maths::Vector lerp(const Maths::Vector &startValue, const Maths::Vector &endValue, double t)
+            {
+                return startValue + (endValue - startValue) * t;
+            }
     };
 }
 

@@ -26,7 +26,7 @@ namespace RayTracer {
             const Maths::Vector &getDirectionalLightDirection() const;
             void setDirectionalLightDirection(const Maths::Vector &directionalLightDirection);
 
-            Maths::Vertex hit(const Maths::Vertex &position, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const;
+            Maths::Vertex hit(const Maths::Ray &ray, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const;
 
         private:
 
@@ -36,5 +36,6 @@ namespace RayTracer {
             Maths::Vertex m_directionalLightColor;
             float m_directionalLightIntensity;
             Maths::Vector m_directionalLightDirection;
+            float m_directionalLightFocus;
     };
 }

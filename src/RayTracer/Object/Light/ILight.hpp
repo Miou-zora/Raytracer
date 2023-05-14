@@ -18,7 +18,7 @@ namespace RayTracer {
 
     class ILight {
         public:
-            virtual Maths::Vertex hit(const Maths::Vertex &position, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const = 0;
+            virtual Maths::Vertex hit(const Maths::Ray &ray, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const = 0;
     };
 }
 

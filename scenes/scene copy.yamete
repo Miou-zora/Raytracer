@@ -38,7 +38,7 @@ primitives :
             }
         },
         {
-            type="Cylinder";
+            type="Cone";
             position = {
                 x = 0.0;
                 y = 3.0;
@@ -63,7 +63,8 @@ primitives :
                 y = 0.0;
                 z = 0.0;
             },
-            radius = 1;
+            angle = 0.4;
+            height = 1.0;
         }
     );
 };
