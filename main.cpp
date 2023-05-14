@@ -10,7 +10,7 @@
 int main(int ac, char **av)
 {
     RayTracer::Core core;
-    if (ac != 2 || ac != 3)
+    if (ac != 2 && ac != 3)
         return 84;
     try {
         if (ac == 2)
