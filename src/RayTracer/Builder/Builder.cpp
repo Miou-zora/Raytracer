@@ -11,6 +11,7 @@
 #include "LoaderExceptions.hpp"
 #include "Object.hpp"
 #include "Camera.hpp"
+#include "Convertissor.hpp"
 
 RayTracer::Builder::Builder()
 {
@@ -45,7 +46,10 @@ void RayTracer::Builder::buildScene(RayTracer::Scene &scene)
     cfg.readFile(_scenePath.c_str());
     libconfig::Setting &root = cfg.getRoot();
     try {
+        RayTracer::Convertissor Convertissor;
         libconfig::Setting &camera = root["camera"];
+        libconfig::Setting &resolution = camera["resolution"];
+        scene.setResolution({Convertissor.get<int>(resolution, "width"), Convertissor.get<int>(resolution, "height")});
         initCamera(camera, scene);
         initPrimitives(root, scene);
         initLights(root, scene);

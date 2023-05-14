@@ -16,7 +16,7 @@
 namespace RayTracer {
     class SFMLCore : virtual public ICore {
         public:
-            SFMLCore(int width, int height);
+            SFMLCore();
             ~SFMLCore();
 
             void build(std::string scenePath, std::string flag = "-f");
@@ -28,7 +28,7 @@ namespace RayTracer {
             sf::RenderWindow _window;
             sf::VideoMode _videoMode;
 
-            void createWindow(void);
+            void createWindow(int width, int height);
             void closeWindow(void);
 
             RayTracer::Scene _scene;

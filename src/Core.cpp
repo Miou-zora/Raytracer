@@ -39,7 +39,7 @@ void Core::checkArgs(int ac, char **av)
 
 void Core::runSFML(std::string scenePath)
 {
-    RayTracer::SFMLCore core(1000, 1000);
+    RayTracer::SFMLCore core;
 
     try {
         if (_isFast == true) {

@@ -18,10 +18,9 @@
 #include "Builder.hpp"
 #include <cmath>
 
-RayTracer::SFMLCore::SFMLCore(int width, int height) : _frame(width, height), _useFastRenderer(false)
+RayTracer::SFMLCore::SFMLCore() : _frame(1920, 1080), _useFastRenderer(false)
 {
     _isRunning = true;
-    _windowSize = std::make_pair(width, height);
 }
 
 RayTracer::SFMLCore::~SFMLCore()
@@ -38,6 +37,8 @@ void RayTracer::SFMLCore::build(std::string scenePath, std::string flag)
         builder.setScenePath(scenePath);
         builder.buildScene(_scene);
         _useFastRenderer = true;
+        _frame = RayTracer::Frame(_scene.getResolution().first, _scene.getResolution().second);
+        _windowSize = _scene.getResolution();
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
         throw std::invalid_argument("Error while loading scene");
@@ -46,7 +47,7 @@ void RayTracer::SFMLCore::build(std::string scenePath, std::string flag)
         _renderer = std::make_shared<RayTracer::EnhanceRenderer>();
     else
         _renderer = std::make_shared<RayTracer::FastRenderer>();
-    createWindow();
+    createWindow(_scene.getResolution().first, _scene.getResolution().second);
     _displayer = std::make_shared<RayTracer::SFMLDisplayer>(_window);
 }
 
@@ -67,9 +68,9 @@ void RayTracer::SFMLCore::run(void)
     }
 }
 
-void RayTracer::SFMLCore::createWindow(void)
+void RayTracer::SFMLCore::createWindow(int width, int height)
 {
-    _videoMode = sf::VideoMode(_windowSize.first, _windowSize.second);
+    _videoMode = sf::VideoMode(width, height);
     if (_window.isOpen())
         _window.close();
     _window.create(_videoMode, "Raytracer", sf::Style::Titlebar | sf::Style::Close);

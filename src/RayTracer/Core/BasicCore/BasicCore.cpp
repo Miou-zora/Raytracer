@@ -20,7 +20,7 @@
 
 void RayTracer::BasicCore::run(void)
 {
-    RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
+    RayTracer::Frame frame = RayTracer::Frame(_scene.getResolution().first, _scene.getResolution().second);
 
     std::cerr << "Rendering..." << std::endl;
     if (_useFastRenderer == false)
