@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
+project(raytracer)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "-Wall -Werror -Wextra -Wshadow -Wuninitialized -lconfig++")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -O0")
@@ -33,8 +34,12 @@ set(INCLUDE_SRC src/RayTracer/Object/
                 src/RayTracer/Factory/
                 src/RayTracer/Displayer/
                 src/RayTracer/Displayer/PPMDisplayer/
+                src/RayTracer/Displayer/SFMLDisplayer/
                 src/
                 src/RayTracer/ObjectLoader/
+                src/RayTracer/Core/
+                src/RayTracer/Core/SFMLCore/
+                src/RayTracer/Core/BasicCore/
 )
 
 include_directories(${INCLUDE_SRC})
@@ -42,11 +47,12 @@ include_directories(${INCLUDE_SRC})
 project(raytracer)
 
 set(SRC "src/Maths/Ray/Ray.cpp"
-        "src/Core.cpp"
         "src/Maths/Rect3D/Rect3D.cpp"
         "src/Maths/Vector/Vector.cpp"
         "src/Maths/Vertex/Vertex.cpp"
         "src/RayTracer/Object/Camera/Camera.cpp"
+        "src/RayTracer/Core/SFMLCore/SFMLCore.cpp"
+        "src/RayTracer/Core/BasicCore/BasicCore.cpp"
         "src/RayTracer/Object/Light/DirectionalLight/DirectionalLight.cpp"
         "src/RayTracer/Object/Shape/Sphere/Sphere.cpp"
         "src/RayTracer/Object/Shape/Plane/Plane.cpp"
@@ -57,14 +63,17 @@ set(SRC "src/Maths/Ray/Ray.cpp"
         "src/RayTracer/Renderer/EnhanceRenderer/EnhanceRenderer.cpp"
         "src/RayTracer/Renderer/FastRenderer/FastRenderer.cpp"
         "src/RayTracer/Displayer/PPMDisplayer/PPMDisplayer.cpp"
+        "src/RayTracer/Displayer/SFMLDisplayer/SFMLDisplayer.cpp"
         "src/RayTracer/Frame/Frame.cpp"
         "src/RayTracer/Builder/Builder.cpp"
-
+        "src/Core.cpp"
         )
 
 set(MAIN "main.cpp")
 
 add_executable(raytracer ${MAIN} ${SRC})
+find_package(SFML COMPONENTS graphics window system REQUIRED)
+target_link_libraries(raytracer sfml-graphics sfml-window sfml-system)
 target_link_libraries(raytracer ${CMAKE_DL_LIBS})
 target_link_libraries(raytracer config++)
 ### TESTS ###
@@ -85,6 +94,7 @@ set(TEST_SRC "tests/Maths/tests_vertex.cpp"
 "tests/RayTracer/Object/Camera/tests_camera.cpp")
 
 add_executable(tests_run ${TEST_SRC} ${SRC})
+target_link_libraries(tests_run sfml-graphics sfml-window sfml-system)
 target_link_libraries(tests_run ${CMAKE_DL_LIBS})
 target_link_libraries(tests_run config++)
 

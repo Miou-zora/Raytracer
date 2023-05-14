@@ -1,51 +1,72 @@
 /*
 ** EPITECH PROJECT, 2023
-** Raytracer [WSL : Ubuntu]
+** Raytracer
 ** File description:
 ** Core
 */
 
-#include <iostream>
-#include "Sphere.hpp"
-#include "Plane.hpp"
-#include "FastRenderer.hpp"
-#include "Camera.hpp"
-#include "PPMDisplayer.hpp"
-#include "Scene.hpp"
-#include <cmath>
 #include "Core.hpp"
-#include "FastRenderer.hpp"
-#include "EnhanceRenderer.hpp"
-#include "PPMDisplayer.hpp"
+#include "BasicCore.hpp"
+#include "SFMLCore.hpp"
 
-void RayTracer::Core::run(void)
+Core::Core()
+    : _isSFML(false), _isFast(false)
 {
-    RayTracer::Frame frame = RayTracer::Frame(1000, 1000);
-
-    if (_useFastRenderer == false)
-        _renderer = std::make_shared<RayTracer::EnhanceRenderer>();
-    else if (_useFastRenderer == true)
-        _renderer = std::make_shared<RayTracer::FastRenderer>();
-    _renderer->render(_scene, frame);
-    _displayer = std::make_shared<RayTracer::PPMDisplayer>();
-    _displayer->display(frame);
 }
 
-void RayTracer::Core::build(std::string scenePath, std::string flag)
+Core::~Core()
 {
-    RayTracer::Builder builder;
+}
+
+void Core::checkArgs(int ac, char **av)
+{
+    if (ac > 4 || ac < 2)
+        throw std::invalid_argument("Invalid number of arguments");
+    std::list<std::string> args;
+    for (int i = 2; i < ac; i++)
+        args.push_back(av[i]);
+    for (auto &arg : args) {
+        if (arg == "-sfml")
+            _isSFML = true;
+        if (arg == "-ppm")
+            _isSFML = false;
+        if (arg == "-f" || arg == "--fast")
+            _isFast = true;
+        if (arg == "-e" || arg == "--enhance")
+            _isFast = false;
+    }
+}
+
+void Core::runSFML(std::string scenePath)
+{
+    RayTracer::SFMLCore core;
 
     try {
-        builder.setScenePath(scenePath);
-        builder.buildScene(_scene);
-        if (flag == "-f" || flag == "--fast")
-            _useFastRenderer = true;
-        else if (flag == "-e" || flag == "--enhance")
-            _useFastRenderer = false;
-        else
-            throw std::invalid_argument("Invalid flag");
-    } catch (std::exception &e) {
+        if (_isFast == true) {
+            core.build(scenePath);
+        } else {
+            core.build(scenePath, "-e");
+        }
+    } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         throw std::invalid_argument("Error while loading scene");
     }
+    core.run();
+}
+
+void Core::runBasic(std::string scenePath)
+{
+    RayTracer::BasicCore core;
+
+    try {
+        if (_isFast == true) {
+            core.build(scenePath);
+        } else {
+            core.build(scenePath, "-e");
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+        throw std::invalid_argument("Error while loading scene");
+    }
+    core.run();
 }

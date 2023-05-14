@@ -5,22 +5,23 @@
 ** main
 */
 
+#include "SFMLCore.hpp"
+#include "BasicCore.hpp"
 #include "Core.hpp"
 
 int main(int ac, char **av)
 {
-    RayTracer::Core core;
-    if (ac != 2 && ac != 3)
-        return 84;
+    Core core;
+
     try {
-        if (ac == 2)
-            core.build(av[1]);
-        if (ac == 3)
-            core.build(av[1], av[2]);
+        core.checkArgs(ac, av);
+        if (core.isSFML())
+            core.runSFML(av[1]);
+        else
+            core.runBasic(av[1]);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;
     }
-    core.run();
     return 0;
 }
