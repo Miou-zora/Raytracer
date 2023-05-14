@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <libconfig.h++>
 #include "Vector.hpp"
 #include "Vertex.hpp"
 #include "Ray.hpp"

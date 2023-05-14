@@ -7,7 +7,6 @@
 
 #include <libconfig.h++>
 #include "Builder.hpp"
-#include "ObjectLoader.hpp"
 #include "Factory.hpp"
 #include "LoaderExceptions.hpp"
 #include "Object.hpp"
@@ -15,60 +14,11 @@
 
 RayTracer::Builder::Builder()
 {
-    try {
-        buildLightFactory();
-    } catch (RayTracer::LoaderException &e) {
-        std::cerr << e.what() << std::endl;
-    }
-    try {
-        buildShapeFactory();
-    } catch (RayTracer::LoaderException &e) {
-        std::cerr << e.what() << std::endl;
-    }
+
 }
 
 RayTracer::Builder::~Builder()
 {
-}
-
-void RayTracer::Builder::buildLightFactory()
-{
-    std::string path = "./plugins/";
-    RayTracer::Factory<RayTracer::ILight> factory;
-    std::vector<std::string> libs;
-    RayTracer::ObjectLoader<RayTracer::ILight> loader;
-
-    if (!std::filesystem::exists(path))
-        throw LoaderException("Error while loading libs");
-    try {
-        for (const auto &entry : std::filesystem::directory_iterator(path))
-            if (entry.path().extension() == ".so" && loader.loadType(path + entry.path().filename().string()) == RayTracer::ObjectType::LIGHT)
-                factory.addObject(loader.loadName(path + entry.path().filename().string()), loader.loadObject(path + entry.path().filename().string()));
-    } catch (const std::filesystem::filesystem_error &e) {
-        std::cerr << e.what() << std::endl;
-        throw LoaderException("Error while loading Light libs");
-    }
-    _lightFactory = factory;
-}
-
-void RayTracer::Builder::buildShapeFactory()
-{
-    std::string path = "./plugins/";
-    std::vector<std::string> libs;
-    RayTracer::ObjectLoader<RayTracer::IShape> loader;
-    RayTracer::Factory<RayTracer::IShape> factory;
-
-    if (!std::filesystem::exists(path))
-        throw LoaderException("Error while loading libs");
-    try {
-        for (const auto &entry : std::filesystem::directory_iterator(path))
-            if (entry.path().extension() == ".so" && loader.loadType(path + entry.path().filename().string()) == RayTracer::ObjectType::SHAPE)
-                factory.addObject(loader.loadName(path + entry.path().filename().string()), loader.loadObject(path + entry.path().filename().string()));
-    } catch (const std::filesystem::filesystem_error &e) {
-        std::cerr << e.what() << std::endl;
-        throw LoaderException("Error while loading shape libs");
-    }
-    _shapeFactory = factory;
 }
 
 void RayTracer::Builder::setScenePath(std::string scenePath)
@@ -98,7 +48,7 @@ void RayTracer::Builder::buildScene(RayTracer::Scene &scene)
         libconfig::Setting &camera = root["camera"];
         initCamera(camera, scene);
         initPrimitives(root, scene);
-        //initLights(root, scene);
+        initLights(root, scene);
     } catch (const libconfig::SettingNotFoundException &nfex) {
         throw std::invalid_argument("No 'camera' setting in configuration file.");
     } catch (const std::exception &e) {
@@ -123,14 +73,11 @@ void RayTracer::Builder::initPrimitives(libconfig::Setting &setting, RayTracer::
         libconfig::Setting &primitives = setting["primitives"]["shapes"];
         int nb_primitive = primitives.getLength();
         std::string type;
-        std::cerr << "Number shapes found : " << nb_primitive << std::endl;
-        (void)scene;
-
+        std::cerr << "[INFO] Found " << nb_primitive << " shapes."<<std::endl;
         for(int i = 0; i < nb_primitive; ++i) {
             libconfig::Setting &primitive = primitives[i];
             primitive.lookupValue("type", type);
-            std::shared_ptr<RayTracer::IShape> shape = _shapeFactory.createObject(type);
-            shape->loadConfig(primitives[i]);
+            std::shared_ptr<RayTracer::IShape> shape = _factory.createShape(type, primitive);
             scene.addShape(shape);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
@@ -145,16 +92,17 @@ void RayTracer::Builder::initLights(libconfig::Setting &setting, RayTracer::Scen
     try {
         libconfig::Setting &lights = setting["lights"];
         int nb_lights = lights.getLength();
-        std::string filepath;
-
+        std::string type;
+        std::cerr << "[INFO] Found " << nb_lights << " lights."<<std::endl;
         for(int i = 0; i < nb_lights; ++i) {
             libconfig::Setting &light = lights[i];
-            light.lookupValue("filepath", filepath);
-            std::shared_ptr<RayTracer::ILight> new_light = _lightFactory.createObject(filepath);
-            new_light->loadConfig(lights[i]);
+            light.lookupValue("type", type);
+            std::shared_ptr<RayTracer::ILight> new_light = _factory.createLight(type, light);
             scene.addLight(new_light);
         }
     } catch (const libconfig::SettingNotFoundException &nfex) {
         //pass, it not mandatory
+    } catch (const std::exception &e) {
+        std::cerr << "An error occured during lights creation because there are not implemented yet. "<< e.what()<< std::endl;
     }
 }

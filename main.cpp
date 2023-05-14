@@ -13,8 +13,7 @@ int main(int ac, char **av)
     if (ac != 2)
         return 84;
     try {
-        core.setScenePath(av[1]);
-        core.buildScene();
+        core.build(av[1]);
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;

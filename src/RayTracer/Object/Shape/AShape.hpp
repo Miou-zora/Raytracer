@@ -12,9 +12,9 @@
 #include "Material.hpp"
 
 namespace RayTracer {
-    class AShape: public RayTracer::Object, public RayTracer::IShape {
+    class AShape: public RayTracer::AObject, public RayTracer::IShape {
         public:
-            AShape(void): RayTracer::Object(), _material(RayTracer::Material()), _isShadow(true) {};
+            AShape(void): RayTracer::AObject(), _material(RayTracer::Material()), _isShadow(true) {};
             virtual ~AShape() = default;
 
             RayTracer::Material getMaterial() const { return _material; };

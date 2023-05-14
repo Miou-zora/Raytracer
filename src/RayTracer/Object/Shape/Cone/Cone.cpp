@@ -8,6 +8,7 @@
 #include "Cone.hpp"
 #include "MathsUtils.hpp"
 #include <cmath>
+#include "Convertissor.hpp"
 
 RayTracer::Cone::Cone(const Maths::Vertex &position, const double &angle, const double &height,
                       const RayTracer::Material &material)
@@ -68,4 +69,14 @@ RayTracer::HitRecord RayTracer::Cone::hit(const Maths::Ray &ray) const
     hit_record.setFrontFace(true);
     hit_record.setMaterial(this->getMaterial());
     return hit_record;
+}
+
+RayTracer::Cone::Cone(libconfig::Setting &setting)
+{
+    RayTracer::Convertissor convertissor;
+
+    setPosition(convertissor.ToVertex(setting, "position"));
+    setMaterial(convertissor.ToMaterial(setting, "material"));
+    _angle = convertissor.get<float>(setting, "angle");
+    _height = convertissor.get<float>(setting, "height");
 }
