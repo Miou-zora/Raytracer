@@ -59,7 +59,6 @@ RayTracer::HitRecord RayTracer::Plane::hit(const Maths::Ray &ray) const
 
 RayTracer::Plane::Plane(libconfig::Setting &setting)
 {
-    std::cerr << "Loading plane" << std::endl;
     RayTracer::Convertissor Convertissor;
 
     setPosition(Convertissor.ToVertex(setting, "position"));

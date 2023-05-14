@@ -7,7 +7,6 @@
 
 #include <libconfig.h++>
 #include "Builder.hpp"
-#include "ObjectLoader.hpp"
 #include "Factory.hpp"
 #include "LoaderExceptions.hpp"
 #include "Object.hpp"
