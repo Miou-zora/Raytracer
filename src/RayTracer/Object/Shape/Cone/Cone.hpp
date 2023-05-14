@@ -13,6 +13,7 @@ namespace RayTracer {
     class Cone: public RayTracer::AShape {
         public:
             Cone(const Maths::Vertex &position, const double &angle, const double &height, const RayTracer::Material &material);
+            Cone(libconfig::Setting &setting);
             ~Cone() = default;
 
             RayTracer::HitRecord hit(const Maths::Ray &ray) const;
