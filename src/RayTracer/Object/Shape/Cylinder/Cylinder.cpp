@@ -84,6 +84,4 @@ RayTracer::Cylinder::Cylinder(libconfig::Setting &setting)
     setMaterial(Convertissor.ToMaterial(setting, "material"));
     translate((double)translation._x, (double)translation._y, (double)translation._z);
     _radius = Convertissor.get<double>(setting, "radius", 1.0);
-    std::cerr << "Cylinder created" << std::endl;
-    std::cerr << "Position: " << getPosition()._x << " " << getPosition()._y << " " << getPosition()._z << std::endl;
 }
