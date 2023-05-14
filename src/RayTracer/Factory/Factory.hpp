@@ -31,13 +31,14 @@ namespace RayTracer
 
         std::shared_ptr<RayTracer::ILight> createLight(const std::string &name, libconfig::Setting &setting)
         {
+            std::cerr << "[INFO] create light \"" << name << "\"" <<std::endl;
             if (_lightMap.find(name) == _lightMap.end())
                 throw LoaderException("Light not found");
             return _lightMap[name](setting);
         };
         std::shared_ptr<RayTracer::IShape> createShape(const std::string &name, libconfig::Setting &setting)
         {
-            std::cerr << "create shape " << name << std::endl;
+            std::cerr << "[INFO] create shape \"" << name << "\"" <<std::endl;
             if (_shapeMap.find(name) == _shapeMap.end())
                 throw LoaderException("Shape not found");
             return _shapeMap[name](setting);
