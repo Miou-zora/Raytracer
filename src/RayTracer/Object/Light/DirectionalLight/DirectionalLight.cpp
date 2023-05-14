@@ -31,6 +31,7 @@ const Maths::Vertex &RayTracer::DirectionalLight::getDirectionalLightColor() con
 void RayTracer::DirectionalLight::setDirectionalLightColor(const Maths::Vertex &directionalLightColor)
 {
     m_directionalLightColor = directionalLightColor;
+    m_directionalLightColor.normalize();
 }
 
 const float &RayTracer::DirectionalLight::getDirectionalLightIntensity() const
@@ -51,6 +52,7 @@ const Maths::Vector &RayTracer::DirectionalLight::getDirectionalLightDirection()
 void RayTracer::DirectionalLight::setDirectionalLightDirection(const Maths::Vector &directionalLightDirection)
 {
     m_directionalLightDirection = directionalLightDirection;
+    m_directionalLightDirection.normalize();
 }
 
 RayTracer::HitRecord RayTracer::DirectionalLight::getClosestHit(const std::vector<RayTracer::HitRecord> &records) const
@@ -105,4 +107,5 @@ RayTracer::DirectionalLight::DirectionalLight(libconfig::Setting &setting)
     RayTracer::Convertissor Convertissor;
     m_directionalLightColor = Convertissor.ToVertex(setting, "color");
     m_directionalLightIntensity = Convertissor.get<float>(setting, "intensity");
+    m_directionalLightDirection = Convertissor.ToVector(setting, "direction");
 }

@@ -19,8 +19,8 @@ primitives :
             };
             material = {
                 color = {
-                    x = 255.0;
-                    y = 255.0;
+                    x = 1.0;
+                    y = 1.0;
                     z = 0.0;
                 };
                 emissionColor = {
@@ -42,7 +42,7 @@ primitives :
             };
             material = {
                 color = {
-                    x = 255.0;
+                    x = 1.0;
                     y = 0.0;
                     z = 0.0;
                 };
@@ -65,9 +65,9 @@ primitives :
             };
             material = {
                 color = {
-                    x = 255.0;
-                    y = 255.0;
-                    z = 255.0;
+                    x = 1.0;
+                    y = 1.0;
+                    z = 1.0;
                 };
                 emissionColor = {
                     x = 0.0;
