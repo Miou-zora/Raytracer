@@ -10,6 +10,7 @@ set(INCLUDE_SRC src/RayTracer/Object/
                 src/RayTracer/Object/Shape/Sphere/
                 src/RayTracer/Object/Shape/Plane/
                 src/RayTracer/Object/Shape/Cylinder/
+                src/RayTracer/Object/Shape/Cone/
                 src/RayTracer/ErrorHandling/
                 src/Maths/Ray/
                 src/Maths/Rect3D/
@@ -26,6 +27,7 @@ set(INCLUDE_SRC src/RayTracer/Object/
                 src/RayTracer/Scene/
                 src/RayTracer/Object/Camera/
                 src/RayTracer/Object/Light/
+                src/RayTracer/Object/Light/DirectionalLight/
                 src/RayTracer/RGBAColor/
                 src/RayTracer/Frame/
                 src/RayTracer/Factory/
