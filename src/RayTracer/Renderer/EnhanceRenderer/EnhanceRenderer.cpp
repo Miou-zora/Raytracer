@@ -29,7 +29,7 @@ RayTracer::HitRecord RayTracer::EnhanceRenderer::castRay(const RayTracer::Scene 
     RayTracer::HitRecord record;
 
     (void)scene;
-    for (const auto &shape : m_shapes) {
+    for (const auto &shape : scene.getShapes()) {
         record = shape.get()->hit(ray);
         if (record.isHit() && record.isFrontFace()) {
             records.push_back(record);
@@ -42,14 +42,25 @@ RayTracer::HitRecord RayTracer::EnhanceRenderer::castRay(const RayTracer::Scene 
     return this->getClosestHit(records);
 }
 
-Maths::Vector reflect(const Maths::Vector &v, const Maths::Vector &n)
+Maths::Vertex RayTracer::EnhanceRenderer::findLightCoeff(const RayTracer::Scene &scene, const RayTracer::HitRecord &record, const Maths::Ray &ray) const
 {
-    return v - n * 2 * v.dot(n);
-}
+    Maths::Vertex lightAccumulate = Maths::Vertex(0, 0, 0);
+    Maths::Ray lerpedRay = ray;
 
-Maths::Vector lerp(const Maths::Vector &startValue, const Maths::Vector &endValue, double t)
-{
-    return startValue + (endValue - startValue) * t;
+    if (!record.isHit())
+        return lightAccumulate;
+    lerpedRay._origin = ray._origin - ray._direction * 0.001;
+    lerpedRay._direction = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
+    for (const auto &light : scene.getLights()) {
+        lightAccumulate += light->hit(lerpedRay, scene, record);
+    }
+    if (lightAccumulate._x > 1)
+        lightAccumulate._x = 1;
+    if (lightAccumulate._y > 1)
+        lightAccumulate._y = 1;
+    if (lightAccumulate._z > 1)
+        lightAccumulate._z = 1;
+    return (lightAccumulate);
 }
 
 Maths::Vertex RayTracer::EnhanceRenderer::trace(const RayTracer::Scene &scene, const Maths::Ray &ray)
@@ -58,26 +69,25 @@ Maths::Vertex RayTracer::EnhanceRenderer::trace(const RayTracer::Scene &scene, c
     Maths::Vertex incomingLight(0, 0, 0);
     Maths::Ray newRay = ray;
     RayTracer::HitRecord record;
+    RayTracer::HitRecord lastRecord;
+    Maths::Vertex lightCoeff;
+    record.setHit(false);
+
     for (std::size_t i = 0; i < MAX_DEPTH; i++) {
+        lastRecord = record;
         record = this->castRay(scene, newRay);
         if (!record.isHit()) {
-            newRay._direction = lerp(newRay._direction, -m_directionalLightDirection, m_directionalFocus);
-            // newRay._direction = -m_directionalLightDirection;
-            newRay._origin = newRay._origin + newRay._direction * -0.0001;
-            RayTracer::HitRecord directionalLightRecord = this->castRay(scene, newRay);
-            if (!directionalLightRecord.isHit()) {
-                Maths::Vertex lightIntensity = Maths::Vertex(std::max(m_ambientColor._x * m_ambientIntensity, m_directionalLightColor._x * m_directionalLightIntensity),
-                                                             std::max(m_ambientColor._y * m_ambientIntensity, m_directionalLightColor._y * m_directionalLightIntensity),
-                                                             std::max(m_ambientColor._z * m_ambientIntensity, m_directionalLightColor._z * m_directionalLightIntensity));
-                incomingLight += lightIntensity * rayColor;
-            } else
-                incomingLight += m_ambientColor * m_ambientIntensity * rayColor;
+            lightCoeff = findLightCoeff(scene, lastRecord, newRay);
+            lightCoeff._x = std::max(lightCoeff._x, m_ambientColor._x * m_ambientIntensity);
+            lightCoeff._y = std::max(lightCoeff._y, m_ambientColor._y * m_ambientIntensity);
+            lightCoeff._z = std::max(lightCoeff._z, m_ambientColor._z * m_ambientIntensity);
+            incomingLight += lightCoeff * rayColor;
             break;
         }
         newRay._origin = record.getIntersectionPoint();
         Maths::Vector diffuseDir = Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal());
-        Maths::Vector specularDir = reflect(newRay._direction.normalized(), record.getNormal().normalized());
-        newRay._direction = lerp(diffuseDir, specularDir, record.getMaterial().getSmoothness());
+        Maths::Vector specularDir = Maths::MathsUtils::reflect(newRay._direction.normalized(), record.getNormal().normalized());
+        newRay._direction = Maths::MathsUtils::lerp(diffuseDir, specularDir, record.getMaterial().getSmoothness());
         const RayTracer::Material& material = record.getMaterial();
         Maths::Vertex emittedLight = material.getEmissionColor() * material.getEmissionStrength();
         incomingLight += emittedLight * rayColor;

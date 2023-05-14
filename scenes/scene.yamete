@@ -21,24 +21,24 @@ primitives :
                 color = {
                     x = 1.0;
                     y = 1.0;
-                    z = 0.0;
+                    z = 1.0;
                 };
                 emissionColor = {
                     x = 0.0;
                     y = 0.0;
                     z = 0.0;
                 };
-                smoothness = 0.0;
+                smoothness = 0.8;
                 emissionStrength = 0.0;
             };
-            radius = 2.0;
+            radius = 1.0;
         },
         {
             type="Sphere";
             position = {
-                x = 1.0;
-                y = 1.0;
-                z = 1.0;
+                x = 1.5;
+                y = 6.0;
+                z = 0.0;
             };
             material = {
                 color = {
@@ -51,7 +51,30 @@ primitives :
                     y = 0.0;
                     z = 0.0;
                 };
-                smoothness = 0.0;
+                smoothness = 0.8;
+                emissionStrength = 0.0;
+            };
+            radius = 1.0;
+        },
+        {
+            type="Sphere";
+            position = {
+                x = -1.5;
+                y = 6.0;
+                z = 0.0;
+            };
+            material = {
+                color = {
+                    x = 0.0;
+                    y = 0.0;
+                    z = 1.0;
+                };
+                emissionColor = {
+                    x = 0.0;
+                    y = 0.0;
+                    z = 0.0;
+                };
+                smoothness = 0.8;
                 emissionStrength = 0.0;
             };
             radius = 1.0;
@@ -91,15 +114,31 @@ lights = (
     {
         type="DirectionalLight";
         color = {
-            x = 1.0;
-            y = 1.0;
+            x = 0.0;
+            y = 0.0;
             z = 1.0;
         };
         intensity = 1.0;
         direction = {
-            x = 0.0;
+            x = 1.0;
             y = 0.0;
             z = -1.0;
         };
+        focus = 1.0;
+    },
+    {
+        type="DirectionalLight";
+        color = {
+            x = 1.0;
+            y = 0.0;
+            z = 0.0;
+        };
+        intensity = 1.0;
+        direction = {
+            x = -1.0;
+            y = 0.0;
+            z = -1.0;
+        };
+        focus = 1.0;
     }
 );

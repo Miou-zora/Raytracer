@@ -59,7 +59,7 @@ Maths::Vertex RayTracer::FastRenderer::findDirectionalLightCoeff(const RayTracer
 {
     Maths::Vertex lightAccumulate = Maths::Vertex(0, 0, 0);
     for (const auto &light : scene.getLights()) {
-        lightAccumulate += light->hit(record.getIntersectionPoint() - ray._direction * 0.0001, scene, record);
+        lightAccumulate += light->hit(Maths::Ray(record.getIntersectionPoint() - ray._direction * 0.0001, Maths::MathsUtils::getRandomHemisphereDirection(record.getNormal())), scene, record);
     }
     if (lightAccumulate._x > 1)
         lightAccumulate._x = 1;

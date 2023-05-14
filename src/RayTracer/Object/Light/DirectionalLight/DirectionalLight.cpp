@@ -13,6 +13,7 @@ RayTracer::DirectionalLight::DirectionalLight(void)
 {
     m_directionalLightColor = Maths::Vertex(1, 1, 1);
     m_directionalLightIntensity = 1;
+    m_directionalLightFocus = 1;
     m_directionalLightDirection = Maths::Vector(0, 0, -1);
 }
 
@@ -20,6 +21,7 @@ RayTracer::DirectionalLight::DirectionalLight(const Maths::Vertex &directionalLi
 {
     m_directionalLightColor = directionalLightColor;
     m_directionalLightIntensity = directionalLightIntensity;
+    m_directionalLightFocus = 1;
     m_directionalLightDirection = directionalLightDirection.normalized();
 }
 
@@ -88,16 +90,20 @@ RayTracer::HitRecord RayTracer::DirectionalLight::castRay(const RayTracer::Scene
     return this->getClosestHit(records);
 }
 
-Maths::Vertex RayTracer::DirectionalLight::hit(const Maths::Vertex &position, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const
+Maths::Vertex RayTracer::DirectionalLight::hit(const Maths::Ray &ray, const RayTracer::Scene &scene, const RayTracer::HitRecord &record) const
 {
-    Maths::Ray ray(position, -m_directionalLightDirection);
-
-    RayTracer::HitRecord newRecord = this->castRay(scene, ray);
+    Maths::Ray newRay = ray;
+    newRay._direction = Maths::MathsUtils::lerp(ray._direction, -m_directionalLightDirection, m_directionalLightFocus);
+    RayTracer::HitRecord newRecord = this->castRay(scene, newRay);
 
     if (newRecord.isHit()) {
         return (Maths::Vertex(0, 0, 0));
     }
-    float coeff = record.getNormal().normalized().dot((-m_directionalLightDirection));
+    (void)record;
+    float coeff = newRay._direction.normalized().dot((-m_directionalLightDirection));
+    if (coeff <= 0) {
+        return Maths::Vertex(0, 0, 0);
+    }
     Maths::Vertex color = m_directionalLightColor * m_directionalLightIntensity * coeff;
     return (color);
 }
@@ -108,4 +114,5 @@ RayTracer::DirectionalLight::DirectionalLight(libconfig::Setting &setting)
     m_directionalLightColor = Convertissor.ToVertex(setting, "color");
     m_directionalLightIntensity = Convertissor.get<float>(setting, "intensity");
     m_directionalLightDirection = Convertissor.ToVector(setting, "direction");
+    m_directionalLightFocus = Convertissor.get<float>(setting, "focus");
 }
