@@ -16,6 +16,7 @@ namespace RayTracer {
         public:
             DirectionalLight(void);
             DirectionalLight(const Maths::Vertex &directionalLightColor, const float &directionalLightIntensity, const Maths::Vector &directionalLightDirection);
+            DirectionalLight(libconfig::Setting &setting);
             ~DirectionalLight() = default;
 
             const Maths::Vertex &getDirectionalLightColor() const;

@@ -7,6 +7,7 @@
 
 #include "DirectionalLight.hpp"
 #include "Scene.hpp"
+#include "Convertissor.hpp"
 
 RayTracer::DirectionalLight::DirectionalLight(void)
 {
@@ -97,4 +98,11 @@ Maths::Vertex RayTracer::DirectionalLight::hit(const Maths::Vertex &position, co
     float coeff = record.getNormal().normalized().dot((-m_directionalLightDirection));
     Maths::Vertex color = m_directionalLightColor * m_directionalLightIntensity * coeff;
     return (color);
+}
+
+RayTracer::DirectionalLight::DirectionalLight(libconfig::Setting &setting)
+{
+    RayTracer::Convertissor Convertissor;
+    m_directionalLightColor = Convertissor.ToVertex(setting, "color");
+    m_directionalLightIntensity = Convertissor.get<float>(setting, "intensity");
 }
