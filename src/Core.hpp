@@ -24,11 +24,11 @@ namespace RayTracer
     class Core
     {
     public:
-        Core(void) = default;
+        Core(void) : _useFastRenderer(true) {};
         virtual ~Core() = default;
 
         void run(void);
-        void build(std::string scenePath);
+        void build(std::string scenePath, std::string flag = "-f");
         void setScene(RayTracer::Scene &scene) { this->_scene = scene; };
         RayTracer::Scene getScene(void) const { return _scene; };
 
@@ -36,5 +36,6 @@ namespace RayTracer
         RayTracer::Scene _scene;
         std::shared_ptr<RayTracer::IRenderer> _renderer;
         std::shared_ptr<RayTracer::IDisplayer> _displayer;
+        bool _useFastRenderer;
     };
 }
